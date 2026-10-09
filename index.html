@@ -139,6 +139,21 @@ a.bg-foreground.rounded-full{background-color:#f2ede3}
 img{-webkit-user-drag:none;user-drag:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;pointer-events:none}
 body{-webkit-touch-callout:none}
 @media print{img,.fl,[data-compare]{visibility:hidden!important}}
+
+/* ===== POP-UP DE OFERTA: sempre alcançável em telas baixas =====
+   No iPhone (Safari e navegador do Instagram/Facebook) 92vh é maior que a área visível,
+   então o rodapé com os links do checkout ficava fora da tela e sem rolagem.
+   Agora quem rola é o fundo escuro: o card centraliza quando cabe e encosta no topo quando não cabe. */
+#upsell{overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain;align-items:flex-start}
+#upsell > [data-close-upsell]:first-child{position:fixed}
+#upsell > .max-w-lg{margin:auto 0;max-height:none!important;overflow:visible!important}
+@media (max-height:720px){
+  #upsell > .max-w-lg{padding:1.25rem 1.25rem 1rem}
+  #upsell h3{font-size:1.3rem;line-height:1.7rem}
+  #upsell ul{margin-bottom:.9rem}
+  #upsell ul > li + li{margin-top:.4rem}
+  #upsell .mb-6{margin-bottom:1rem}
+}
 </style>
 </head>
 <body>
@@ -860,7 +875,7 @@ body{-webkit-touch-callout:none}
 
   // Pop-up de upsell
   safe(function(){ var up=document.getElementById('upsell');
-  document.querySelectorAll('[data-open-upsell]').forEach(function(b){b.addEventListener('click',function(){up.hidden=false;});});
+  document.querySelectorAll('[data-open-upsell]').forEach(function(b){b.addEventListener('click',function(){up.hidden=false;up.scrollTop=0;});});
   up.querySelectorAll('[data-close-upsell]').forEach(function(b){b.addEventListener('click',function(){up.hidden=true;});});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')up.hidden=true;}); });
 
