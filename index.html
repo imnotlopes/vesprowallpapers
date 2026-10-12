@@ -102,9 +102,12 @@ body{
   background-size:auto,760px;
 }
 
+/* Texturas abaixo do topo (títulos, botões, cards, divisórias): só entram depois que a página abre
+   (classe .tex-on no <html>, adicionada no load) para não disputar banda com o topo. */
+
 /* Divisões entre seções: pincelada larga no lugar da linha fina */
 section.border-t{border-top-color:transparent}
-section.border-t::before{
+.tex-on section.border-t::before{
   content:"";position:absolute;left:50%;top:-9px;width:min(1180px,94%);height:18px;transform:translateX(-50%);
   background:linear-gradient(rgba(150,175,210,.10),rgba(150,175,210,.10)),url(assets/tex/impasto-navy.webp?v=2) center/520px;
   -webkit-mask:url(assets/tex/mask-divider.png?v=1) center/100% 100% no-repeat;mask:url(assets/tex/mask-divider.png?v=1) center/100% 100% no-repeat;
@@ -113,7 +116,7 @@ section.border-t::before{
 #oferta.border-t::before{top:0}
 
 /* Títulos com textura de tinta */
-h1,h2{
+.tex-on h1,.tex-on h2{
   background:url(assets/tex/impasto-shade-soft.webp?v=2) 0 0/360px,hsl(var(--foreground));
   background-blend-mode:soft-light;-webkit-background-clip:text;background-clip:text;color:transparent;
   opacity:var(--impasto-text)
@@ -121,25 +124,26 @@ h1,h2{
 
 /* Botões: textura de tinta + borda levemente irregular de pincelada */
 a.bg-foreground.rounded-full,
-a[style*="217, 184, 120"]{
+a[style*="217, 184, 120"]{border-radius:10px!important}
+.tex-on a.bg-foreground.rounded-full,
+.tex-on a[style*="217, 184, 120"]{
   background-image:url(assets/tex/impasto-shade-soft.webp?v=2)!important;background-size:240px!important;background-blend-mode:soft-light;
-  border-radius:10px!important;
   -webkit-mask-box-image:url(assets/tex/mask-stroke.png?v=1) 40 60 40 60 / 3px 6px stretch;
 }
 a.bg-foreground.rounded-full{background-color:#f2ede3}
 
 /* Cards, FAQ, pop-up, pílulas e barra fixa: película de tinta por cima do fundo */
 #oferta .rounded-3xl,[data-faq-item],#upsell .max-w-lg,#sticky-bar > div,.liquid-glass{position:relative;isolation:isolate}
-#oferta .rounded-3xl::after,[data-faq-item]::after,#upsell .max-w-lg::after,#sticky-bar > div::after,.liquid-glass::after{
+.tex-on #oferta .rounded-3xl::after,.tex-on [data-faq-item]::after,.tex-on #upsell .max-w-lg::after,.tex-on #sticky-bar > div::after,.tex-on .liquid-glass::after{
   content:"";position:absolute;inset:0;z-index:-1;border-radius:inherit;pointer-events:none;
   background:url(assets/tex/impasto-shade.webp?v=2) 0 0/520px;mix-blend-mode:soft-light;opacity:var(--impasto-card)
 }
 /* bordas de pincelada nos cards (Chrome/Edge/Safari; no Firefox ficam com o canto arredondado normal) */
-#oferta .rounded-3xl:not(.liquid-glass),[data-faq-item],#upsell .max-w-lg{-webkit-mask-box-image:url(assets/tex/mask-card.png?v=1) 36 / 5px stretch}
+.tex-on #oferta .rounded-3xl:not(.liquid-glass),.tex-on [data-faq-item],.tex-on #upsell .max-w-lg{-webkit-mask-box-image:url(assets/tex/mask-card.png?v=1) 36 / 5px stretch}
 [data-faq-item] > button{border-radius:0}
 
 /* Prévias da galeria: borda de tela pintada */
-#galeria .group{-webkit-mask-box-image:url(assets/tex/mask-card.png?v=1) 36 / 4px stretch}
+.tex-on #galeria .group{-webkit-mask-box-image:url(assets/tex/mask-card.png?v=1) 36 / 4px stretch}
 
 @media (prefers-reduced-transparency:reduce){#oferta .rounded-3xl::after,[data-faq-item]::after,#upsell .max-w-lg::after,#sticky-bar > div::after,.liquid-glass::after{display:none}}
 
@@ -167,9 +171,9 @@ body{-webkit-touch-callout:none}
 
 /* Manchas de luz do fundo: posicionadas em % da altura da página. Em rede lenta a página é desenhada
    pela metade e cresce enquanto o HTML chega, e as manchas "andariam" (o Google conta como layout pulando).
-   Ficam invisíveis até o HTML terminar e entram com fade. */
-.js-glow [data-glow]{visibility:hidden;opacity:0;transition:opacity .8s ease}
-.js-glow.glow-on [data-glow]{visibility:visible;opacity:1}
+   Ficam invisíveis até o HTML terminar de chegar. */
+.js-glow [data-glow]{visibility:hidden}
+.js-glow.glow-on [data-glow]{visibility:visible}
 
 /* Título principal em cor lisa: com a textura dentro das letras o navegador trata o título como imagem
    e só o considera "pintado" quando a textura carrega (atrasava a métrica de carregamento do Google) */
@@ -853,7 +857,11 @@ body{-webkit-touch-callout:none}
 
   // HTML completo: a altura da página já é a final, então as manchas de luz podem aparecer
   document.documentElement.className+=' glow-on';
-  window.addEventListener('load',function(){ if(document.documentElement.className.indexOf('glow-on')<0) document.documentElement.className+=' glow-on'; });
+  window.addEventListener('load',function(){
+    var d=document.documentElement;
+    if(d.className.indexOf('glow-on')<0) d.className+=' glow-on';
+    d.className+=' tex-on';  // texturas de títulos, botões, cards e divisórias
+  });
 
   // Navegadores antigos (WebViews de Android/iOS desatualizados) não têm forEach em NodeList
   if(window.NodeList && !NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach;
