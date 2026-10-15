@@ -24,6 +24,7 @@
 <script>
 window.VESPRO_CONFIG = {
   metaPixelId: "1781303226340709",
+  clarityId: "yyc0uitibt",  // Microsoft Clarity: cole aqui o ID do projeto (clarity.microsoft.com > Configurações > Visão geral)
   checkout: {
     completa: "https://pay.wiapy.com/7fmmsK964ZH8",         // Coleção Completa · R$ 21,90 (botão do card)
     completaUpsell: "https://pay.wiapy.com/SdUNug8FDfso",   // Coleção Completa com desconto · R$ 17,90 (pop-up)
@@ -39,6 +40,24 @@ window.VESPRO_CONFIG = {
   fbq('init', id);
   fbq('track', 'PageView');
   fbq('track', 'ViewContent', {content_name: 'Coleção de wallpapers', content_type: 'product', currency: 'BRL', value: 12.90});
+})();
+</script>
+<script>
+/* Microsoft Clarity (gravações de sessão e mapas de calor). Carrega depois que a página abre para não
+   atrasar o primeiro desenho; as chamadas feitas antes disso ficam na fila e são enviadas quando ele chega. */
+(function(){
+  var id = (window.VESPRO_CONFIG.clarityId || "").trim();
+  if (!id) return;
+  window.clarity = window.clarity || function(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
+  // marca a sessão com a origem do anúncio, para filtrar as gravações por campanha
+  try {
+    new URLSearchParams(location.search).forEach(function(v, k){ if (/^utm_(source|medium|campaign|content|term)$/.test(k) && v) clarity('set', k, v); });
+  } catch(e) {}
+  var go = function(){
+    var t = document.createElement('script'); t.async = 1; t.src = 'https://www.clarity.ms/tag/' + encodeURIComponent(id);
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(t, s);
+  };
+  if (document.readyState === 'complete') go(); else window.addEventListener('load', function(){ setTimeout(go, 0); });
 })();
 </script>
 <script>
@@ -965,7 +984,7 @@ body{-webkit-touch-callout:none}
 
   // Pop-up de upsell
   safe(function(){ var up=document.getElementById('upsell');
-  document.querySelectorAll('[data-open-upsell]').forEach(function(b){b.addEventListener('click',function(){up.hidden=false;up.scrollTop=0;});});
+  document.querySelectorAll('[data-open-upsell]').forEach(function(b){b.addEventListener('click',function(){up.hidden=false;up.scrollTop=0;if(window.clarity)clarity('event','popup_oferta');});});
   up.querySelectorAll('[data-close-upsell]').forEach(function(b){b.addEventListener('click',function(){up.hidden=true;});});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')up.hidden=true;}); });
 
@@ -1001,6 +1020,7 @@ body{-webkit-touch-callout:none}
       }catch(e){}
       // O checkout da Wiapy já dispara o InitiateCheckout oficial (mesmo pixel); aqui só um evento próprio do clique, para não duplicar
       if(window.fbq) fbq('trackCustom','CliqueCheckout',{value:parseFloat(a.dataset.value),currency:'BRL',content_name:a.dataset.name});
+      if(window.clarity){ clarity('set','plano',a.dataset.checkout); clarity('event','clique_checkout_'+a.dataset.checkout); }
     });
   });
 })();
