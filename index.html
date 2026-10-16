@@ -201,6 +201,38 @@ body{-webkit-touch-callout:none}
 /* Topo visível desde o primeiro desenho: sem animação de entrada no que já está na tela ao abrir */
 .js-reveal #inicio .reveal{opacity:1;transform:none;transition:none}
 
+/* ===== VISUALIZADOR DE WALLPAPER =====
+   Abre as prévias em tela cheia com zoom. Usa só os arquivos COM marca d'água (os mesmos do site);
+   a imagem fica sob uma camada transparente, então não dá para arrastar nem "segurar para salvar". */
+html.vlb-open,html.vlb-open body{overflow:hidden}
+.vlb{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;background:rgba(4,7,12,.99);color:#fff;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none}
+.vlb-top{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;padding-top:max(12px,env(safe-area-inset-top))}
+.vlb-count{min-width:52px;font-size:12px;letter-spacing:1.5px;color:hsl(var(--muted-foreground))}
+.vlb-tabs{display:flex;gap:4px;padding:4px;border-radius:999px;background:rgba(255,255,255,.07)}
+.vlb-tabs[hidden]{display:none}
+.vlb-tabs button{padding:8px 13px;border-radius:999px;font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.72)}
+.vlb-tabs button[aria-pressed="true"]{background:rgb(217,184,120);color:hsl(var(--background))}
+.vlb-x{width:40px;height:40px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
+.vlb-stage{position:relative;flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:0 12px;touch-action:none}
+.vlb-frame{position:relative;overflow:hidden;border-radius:12px;line-height:0;box-shadow:0 0 0 1px rgba(255,255,255,.12),0 30px 80px rgba(0,0,0,.6);background:#0b0f16}
+.vlb-img{display:block;width:auto;height:auto;max-width:calc(100vw - 24px);max-height:calc(100vh - 200px);transition:transform .25s ease;pointer-events:none;-webkit-user-drag:none}
+@supports (height:100dvh){.vlb-img{max-height:calc(100dvh - 200px)}}
+@media (min-width:768px){.vlb-img{max-width:calc(100vw - 180px)}}
+.vlb-frame.z .vlb-img{transform:scale(2.2)}
+.vlb-shield{position:absolute;inset:0;cursor:zoom-in;-webkit-touch-callout:none}
+.vlb-frame.z .vlb-shield{cursor:zoom-out}
+.vlb-frame.loading::after{content:"";position:absolute;left:50%;top:50%;width:28px;height:28px;margin:-14px 0 0 -14px;border-radius:50%;border:2px solid rgba(255,255,255,.25);border-top-color:rgb(217,184,120);animation:vlbspin .8s linear infinite}
+@keyframes vlbspin{to{transform:rotate(360deg)}}
+.vlb-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:999px;display:none;align-items:center;justify-content:center;background:rgba(255,255,255,.08)}
+@media (min-width:768px){.vlb-nav{display:flex}}
+.vlb-nav[hidden]{display:none}
+.vlb-prev{left:16px}.vlb-next{right:16px}
+.vlb-bottom{display:flex;flex-direction:column;align-items:center;gap:10px;padding:14px 16px;padding-bottom:max(16px,env(safe-area-inset-bottom));text-align:center}
+.vlb-hint{font-size:12px;color:hsl(var(--muted-foreground))}
+.vlb-cta{display:block;width:100%;max-width:360px;padding:15px 20px;border-radius:12px;font-size:14px;font-weight:700;letter-spacing:.5px;background:rgb(217,184,120);color:hsl(var(--background))}
+[data-zoom]{cursor:zoom-in}
+.vlb-badge{position:absolute;right:10px;bottom:10px;width:30px;height:30px;border-radius:999px;display:flex;align-items:center;justify-content:center;background:rgba(6,10,16,.55);box-shadow:0 0 0 1px rgba(255,255,255,.18);pointer-events:none}
+
 /* ===== POP-UP DE OFERTA: sempre alcançável em telas baixas =====
    No iPhone (Safari e navegador do Instagram/Facebook) 92vh é maior que a área visível,
    então o rodapé com os links do checkout ficava fora da tela e sem rolagem.
@@ -653,7 +685,7 @@ body{-webkit-touch-callout:none}
 <div aria-hidden="true" class="fl fl-2xl" style="left: calc(50% + 576px + 64px); bottom: 8%; --w: 180px; --rot: -6deg; opacity: 0.45; animation: drift 6.9s ease-in-out -4.8s infinite;"><img sizes="(min-width: 1024px) 224px, 160px" data-srcset="assets/desktop/340/39.webp?v=wm2 340w, assets/desktop/400/39.webp?v=wm2 400w, assets/desktop/800/39.webp?v=wm2 800w" data-src="assets/desktop/400/39.webp?v=wm2" alt="" loading="lazy" decoding="async" class="w-full aspect-[16/10] object-cover rounded-xl ring-1 ring-white/20 shadow-2xl shadow-black/60"></div>
 <div class="max-w-6xl mx-auto text-center">
   <div class="reveal"><h2 class="text-5xl md:text-7xl lg:text-8xl font-medium tracking-[-2px]">Algumas das nossas <span class="font-serif italic font-normal">favoritas</span></h2></div>
-  <div class="reveal" style="transition-delay: 0.1s;"><p class="text-muted-foreground text-lg max-w-2xl mx-auto mb-12 md:mb-20 mt-6">Aqui dá pra ter uma ideia do que tem dentro da coleção.<br>No site elas estão comprimidas. Quando você baixa, recebe tudo em resolução máxima.</p></div>
+  <div class="reveal" style="transition-delay: 0.1s;"><p class="text-muted-foreground text-lg max-w-2xl mx-auto mb-12 md:mb-20 mt-6">Aqui dá pra ter uma ideia do que tem dentro da coleção. Toque em qualquer uma para ver em tela cheia.<br>No site elas aparecem com marca d'água e comprimidas. Quando você baixa, recebe tudo em resolução máxima e sem marca.</p></div>
   <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-10 md:mb-16 text-left">
 <div class="flex flex-col gap-4">
 <div class="reveal relative rounded-xl overflow-hidden group"><div class="aspect-[16/10]"><img sizes="(min-width: 1200px) 368px, (min-width: 768px) 31vw, 46vw" data-srcset="assets/desktop/340/03.webp?v=wm2 340w, assets/desktop/400/03.webp?v=wm2 400w, assets/desktop/800/03.webp?v=wm2 800w, assets/desktop/03.webp?v=wm2 1672w" data-src="assets/desktop/800/03.webp?v=wm2" alt="" data-alt="Prévia de wallpaper impasto para notebook" loading="lazy" decoding="async" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.04]"></div><div class="absolute top-3 left-3"><span class="liquid-glass block rounded-full px-3 py-1 text-[10px] tracking-[1.5px] uppercase text-foreground/90">Notebook</span></div></div>
@@ -981,6 +1013,132 @@ body{-webkit-touch-callout:none}
     var ic=it.querySelector('[data-faq-icon]');ic.style.transform=open?'rotate(135deg)':'rotate(0deg)';ic.style.color=open?'#d9b878':'hsl(var(--muted-foreground))';
     var b=it.querySelector('[data-faq-body]');b.style.gridTemplateRows=open?'1fr':'0fr';b.style.opacity=open?1:0;};
   items.forEach(function(it){it.querySelector('button').addEventListener('click',function(){var wasOpen=it.querySelector('button').getAttribute('aria-expanded')==='true';items.forEach(function(o){setItem(o,false);});if(!wasOpen)setItem(it,true);});}); });
+
+  // Visualizador de wallpaper: toque/clique numa prévia abre em tela cheia com zoom (sempre com marca d'água)
+  safe(function(){
+    var V='?v=wm2', wide=window.matchMedia && matchMedia('(min-width: 900px)').matches;
+    var deskN=function(u){ var m=/assets\/desktop\/(?:\d+\/|sq\/)?(\d+)(?:-\d+)?\.webp/.exec(u||''); return m?m[1]:null; };
+    var celN=function(u){ var m=/assets\/celular\/(?:\d+\/|thumb\/|mini\/)?(\d+)\.webp/.exec(u||''); return m?m[1]:null; };
+    var srcOf=function(i){ return i.getAttribute('srcset')||i.getAttribute('data-srcset')||i.getAttribute('src')||i.getAttribute('data-src')||''; };
+    var views=function(d,c){ var v={};
+      if(d) v.desk={mid:'assets/desktop/'+(wide?'':'800/')+d+'.webp'+V, big:'assets/desktop/'+d+'.webp'+V};
+      if(c) v.cel={mid:'assets/celular/'+c+'.webp'+V, big:'assets/celular/'+c+'.webp'+V};
+      return v; };
+    var groups={};
+    var add=function(g,el,item){
+      var list=groups[g]=groups[g]||[], key=JSON.stringify(item.v);
+      for(var i=0;i<list.length;i++) if(list[i].key===key){ el._vlb=[g,i]; return; }
+      item.key=key; list.push(item); el._vlb=[g,list.length-1];
+    };
+    var lupa='<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5M11 8v6M8 11h6"/></svg>';
+    var clickable=function(el){
+      el.setAttribute('data-zoom',''); el.setAttribute('role','button'); el.setAttribute('tabindex','0'); el.setAttribute('aria-label','Ver wallpaper em tela cheia');
+      el.addEventListener('click',function(){ open(el._vlb); });
+      el.addEventListener('keydown',function(e){ if(e.key==='Enter'||e.key===' '){ e.preventDefault(); open(el._vlb); } });
+    };
+    // topo: par notebook + celular (abre com as duas versões)
+    document.querySelectorAll('#inicio [data-marquee] > div > div').forEach(function(it){
+      it.setAttribute('data-vlb-item','');
+      var l=it.querySelector('img[srcset*="assets/desktop/"]'), p=it.querySelector('img[src*="assets/celular/"]');
+      var d=l&&deskN(srcOf(l)), c=p&&celN(srcOf(p)); if(d||c) add('topo',it,{v:views(d,c),first:d?'desk':'cel'});
+    });
+    // galeria
+    document.querySelectorAll('#galeria .group').forEach(function(card){
+      var im=card.querySelector('img'); if(!im) return; var s=srcOf(im), d=deskN(s), c=d?null:celN(s); if(!d&&!c) return;
+      add('galeria',card,{v:views(d,c),first:d?'desk':'cel'}); clickable(card);
+      var b=document.createElement('span'); b.className='vlb-badge'; b.setAttribute('aria-hidden','true'); b.innerHTML=lupa; card.appendChild(b);
+    });
+    // águia (estilo) e imagem do pacote: abre a arte inteira
+    document.querySelectorAll('#estilo img, #pack img').forEach(function(im){
+      if(im.closest('.fl')) return; var d=deskN(srcOf(im)); if(!d) return;
+      var holder=im.parentElement;
+      add('artes',holder,{v:views(d,null),first:'desk'}); clickable(holder);
+    });
+    // mural da comunidade: fotos e conversas (mesmos arquivos, com marca)
+    document.querySelectorAll('#comunidade .cm-card').forEach(function(card){
+      var im=card.querySelector('img'); if(!im) return; var s=im.getAttribute('src')||im.getAttribute('data-src'); if(!s) return;
+      add('comunidade',card,{v:{foto:{mid:s,big:s}},first:'foto'});
+    });
+    // nos carrosséis (topo e mural) o toque é separado do arrastar
+    document.querySelectorAll('[data-marquee]').forEach(function(w){
+      var sx=0,sy=0,st=0;
+      w.addEventListener('pointerdown',function(e){ sx=e.clientX; sy=e.clientY; st=Date.now(); });
+      w.addEventListener('pointerup',function(e){
+        if(Math.abs(e.clientX-sx)>8||Math.abs(e.clientY-sy)>8||Date.now()-st>600) return;
+        var el=document.elementFromPoint(e.clientX,e.clientY), t=el&&el.closest&&el.closest('[data-vlb-item],.cm-card');
+        if(t&&t._vlb) open(t._vlb);
+      });
+    });
+
+    // estrutura do visualizador
+    var box=document.createElement('div');
+    box.className='vlb'; box.hidden=true; box.setAttribute('role','dialog'); box.setAttribute('aria-modal','true'); box.setAttribute('aria-label','Wallpaper em tela cheia');
+    box.innerHTML='<div class="vlb-top"><span class="vlb-count"></span><div class="vlb-tabs" hidden><button type="button" data-view="desk">Notebook</button><button type="button" data-view="cel">Celular</button></div>'+
+      '<button type="button" class="vlb-x" aria-label="Fechar"><svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>'+
+      '<div class="vlb-stage"><div class="vlb-frame"><img class="vlb-img" alt="" draggable="false"><div class="vlb-shield"></div></div>'+
+      '<button type="button" class="vlb-nav vlb-prev" aria-label="Anterior"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="m15 5-7 7 7 7"/></svg></button>'+
+      '<button type="button" class="vlb-nav vlb-next" aria-label="Próximo"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round"><path d="m9 5 7 7-7 7"/></svg></button></div>'+
+      '<div class="vlb-bottom"><p class="vlb-hint">Toque na imagem para ampliar · prévia com marca d’água</p><a href="#oferta" class="vlb-cta">QUERO A COLEÇÃO</a></div>';
+    document.body.appendChild(box);
+    var q=function(s){ return box.querySelector(s); };
+    var frame=q('.vlb-frame'), img=q('.vlb-img'), shield=q('.vlb-shield'), stage=q('.vlb-stage'), tabs=q('.vlb-tabs'), count=q('.vlb-count'), prev=q('.vlb-prev'), next=q('.vlb-next');
+    var list=[], idx=0, view='desk', zoomed=false, isOpen=false, toOffer=false, tracked=false;
+    var cur=function(){ return list[idx].v[view]; };
+    var pan=function(e){ var r=frame.getBoundingClientRect(); if(!r.width) return;
+      var x=Math.min(1,Math.max(0,(e.clientX-r.left)/r.width))*100, y=Math.min(1,Math.max(0,(e.clientY-r.top)/r.height))*100;
+      img.style.transformOrigin=x+'% '+y+'%'; };
+    var setZoom=function(z,e){
+      zoomed=z; frame.classList.toggle('z',z);
+      if(!z){ img.style.transformOrigin='50% 50%'; return; }
+      if(e) pan(e);
+      var v=cur(); if(img.getAttribute('src')!==v.big){ var n=new Image(); n.onload=function(){ if(isOpen&&zoomed&&cur()===v) img.src=v.big; }; n.src=v.big; }
+    };
+    var show=function(){
+      var it=list[idx]; if(!it.v[view]) view=it.first;
+      setZoom(false); frame.classList.add('loading');
+      img.onload=function(){ frame.classList.remove('loading'); };
+      img.src=cur().mid;
+      tabs.hidden=!(it.v.desk&&it.v.cel);
+      tabs.querySelectorAll('button').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-view')===view ? 'true':'false'); });
+      count.textContent=list.length>1 ? (idx+1)+' / '+list.length : '';
+      prev.hidden=next.hidden=list.length<2;
+    };
+    var go=function(d){ if(list.length<2) return; idx=(idx+d+list.length)%list.length; view=list[idx].first; show(); };
+    var open=function(ref){
+      if(!ref||!groups[ref[0]]) return;
+      list=groups[ref[0]]; idx=ref[1]; view=list[idx].first; show();
+      box.hidden=false; isOpen=true; document.documentElement.classList.add('vlb-open');
+      try{ history.pushState({vlb:1},''); }catch(e){}
+      try{ q('.vlb-x').focus({preventScroll:true}); }catch(e){}
+      if(window.clarity) clarity('event','ver_wallpaper');
+      if(!tracked && window.fbq){ fbq('trackCustom','VerWallpaper'); tracked=true; }
+    };
+    var finish=function(){
+      if(!isOpen) return; isOpen=false; box.hidden=true; setZoom(false); img.removeAttribute('src');
+      document.documentElement.classList.remove('vlb-open');
+      // espera o navegador restaurar a rolagem do histórico antes de ir para a oferta
+      if(toOffer){ toOffer=false; setTimeout(function(){ var of=document.getElementById('oferta'); if(of) of.scrollIntoView({behavior:'smooth'}); },80); }
+    };
+    var close=function(){ if(history.state&&history.state.vlb){ history.back(); } else finish(); };
+    window.addEventListener('popstate',function(){ if(isOpen) finish(); });
+    q('.vlb-x').addEventListener('click',close);
+    q('.vlb-cta').addEventListener('click',function(e){ e.preventDefault(); toOffer=true; close(); });
+    prev.addEventListener('click',function(e){ e.stopPropagation(); go(-1); });
+    next.addEventListener('click',function(e){ e.stopPropagation(); go(1); });
+    tabs.addEventListener('click',function(e){ var b=e.target.closest('button'); if(!b) return; view=b.getAttribute('data-view'); show(); });
+    document.addEventListener('keydown',function(e){ if(!isOpen) return;
+      if(e.key==='Escape') close(); else if(e.key==='ArrowRight') go(1); else if(e.key==='ArrowLeft') go(-1); });
+    // toque na imagem amplia/reduz; arrastar com zoom passeia; deslizar sem zoom troca; toque fora fecha
+    var px=0,py=0;
+    stage.addEventListener('pointerdown',function(e){ px=e.clientX; py=e.clientY; });
+    stage.addEventListener('pointermove',function(e){ if(zoomed&&(e.pointerType==='mouse'||e.buttons)) pan(e); });
+    stage.addEventListener('pointerup',function(e){
+      if(e.target.closest('.vlb-nav')) return;
+      var dx=e.clientX-px, dy=e.clientY-py;
+      if(Math.abs(dx)<8&&Math.abs(dy)<8){ if(e.target===shield) setZoom(!zoomed,e); else close(); return; }
+      if(!zoomed&&Math.abs(dx)>50&&Math.abs(dx)>Math.abs(dy)) go(dx<0?1:-1);
+    });
+  });
 
   // Pop-up de upsell
   safe(function(){ var up=document.getElementById('upsell');
