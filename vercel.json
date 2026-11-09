@@ -1,8 +1,17 @@
 {
+  "redirects": [
+    { "source": "/sitemap.xml", "destination": "/fuja/", "permanent": false },
+    { "source": "/sitemap_index.xml", "destination": "/fuja/", "permanent": false },
+    { "source": "/sitemap(.*).xml", "destination": "/fuja/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/assets/(.*)",
       "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
+    },
+    {
+      "source": "/fuja/(.*)",
+      "headers": [{ "key": "X-Robots-Tag", "value": "noindex, nofollow" }]
     }
   ]
 }
