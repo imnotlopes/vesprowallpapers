@@ -15,11 +15,11 @@
      Preço e links desta página. Só mexa aqui. -->
 <script>
 window.UPSELL = {
-  preco: "37,90",                 // preço do Acervo Completo (sem "R$")
+  preco: "32,90",                 // preço do Acervo Completo (sem "R$")
   precoAntes: "",                 // preço riscado: deixe vazio se nunca foi praticado
   // Botão de upsell da Wiapy (Upsell > Script > Html botão): copie o linkUrl e o refusalLinkUrl
-  checkout: "https://pay.wiapy.com/checkout/undefined",   // linkUrl
-  recusar: "https://wiapy.com/login",                       // refusalLinkUrl (para onde vai quem recusa)
+  checkout: "https://pay.wiapy.com/checkout/te-lcZmlti_g",   // linkUrl (Acervo Completo VESPRO, R$ 32,90)
+  recusar: "https://vesprowallpapers.vercel.app/obrigado/",   // refusalLinkUrl (para onde vai quem recusa)
   metaPixelId: "1781303226340709",
   clarityId: "yyc0uitibt"
 };
@@ -110,6 +110,9 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 @media (min-width:600px){h1{font-size:40px}.preco{font-size:60px}}
 .video{margin:18px auto 6px;border-radius:14px;overflow:hidden;border:1px solid var(--line);background:#000;box-shadow:0 20px 50px -25px rgba(0,0,0,.9)}
 .video video{display:block;width:100%;height:auto}
+.hero-2{padding-top:18px}
+.gancho{font-size:40px;line-height:1.05;margin:6px 0 14px;letter-spacing:-1.5px}
+@media (min-width:600px){.gancho{font-size:48px}}
 .capa{width:min(100%,360px);margin:0 auto 18px;border-radius:14px;box-shadow:0 24px 60px -24px rgba(0,0,0,.9)}
 .oferta .capa{width:min(100%,260px);margin:0 auto 16px}
 @media (min-width:600px){h1{font-size:48px}h2{font-size:38px}}
@@ -125,15 +128,21 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 
 <main class="wrap">
   <section class="hero">
-    <img class="capa" src="../assets/acervo/capa-720.webp" alt="Acervo Completo VESPRO" width="720" height="720">
-    <h1>Espera, tem <span class="serif">mais uma coisa</span></h1>
-    <p class="lead">Você acabou de liberar uma condição que quem comprou antes não teve.</p>
+    <img class="logo" src="../assets/logo/vespro-logo-240.webp" alt="VESPRO" width="240" height="212">
+    <h1>Obrigado por <span class="serif">confiar</span> na gente</h1>
+    <p class="lead">Parabéns por chegar até aqui! Se você comprou, é porque confiou na VESPRO™ e curtiu as artes. Isso significa muito pra gente.</p>
   </section>
 
   <div class="ok">
     <b>Pronto, compra confirmada!</b>
     <span>Sua coleção já está indo pro seu e-mail.</span>
   </div>
+
+  <section class="hero hero-2">
+    <img class="capa" src="../assets/acervo/capa-720.webp" alt="Acervo Completo VESPRO" width="720" height="720">
+    <h2 class="gancho">Espera, tem <span class="serif">mais uma coisa</span></h2>
+    <p class="lead">Como você confiou na gente, liberamos uma condição que quem comprou antes não teve.</p>
+  </section>
 
   <p>A maioria das pessoas compra uma coleção e para por aí. E tudo bem, as artes são lindas.</p>
   <p>Mas dá pra ficar com o <b>acervo todo</b>: as coleções que já saíram, as que ainda vão sair e as artes que nem aparecem no site.</p>
@@ -196,7 +205,7 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     <img class="capa" src="../assets/acervo/capa-720.webp" alt="" width="720" height="720" loading="lazy">
     <p class="de" data-de hidden>De <s>R$ <span data-precoantes></span></s></p>
     <p class="por">O Acervo Completo não está à venda na página principal. Aqui, você leva tudo por</p>
-    <div class="preco"><small>R$</small><span data-preco>37,90</span></div>
+    <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
     <p class="unico">Pagamento único · sem mensalidade</p>
     <div class="wiapy" id="wiapy_upsell_1"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
     
@@ -224,7 +233,7 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 
     <section class="oferta" style="margin-top:26px">
       <span class="selo">Só nesta página</span>
-      <div class="preco"><small>R$</small><span data-preco>37,90</span></div>
+      <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
       <p class="unico">Pagamento único · sem mensalidade</p>
       <div class="wiapy" id="wiapy_upsell_2"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
       
