@@ -119,6 +119,32 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 .video.telas{aspect-ratio:3/4}
 .video.mac{max-width:300px;aspect-ratio:9/16}
 .video.telas video,.video.mac video{height:100%;object-fit:cover}
+
+/* card de oferta no modelo do card "Coleção Completa" da landing */
+.oferta.card{position:relative;text-align:left;margin:46px 0 14px;padding:30px 22px 22px;border:1px solid rgba(255,255,255,.22);border-radius:22px;background:rgba(10,14,22,.62);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);box-shadow:0 30px 70px -40px rgba(0,0,0,.95)}
+.oferta.card .selo{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);margin:0;white-space:nowrap;padding:7px 16px;font-size:11px;letter-spacing:1.5px}
+.c-nome{font-size:24px;font-weight:600;letter-spacing:-.4px;margin:4px 0 4px}
+.c-sub{font-size:15px;color:var(--muted);margin:0 0 16px}
+.c-thumbs{display:flex;margin:0 0 18px}
+.c-thumbs img,.c-thumbs span{width:58px;height:58px;border-radius:13px;object-fit:cover;border:2px solid #0a0e16;box-shadow:0 6px 16px -6px rgba(0,0,0,.8)}
+.c-thumbs img+img,.c-thumbs img+span{margin-left:-12px}
+.c-thumbs span{display:flex;align-items:center;justify-content:center;background:#221d12;color:var(--gold);font-size:14px;font-weight:700}
+.c-resumo{font-size:15px;line-height:1.55;color:#b9bec6;margin:0 0 16px}
+.c-resumo b{display:block;color:#fff;font-weight:600;margin-bottom:2px}
+.c-lista{list-style:none;margin:0 0 22px;padding:0}
+.c-lista li{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.45;color:#e6e6e6;padding:6px 0}
+.ck{flex:0 0 22px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);background:rgba(217,184,120,.10);box-shadow:inset 0 0 0 1px rgba(217,184,120,.45);margin-top:-1px}
+.ck svg{width:12px;height:12px}
+.c-label{text-align:center;font-size:14px;letter-spacing:2.5px;text-transform:uppercase;color:var(--muted);margin:6px 0 2px}
+.oferta.card .de{text-align:center}
+.oferta.card .preco{text-align:center;color:#fff;font-weight:500;font-size:64px;letter-spacing:-2px;margin:0}
+.oferta.card .preco small{font-size:30px;font-weight:500;margin-right:6px}
+.c-conta{text-align:center;font-size:14px;color:var(--muted);margin:8px 0 22px}
+.oferta.card .seguro{text-align:center}
+.oferta.card.mini{text-align:center}
+.oferta.card.mini .c-nome{text-align:center;margin-top:8px}
+/* botao com textura de tinta, igual ao CTA da landing */
+.wiapy button,.wiapy .btn{background-image:url(../assets/tex/impasto-shade-soft.webp)!important;background-size:240px!important;background-blend-mode:soft-light!important;letter-spacing:.4px;-webkit-mask-box-image:url(../assets/tex/mask-stroke.png) 40 60 40 60 / 3px 6px stretch}
 </style>
 <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
 </head>
@@ -200,15 +226,30 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
   </div>
   <p class="punch">Não é só mais wallpaper. É <em>nunca mais ficar sem tela nova</em>.</p>
 
-  <section class="oferta" id="oferta">
+  <section class="oferta card" id="oferta">
     <span class="selo">Só nesta página</span>
-    <img class="capa" src="../assets/acervo/capa-720.webp" alt="" width="720" height="720" loading="lazy">
+    <h3 class="c-nome">Acervo Completo</h3>
+    <p class="c-sub">Para quem quer ficar com tudo.</p>
+    <div class="c-thumbs" aria-hidden="true">
+      <img src="../assets/acervo/polo-nuvem-400.webp" alt="" width="400" height="225" loading="lazy">
+      <img src="../assets/acervo/relogio-9-5-400.webp" alt="" width="400" height="223" loading="lazy">
+      <img src="../assets/acervo/no-risk-no-story-400.webp" alt="" width="400" height="223" loading="lazy">
+      <span>200+</span>
+    </div>
+    <p class="c-resumo"><b>200+ wallpapers</b>Você fica com a sua coleção e com todas as outras que a VESPRO™ já lançou, mais as próximas.</p>
+    <ul class="c-lista">
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>200+ wallpapers exclusivos</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Todas as coleções que já saíram</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Todas as próximas coleções</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Artes que não aparecem no site</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Celular, notebook, iPad e ultrawide</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Guia para trocar o wallpaper automaticamente</span></li>
+    </ul>
+    <p class="c-label">Pagamento único</p>
     <p class="de" data-de hidden>De <s>R$ <span data-precoantes></span></s></p>
-    <p class="por">O Acervo Completo não está à venda na página principal. Aqui, você leva tudo por</p>
     <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
-    <p class="unico">Pagamento único · sem mensalidade</p>
+    <p class="c-conta">Dá menos de 17 centavos por wallpaper.</p>
     <div class="wiapy" id="wiapy_upsell_1"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
-    
     <p class="seguro">Compra segura · acesso liberado na hora</p>
   </section>
 
@@ -231,10 +272,12 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     <div class="item">Celular, iPad e ultrawide<small>A mesma arte ajustada pra cada tela, sem cortar no meio.</small></div>
     <div class="item">Guia de troca automática<small>Seu wallpaper muda sozinho todo dia, no notebook e no celular.</small></div>
 
-    <section class="oferta" style="margin-top:26px">
+    <section class="oferta card mini" style="margin-top:34px">
       <span class="selo">Só nesta página</span>
+      <h3 class="c-nome">Acervo Completo</h3>
+      <p class="c-label">Pagamento único</p>
       <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
-      <p class="unico">Pagamento único · sem mensalidade</p>
+      <p class="c-conta">Dá menos de 17 centavos por wallpaper.</p>
       <div class="wiapy" id="wiapy_upsell_2"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
       
     </section>
