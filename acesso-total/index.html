@@ -148,6 +148,12 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 .topbar .seta{display:inline-block;margin-left:2px;animation:desce 1.4s ease-in-out infinite}
 @keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
 @media (prefers-reduced-motion:reduce){.topbar .seta{animation:none}}
+.setups{margin:20px -20px 6px;overflow:hidden}
+.setups-trilho{display:flex;gap:10px;width:max-content;animation:passa 32s linear infinite}
+.setups-trilho img{height:190px;width:auto;border-radius:12px;border:1px solid var(--line);flex:none}
+@media (min-width:600px){.setups-trilho img{height:220px}}
+@keyframes passa{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 5px))}}
+@media (prefers-reduced-motion:reduce){.setups-trilho{animation:none}}
 </style>
 <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
 </head>
@@ -192,12 +198,17 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
   </div>
   <p class="legenda">Uma amostra. O resto você só vê lá dentro.</p>
 
-  <div class="video telas">
-    <video data-auto muted loop playsinline preload="none" poster="../assets/videos/acesso-telas.webp" width="720" height="960" aria-label="Artes da VESPRO trocando no monitor e no notebook">
-      <source src="../assets/videos/acesso-telas.mp4" type="video/mp4">
-    </video>
+  <div class="setups" aria-label="Fotos de setups de clientes">
+    <div class="setups-trilho">
+      <img src="../assets/comunidade/setup-cliente-3-monitores.webp" alt="Cliente com wallpapers VESPRO em três monitores" width="900" height="506" decoding="async">
+      <img src="../assets/comunidade/setup-cliente-gato.webp" alt="Cliente com o wallpaper do gato em dois monitores" width="900" height="675" decoding="async">
+      <img src="../assets/comunidade/setup-cliente-luz.webp" alt="Cliente com wallpaper VESPRO no setup de dois monitores" width="900" height="675" decoding="async">
+      <img src="../assets/comunidade/setup-cliente-3-monitores.webp" alt="" width="900" height="506" decoding="async">
+      <img src="../assets/comunidade/setup-cliente-gato.webp" alt="" width="900" height="675" decoding="async">
+      <img src="../assets/comunidade/setup-cliente-luz.webp" alt="" width="900" height="675" decoding="async">
+    </div>
   </div>
-  <p class="legenda">Arte nova na tela todo dia.</p>
+  <p class="legenda">Setups de clientes VESPRO™.</p>
 
   <section class="oferta card" id="oferta">
     <span class="selo">Só nesta página</span>
