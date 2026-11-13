@@ -145,35 +145,31 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 .oferta.card.mini .c-nome{text-align:center;margin-top:8px}
 /* botao com textura de tinta, igual ao CTA da landing */
 .wiapy button,.wiapy .btn{background-image:url(../assets/tex/impasto-shade-soft.webp)!important;background-size:240px!important;background-blend-mode:soft-light!important;letter-spacing:.4px;-webkit-mask-box-image:url(../assets/tex/mask-stroke.png) 40 60 40 60 / 3px 6px stretch}
+.topbar .seta{display:inline-block;margin-left:2px;animation:desce 1.4s ease-in-out infinite}
+@keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(3px)}}
+@media (prefers-reduced-motion:reduce){.topbar .seta{animation:none}}
 </style>
 <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
 </head>
 <body>
 
-<div class="topbar">⚠ Compra aprovada. Fica nesta página: essa condição aparece uma vez só.</div>
+<div class="topbar">⚠ Essa página vai se autodestruir depois de você sair. Não acesse os wallpapers antes de ver isso <span class="seta" aria-hidden="true">↓</span></div>
 
 <main class="wrap">
   <section class="hero">
     <img class="logo" src="../assets/logo/vespro-logo-240.webp" alt="VESPRO" width="240" height="212">
     <h1>Obrigado por <span class="serif">confiar</span> na gente</h1>
-    <p class="lead">Parabéns por chegar até aqui! Se você comprou, é porque confiou na VESPRO™ e curtiu as artes. Isso significa muito pra gente.</p>
-  </section>
-
-  <div class="ok">
-    <b>Pronto, compra confirmada!</b>
-    <span>Sua coleção já está indo pro seu e-mail.</span>
-  </div>
-
-  <section class="hero hero-2">
+    <p class="lead">Se você comprou, é porque confiou na VESPRO™ e curtiu as artes. Isso significa muito pra gente.</p>
+    <div class="ok">
+      <b>Pronto, compra confirmada!</b>
+      <span>Sua coleção já está indo pro seu e-mail.</span>
+    </div>
     <img class="capa" src="../assets/acervo/capa-720.webp" alt="Acervo Completo VESPRO" width="720" height="720">
     <h2 class="gancho">Espera, tem <span class="serif">mais uma coisa</span></h2>
-    <p class="lead">Como você confiou na gente, liberamos uma condição que quem comprou antes não teve.</p>
+    <p class="lead">Você levou uma coleção. Por <b>R$ <span data-preco>32,90</span></b>, fica com <b>todas</b>: as que já saíram, as próximas e as artes que nem aparecem no site.</p>
   </section>
 
-  <p>A maioria das pessoas compra uma coleção e para por aí. E tudo bem, as artes são lindas.</p>
-  <p>Mas dá pra ficar com o <b>acervo todo</b>: as coleções que já saíram, as que ainda vão sair e as artes que nem aparecem no site.</p>
-  <p class="m">Olha a diferença:</p>
-
+  <p class="m" style="text-align:center;margin-top:18px">Olha a diferença:</p>
   <table class="tabela">
     <tr><th></th><th>Comprou a Essencial</th><th>Comprou a Completa</th><th class="voce">Você, com o Acervo Completo</th></tr>
     <tr><td>Wallpapers</td><td>75+</td><td>150+</td><td class="voce">a sua coleção + 200+ exclusivos</td></tr>
@@ -202,29 +198,6 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     </video>
   </div>
   <p class="legenda">Arte nova na tela todo dia.</p>
-
-  <h2>O que vem no <span class="serif">acervo</span></h2>
-  <div class="box">
-    <ul class="lista">
-      <li><b>200+ wallpapers exclusivos</b>, além dos que você acabou de comprar</li>
-      <li><b>Todas as coleções que já saíram</b>, numa pasta só</li>
-      <li><b>Todas as próximas coleções</b>, sem pagar de novo</li>
-      <li>Artes que ficam só lá dentro e <b>não aparecem no site</b></li>
-      <li>Celular, notebook, iPad e ultrawide</li>
-    </ul>
-  </div>
-
-  <h2>Na tela fica <span class="serif">assim</span></h2>
-  <div class="ba">
-    <figure><figcaption>Antes</figcaption><img src="../assets/antes-depois/antes-820.webp?v=wm3" alt="Monitor e notebook com o wallpaper padrão de fábrica" width="820" height="461" loading="lazy"></figure>
-    <figure><figcaption>Depois</figcaption><img src="../assets/antes-depois/depois-820.webp?v=wm3" alt="O mesmo monitor e notebook com uma pintura a óleo impasto da VESPRO" width="820" height="461" loading="lazy"></figure>
-  </div>
-  <div class="video mac">
-    <video data-auto muted loop playsinline preload="none" poster="../assets/videos/acesso-mac.webp" width="360" height="640" aria-label="Wallpapers da VESPRO num notebook">
-      <source src="../assets/videos/acesso-mac.mp4" type="video/mp4">
-    </video>
-  </div>
-  <p class="punch">Não é só mais wallpaper. É <em>nunca mais ficar sem tela nova</em>.</p>
 
   <section class="oferta card" id="oferta">
     <span class="selo">Só nesta página</span>
@@ -257,34 +230,8 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     <b>Como dá pra ser tão barato?</b>
     <span>Você já é cliente. A gente não precisa pagar anúncio pra te achar de novo, e essa economia vira desconto pra você.</span>
   </div>
+  <p class="garantia">7 dias de garantia. Se baixar e sentir que não era o que imaginava, é só pedir o reembolso.</p>
 </main>
-
-<section class="escuro">
-  <div class="wrap">
-    <img class="logo" src="../assets/logo/vespro-logo-240.webp" alt="VESPRO" width="240" height="212">
-    <h2 style="margin-top:0">Tudo que vem no <span class="serif">acervo</span></h2>
-    <div class="item">200+ wallpapers exclusivos<small>Pinturas a óleo impasto que não estão na sua coleção.</small></div>
-    <div class="item">Todas as coleções que já saíram<small>Tudo o que a VESPRO™ já lançou, organizado numa pasta só.</small></div>
-    <div class="item">Todas as próximas coleções<small>Saiu coleção nova, ela entra na sua pasta sem pagar de novo.</small></div>
-    <div class="item">Artes que não aparecem no site<small>Obras que só quem tem o Acervo Completo consegue baixar.</small></div>
-
-    <p class="bonus-t">E ainda leva:</p>
-    <div class="item">Celular, iPad e ultrawide<small>A mesma arte ajustada pra cada tela, sem cortar no meio.</small></div>
-    <div class="item">Guia de troca automática<small>Seu wallpaper muda sozinho todo dia, no notebook e no celular.</small></div>
-
-    <section class="oferta card mini" style="margin-top:34px">
-      <span class="selo">Só nesta página</span>
-      <h3 class="c-nome">Acervo Completo</h3>
-      <p class="c-label">Pagamento único</p>
-      <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
-      <p class="c-conta">Dá menos de 17 centavos por wallpaper.</p>
-      <div class="wiapy" id="wiapy_upsell_2"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
-      
-    </section>
-
-    <p class="garantia">7 dias de garantia. Se baixar e sentir que não era o que imaginava, é só pedir o reembolso.</p>
-  </div>
-</section>
 
 <footer>VESPRO™ · todos os direitos reservados</footer>
 
