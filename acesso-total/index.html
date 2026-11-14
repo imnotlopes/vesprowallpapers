@@ -23,6 +23,22 @@ window.UPSELL = {
   metaPixelId: "1781303226340709",
   clarityId: "yyc0uitibt"
 };
+/* ===== VERSÕES COM DESCONTO DA COMPRA (uma por checkout) =====
+   Página: /acesso-total/essencial/, /acesso-total/completa-oferta/, /acesso-total/completa/
+   pagou = preço da coleção que a pessoa comprou; preco = quanto ela paga agora pelo Acervo;
+   total = pagou + preco; checkout = linkUrl do botão de upsell da Wiapy desse produto. */
+window.VERSOES = {
+  "essencial":       { comprou: "Coleção Essencial", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "" },
+  "completa-oferta": { comprou: "Coleção Completa",  pagou: "19,90", preco: "29,90", total: "49,80", checkout: "" },
+  "completa":        { comprou: "Coleção Completa",  pagou: "23,90", preco: "25,99", total: "49,89", checkout: "" }
+};
+(function(){
+  var m = location.pathname.match(/\/acesso-total\/(essencial|completa-oferta|completa)\/?/) || location.search.match(/[?&]de=(essencial|completa-oferta|completa)/);
+  if(!m) return;
+  var v = window.VERSOES[m[1]], u = window.UPSELL;
+  u.versao = m[1]; u.credito = v; u.preco = v.preco; u.checkout = v.checkout;
+  document.documentElement.className += " modo-credito";
+})();
 </script>
 <script>
 (function(){
@@ -186,6 +202,27 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
   .oferta.card{max-width:520px;margin:80px auto 14px}
   .como,.garantia{max-width:520px;margin-left:auto;margin-right:auto}
 }
+.so-credito{display:none}
+.modo-credito .so-credito{display:block}
+.modo-credito .so-normal{display:none}
+.credito{margin:18px 0 6px;padding:18px 16px 16px;border:1px solid rgba(217,184,120,.35);border-radius:16px;background:rgba(10,14,22,.6);text-align:left}
+.cr-barra{display:flex;gap:4px;height:64px;border-radius:12px;overflow:hidden}
+.cr-barra>div{flex:1 1 0;display:flex;flex-direction:column;justify-content:center;padding:0 12px;min-width:0}
+.cr-barra small{font-size:11px;letter-spacing:1px;text-transform:uppercase;font-weight:700;opacity:.85}
+.cr-barra b{font-size:17px;white-space:nowrap}
+.cr-pago{background:repeating-linear-gradient(135deg,rgba(61,220,132,.22) 0 8px,rgba(61,220,132,.12) 8px 16px);color:#bff0d3;box-shadow:inset 0 0 0 1.5px rgba(61,220,132,.55);border-radius:12px 0 0 12px}
+.cr-falta{background:var(--gold);color:#0b0f15;border-radius:0 12px 12px 0;text-align:right;align-items:flex-end}
+.cr-barra-leg{font-size:12px;color:var(--muted);text-align:center;margin:8px 0 14px}
+.cr-recibo{border-top:1px dashed rgba(255,255,255,.18);padding-top:10px}
+.cr-linha{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:5px 0;color:#e6e6e6}
+.cr-linha>span:last-child{white-space:nowrap;flex:none}
+.cr-desc{color:#9fe7bf}
+.cr-desc small{display:block;font-size:12px;opacity:.8;padding-left:20px}
+.cr-desc i{font-style:normal;margin-right:4px}
+.cr-total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:800;font-size:18px;color:var(--gold)}
+.c-cred{text-align:center;font-size:14px;color:#cfd3d8;margin:0 0 8px}
+.c-cred .menos{color:#9fe7bf}
+@media (min-width:960px){.intro .credito{max-width:520px}}
 </style>
 <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
 </head>
@@ -208,8 +245,22 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
   <section class="intro">
     <img class="capa" src="../assets/acervo/capa-720.webp" alt="Acervo Completo VESPRO" width="720" height="720">
     <div class="intro-txt">
-      <h2 class="gancho">Espera, tem <span class="serif">mais uma coisa</span></h2>
-      <p class="lead">Você levou uma coleção. Por <b>R$ <span data-preco>32,90</span></b>, fica com <b>todas</b>: as que já saíram, as próximas e as artes que nem aparecem no site.</p>
+      <h2 class="gancho so-normal">Espera, tem <span class="serif">mais uma coisa</span></h2>
+      <h2 class="gancho so-credito">Sua coleção de hoje <span class="serif">sai de graça</span></h2>
+      <p class="lead so-credito">O Acervo Completo já inclui a <b data-cr="comprou">Coleção Completa</b> que você comprou. Você não paga duas vezes por ela: <b>o que pagou hoje vira desconto.</b></p>
+      <div class="credito so-credito" aria-label="Como fica o desconto">
+        <div class="cr-barra">
+          <div class="cr-pago" data-cr-flex="pagou"><small>Já pago</small><b>R$ <span data-cr="pagou">23,90</span></b></div>
+          <div class="cr-falta" data-cr-flex="preco"><small>Falta</small><b>R$ <span data-cr="preco">25,99</span></b></div>
+        </div>
+        <p class="cr-barra-leg">Acervo Completo inteiro: R$ <span data-cr="total">49,89</span></p>
+        <div class="cr-recibo">
+          <div class="cr-linha"><span>Acervo Completo</span><span>R$ <span data-cr="total">49,89</span></span></div>
+          <div class="cr-linha cr-desc"><span><i aria-hidden="true">✓</i> Você já pagou<small data-cr="comprou">Coleção Completa</small></span><span>- R$ <span data-cr="pagou">23,90</span></span></div>
+          <div class="cr-linha cr-total"><span>Você paga agora</span><span>R$ <span data-cr="preco">25,99</span></span></div>
+        </div>
+      </div>
+      <p class="lead so-normal">Você levou uma coleção. Por <b>R$ <span data-preco>32,90</span></b>, fica com <b>todas</b>: as que já saíram, as próximas e as artes que nem aparecem no site.</p>
       <div class="mural" aria-label="Algumas artes do Acervo Completo">
         <img src="../assets/acervo/polo-nuvem-400.webp" alt="" loading="lazy" width="400" height="225">
         <img src="../assets/acervo/relogio-9-5-400.webp" alt="" loading="lazy" width="400" height="223">
@@ -272,10 +323,12 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Celular, notebook, iPad e ultrawide</span></li>
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Guia para trocar o wallpaper automaticamente</span></li>
     </ul>
+    <p class="c-cred so-credito">Acervo R$ <span data-cr="total">49,89</span> <span class="menos">- R$ <span data-cr="pagou">23,90</span> que você já pagou</span></p>
     <p class="c-label">Pagamento único</p>
     <p class="de" data-de hidden>De <s>R$ <span data-precoantes></span></s></p>
     <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
-    <p class="c-conta">Dá menos de 17 centavos por wallpaper.</p>
+    <p class="c-conta so-normal">Dá menos de 17 centavos por wallpaper.</p>
+    <p class="c-conta so-credito">O que você pagou hoje já está descontado.</p>
     <div class="wiapy" id="wiapy_upsell_1"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
     <p class="seguro">Compra segura · acesso liberado na hora</p>
   </section>
@@ -293,6 +346,10 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 (function(){
   var u=window.UPSELL||{};
   document.querySelectorAll('[data-preco]').forEach(function(e){ e.textContent=u.preco; });
+  if(u.credito){
+    document.querySelectorAll('[data-cr]').forEach(function(e){ e.textContent=u.credito[e.getAttribute('data-cr')]; });
+    document.querySelectorAll('[data-cr-flex]').forEach(function(e){ e.style.flexGrow=parseFloat(u.credito[e.getAttribute('data-cr-flex')].replace(',','.')); });
+  }
   if((u.precoAntes||"").trim()){
     document.querySelectorAll('[data-precoantes]').forEach(function(e){ e.textContent=u.precoAntes; });
     document.querySelectorAll('[data-de]').forEach(function(e){ e.hidden=false; });
