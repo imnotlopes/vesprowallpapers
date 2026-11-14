@@ -29,9 +29,9 @@ window.UPSELL = {
    pagou = preço da coleção que a pessoa comprou; preco = quanto ela paga agora pelo Acervo;
    total = pagou + preco; checkout = linkUrl do botão de upsell da Wiapy desse produto. */
 window.VERSOES = {
-  "essencial":       { comprou: "Coleção Essencial", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "" },
-  "completa-oferta": { comprou: "Coleção Completa",  pagou: "19,90", preco: "29,90", total: "49,80", checkout: "" },
-  "completa":        { comprou: "Coleção Completa",  pagou: "23,90", preco: "25,99", total: "49,89", checkout: "" }
+  "essencial":       { comprou: "Coleção Essencial", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
+  "completa-oferta": { comprou: "Coleção Completa",  pagou: "19,90", preco: "29,90", total: "49,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
+  "completa":        { comprou: "Coleção Completa",  pagou: "23,90", preco: "25,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
 };
 (function(){
   var m = location.pathname.match(/\/acesso-total\/(essencial|completa-oferta|completa)\/?/) || location.search.match(/[?&]de=(essencial|completa-oferta|completa)/);
