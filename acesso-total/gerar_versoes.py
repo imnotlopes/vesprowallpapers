@@ -1,16 +1,17 @@
-"""Gera as 3 páginas de upsell com desconto da compra (uma por checkout).
+"""Gera as páginas de upsell com desconto da compra (uma por checkout).
 
 A fonte é acesso-total/index.html. Edite só ela e rode:
     python acesso-total/gerar_versoes.py
 
-Cria acesso-total/essencial/, acesso-total/completa-oferta/ e acesso-total/completa/.
+Cria uma pasta por versão: essencial, completa-oferta, completa (página principal) e
+movies, movies-signature-oferta, movies-signature (página /filmes/).
 A página detecta a versão pelo endereço e usa os preços de window.VERSOES.
 """
 import os
 import re
 
 AQUI = os.path.dirname(os.path.abspath(__file__))
-VERSOES = ["essencial", "completa-oferta", "completa"]
+VERSOES = ["essencial", "completa-oferta", "completa", "movies", "movies-signature-oferta", "movies-signature"]
 
 with open(os.path.join(AQUI, "index.html"), encoding="utf-8") as f:
     fonte = f.read()

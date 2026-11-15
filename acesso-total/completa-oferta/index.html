@@ -25,17 +25,21 @@ window.UPSELL = {
   clarityId: "yyc0uitibt"
 };
 /* ===== VERSÕES COM DESCONTO DA COMPRA (uma por checkout) =====
-   Página: /acesso-total/essencial/, /acesso-total/completa-oferta/, /acesso-total/completa/
+   Página: /acesso-total/<versão>/ (essencial, completa-oferta, completa, movies, movies-signature-oferta, movies-signature)
    pagou = preço da coleção que a pessoa comprou; preco = quanto ela paga agora pelo Acervo;
    total = pagou + preco; checkout = linkUrl do botão de upsell da Wiapy desse produto. */
 window.VERSOES = {
   "essencial":       { comprou: "Coleção Essencial", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
   "completa-oferta": { comprou: "Coleção Completa",  pagou: "19,90", preco: "29,90", total: "49,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
-  "completa":        { comprou: "Coleção Completa",  pagou: "23,90", preco: "25,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
+  "completa":        { comprou: "Coleção Completa",  pagou: "23,90", preco: "25,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" },
+  // quem comprou na página /filmes/ (mesmos preços e mesmos upsells da Wiapy; muda só o nome do que a pessoa comprou)
+  "movies":                  { comprou: "VESPRO Movies™", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
+  "movies-signature-oferta": { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "19,90", preco: "29,90", total: "49,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
+  "movies-signature":        { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "23,90", preco: "25,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
 };
 (function(){
-  var m = location.pathname.match(/\/acesso-total\/(essencial|completa-oferta|completa)\/?/) || location.search.match(/[?&]de=(essencial|completa-oferta|completa)/);
-  if(!m) return;
+  var m = location.pathname.match(/\/acesso-total\/([a-z-]+)\/?/) || location.search.match(/[?&]de=([a-z-]+)/);
+  if(!m || !window.VERSOES[m[1]]) return;
   var v = window.VERSOES[m[1]], u = window.UPSELL;
   u.versao = m[1]; u.credito = v; u.preco = v.preco; u.checkout = v.checkout;
   document.documentElement.className += " modo-credito";
