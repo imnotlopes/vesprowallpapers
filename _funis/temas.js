@@ -21,9 +21,9 @@ module.exports = {
     packP2: 'Tem máfia, cassino, golpe perfeito, herói na cidade à noite e várias que ficam absurdas em tela grande.',
     entradaP: 'Para quem quer só as artes de cinema.',
     checkout: {
-      completa: 'https://pay.wiapy.com/NAhagBuNVr4y',        // VESPRO Movies™ + Signature Collection™ · R$ 23,90
-      completaUpsell: 'https://pay.wiapy.com/u5h0EscLMhD3',  // o mesmo combo no pop-up · R$ 19,90
-      essencial: 'https://pay.wiapy.com/oPEAOO9qmrct'        // VESPRO Movies™ · R$ 14,90
+      completa: 'https://pay.wiapy.com/NAhagBuNVr4y',        // VESPRO Movies™ + Signature Collection™ · R$ 21,90
+      completaUpsell: 'https://pay.wiapy.com/u5h0EscLMhD3',  // o mesmo combo no pop-up · R$ 17,90
+      essencial: 'https://pay.wiapy.com/oPEAOO9qmrct'        // VESPRO Movies™ · R$ 12,90
     }
   },
 

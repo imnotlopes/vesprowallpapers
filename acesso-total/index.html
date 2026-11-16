@@ -28,13 +28,13 @@ window.UPSELL = {
    pagou = preço da coleção que a pessoa comprou; preco = quanto ela paga agora pelo Acervo;
    total = pagou + preco; checkout = linkUrl do botão de upsell da Wiapy desse produto. */
 window.VERSOES = {
-  "essencial":       { comprou: "Coleção Essencial", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
-  "completa-oferta": { comprou: "Coleção Completa",  pagou: "19,90", preco: "29,90", total: "49,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
-  "completa":        { comprou: "Coleção Completa",  pagou: "23,90", preco: "25,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" },
+  "essencial":       { comprou: "Coleção Essencial", pagou: "12,90", preco: "34,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
+  "completa-oferta": { comprou: "Coleção Completa",  pagou: "17,90", preco: "29,90", total: "47,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
+  "completa":        { comprou: "Coleção Completa",  pagou: "21,90", preco: "25,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" },
   // quem comprou na página /filmes/ (mesmos preços e mesmos upsells da Wiapy; muda só o nome do que a pessoa comprou)
-  "movies":                  { comprou: "VESPRO Movies™", pagou: "14,90", preco: "34,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
-  "movies-signature-oferta": { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "19,90", preco: "29,90", total: "49,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
-  "movies-signature":        { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "23,90", preco: "25,99", total: "49,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
+  "movies":                  { comprou: "VESPRO Movies™", pagou: "12,90", preco: "34,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
+  "movies-signature-oferta": { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "17,90", preco: "29,90", total: "47,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
+  "movies-signature":        { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "21,90", preco: "25,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
 };
 (function(){
   var m = location.pathname.match(/\/acesso-total\/([a-z-]+)\/?/) || location.search.match(/[?&]de=([a-z-]+)/);
@@ -254,13 +254,13 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
       <p class="lead so-credito">O Acervo Completo já inclui a <b data-cr="comprou">Coleção Completa</b> que você comprou. Você não paga duas vezes por ela: <b>o que pagou hoje vira desconto.</b></p>
       <div class="credito so-credito" aria-label="Como fica o desconto">
         <div class="cr-barra">
-          <div class="cr-pago" data-cr-flex="pagou"><small>Já pago</small><b>R$ <span data-cr="pagou">23,90</span></b></div>
+          <div class="cr-pago" data-cr-flex="pagou"><small>Já pago</small><b>R$ <span data-cr="pagou">21,90</span></b></div>
           <div class="cr-falta" data-cr-flex="preco"><small>Falta</small><b>R$ <span data-cr="preco">25,99</span></b></div>
         </div>
-        <p class="cr-barra-leg">Acervo Completo inteiro: R$ <span data-cr="total">49,89</span></p>
+        <p class="cr-barra-leg">Acervo Completo inteiro: R$ <span data-cr="total">47,89</span></p>
         <div class="cr-recibo">
-          <div class="cr-linha"><span>Acervo Completo</span><span>R$ <span data-cr="total">49,89</span></span></div>
-          <div class="cr-linha cr-desc"><span><i aria-hidden="true">✓</i> Você já pagou<small data-cr="comprou">Coleção Completa</small></span><span>- R$ <span data-cr="pagou">23,90</span></span></div>
+          <div class="cr-linha"><span>Acervo Completo</span><span>R$ <span data-cr="total">47,89</span></span></div>
+          <div class="cr-linha cr-desc"><span><i aria-hidden="true">✓</i> Você já pagou<small data-cr="comprou">Coleção Completa</small></span><span>- R$ <span data-cr="pagou">21,90</span></span></div>
           <div class="cr-linha cr-total"><span>Você paga agora</span><span>R$ <span data-cr="preco">25,99</span></span></div>
         </div>
       </div>
@@ -327,7 +327,7 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Celular, notebook, iPad e ultrawide</span></li>
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Guia para trocar o wallpaper automaticamente</span></li>
     </ul>
-    <p class="c-cred so-credito">Acervo R$ <span data-cr="total">49,89</span> <span class="menos">- R$ <span data-cr="pagou">23,90</span> que você já pagou</span></p>
+    <p class="c-cred so-credito">Acervo R$ <span data-cr="total">47,89</span> <span class="menos">- R$ <span data-cr="pagou">21,90</span> que você já pagou</span></p>
     <p class="c-label">Pagamento único</p>
     <p class="de" data-de hidden>De <s>R$ <span data-precoantes></span></s></p>
     <div class="preco"><small>R$</small><span data-preco>32,90</span></div>

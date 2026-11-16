@@ -31,7 +31,7 @@ function gerar(slug, t) {
   const limpo = C.replace(/™/g, '');          // nome sem ™ para Pixel/Clarity
   const SIG = 'VESPRO Signature Collection™';   // nome fixo dos 150 wallpapers em todas as páginas temáticas
   const combo = `${limpo} + Signature Collection`;
-  const centavos = Math.ceil(2390 / (150 + t.qtdNum));
+  const centavos = Math.ceil(2190 / (150 + t.qtdNum));
   const link = k => (t.checkout[k] || '').trim();
 
   // Aviso no topo do arquivo gerado
@@ -50,9 +50,9 @@ function gerar(slug, t) {
   // Checkout (configuração) + nome do produto no Pixel + marca do funil no Clarity
   troca(/checkout: \{[\s\S]*?\n  \}/, `checkout: {
     // ${C}: cole os links da Wiapy em _funis/temas.js (não aqui) e gere de novo
-    completa: "${link('completa')}",         // ${combo} · R$ 23,90 (botão do card)
-    completaUpsell: "${link('completaUpsell')}",   // ${combo} com desconto · R$ 19,90 (pop-up)
-    essencial: "${link('essencial')}"         // ${C} · R$ 14,90 (pop-up, "não, quero só a ${C}")
+    completa: "${link('completa')}",         // ${combo} · R$ 21,90 (botão do card)
+    completaUpsell: "${link('completaUpsell')}",   // ${combo} com desconto · R$ 17,90 (pop-up)
+    essencial: "${link('essencial')}"         // ${C} · R$ 12,90 (pop-up, "não, quero só a ${C}")
   }`);
   troca("content_name: 'Coleção de wallpapers'", `content_name: '${limpo}'`);
   troca('  // marca a sessão com a origem do anúncio', `  clarity('set', 'funil', '${slug}');\n  // marca a sessão com a origem do anúncio`);
@@ -83,7 +83,7 @@ function gerar(slug, t) {
   troca('>150 wallpapers</p>', `>${Q} ${A} + 150 wallpapers</p>`);
   troca('Você recebe as artes da Essencial e também as outras versões e formatos que fizemos.', `Você recebe a coleção ${C} e também os 150 wallpapers da ${SIG}, com todas as versões e formatos.`);
   troca('>150 wallpapers em 4K</span>', `>${C} + ${SIG} (150 wallpapers) em 4K</span>`);
-  troca('Dá menos de 16 centavos por wallpaper.', `Dá menos de ${centavos} centavos por wallpaper.`);
+  troca('Dá menos de 15 centavos por wallpaper.', `Dá menos de ${centavos} centavos por wallpaper.`);
   troca('>QUERO A COLEÇÃO COMPLETA</a>', `>QUERO ${NU} + SIGNATURE</a>`);
 
   // Pop-up (abre ao escolher a coleção de entrada)
