@@ -28,13 +28,13 @@ window.UPSELL = {
    pagou = preço da coleção que a pessoa comprou; preco = quanto ela paga agora pelo Acervo;
    total = pagou + preco; checkout = linkUrl do botão de upsell da Wiapy desse produto. */
 window.VERSOES = {
-  "essencial":       { comprou: "Coleção Essencial", pagou: "12,90", preco: "34,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
-  "completa-oferta": { comprou: "Coleção Completa",  pagou: "17,90", preco: "29,90", total: "47,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
-  "completa":        { comprou: "Coleção Completa",  pagou: "21,90", preco: "25,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" },
+  "essencial":       { comprou: "Coleção Essencial", pagou: "12,90", preco: "26,90", total: "39,80", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
+  "completa-oferta": { comprou: "Coleção Completa",  pagou: "17,90", preco: "21,90", total: "39,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
+  "completa":        { comprou: "Coleção Completa",  pagou: "21,90", preco: "17,90", total: "39,80", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" },
   // quem comprou na página /filmes/ (mesmos preços e mesmos upsells da Wiapy; muda só o nome do que a pessoa comprou)
-  "movies":                  { comprou: "VESPRO Movies™", pagou: "12,90", preco: "34,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
-  "movies-signature-oferta": { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "17,90", preco: "29,90", total: "47,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
-  "movies-signature":        { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "21,90", preco: "25,99", total: "47,89", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
+  "movies":                  { comprou: "VESPRO Movies™", pagou: "12,90", preco: "26,90", total: "39,80", checkout: "https://pay.wiapy.com/checkout/6af891a45052a21e210c1fc1" },
+  "movies-signature-oferta": { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "17,90", preco: "21,90", total: "39,80", checkout: "https://pay.wiapy.com/checkout/6af892f1a84994dd38925d55" },
+  "movies-signature":        { comprou: "VESPRO Movies™ + Signature Collection™", pagou: "21,90", preco: "17,90", total: "39,80", checkout: "https://pay.wiapy.com/checkout/6af8938255667c91c56061d8" }
 };
 (function(){
   var m = location.pathname.match(/\/acesso-total\/([a-z-]+)\/?/) || location.search.match(/[?&]de=([a-z-]+)/);
@@ -226,6 +226,19 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
 .cr-total{border-top:1px solid var(--line);margin-top:6px;padding-top:10px;font-weight:800;font-size:18px;color:var(--gold)}
 .c-cred{text-align:center;font-size:14px;color:#cfd3d8;margin:0 0 8px}
 .c-cred .menos{color:#9fe7bf}
+.btn-topo{text-align:center;margin:14px 0 4px}
+.modo-credito .btn-topo.so-credito{display:block}
+.c-ancora{text-align:center;font-size:14px;line-height:1.5;color:#cfd3d8;margin:0 0 14px;padding:10px 12px;border-radius:12px;background:rgba(217,184,120,.08)}
+.c-ancora b{color:var(--gold2)}
+.risco{text-align:center;font-size:13px;color:#cfe9da;margin:8px 0 0}
+.risco b{color:var(--green)}
+.vip{margin:16px 0 4px;padding:14px 16px 6px;border:1.5px solid var(--gold);border-radius:14px;background:linear-gradient(180deg,rgba(217,184,120,.14),rgba(217,184,120,.04));text-align:left}
+.vip-selo{display:inline-block;background:var(--gold);color:#0b0f15;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border-radius:999px;padding:5px 12px;margin:0 0 10px}
+.vip-lista{list-style:none;padding:0;margin:0}
+.vip-lista li{position:relative;padding:0 0 10px 22px;font-size:14.5px;line-height:1.45;color:#e8e8e8}
+.vip-lista li:before{content:"✦";position:absolute;left:0;top:0;color:var(--gold)}
+.vip-lista b{color:var(--gold2)}
+@media (min-width:960px){.intro .vip{max-width:520px}}
 @media (min-width:960px){.intro .credito{max-width:520px}}
 </style>
 <script src="https://wiapy.com/sell/1.0.0/sell.min.js"></script>
@@ -251,20 +264,29 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     <div class="intro-txt">
       <h2 class="gancho so-normal">Espera, tem <span class="serif">mais uma coisa</span></h2>
       <h2 class="gancho so-credito">Sua coleção de hoje <span class="serif">sai de graça</span></h2>
-      <p class="lead so-credito">O Acervo Completo já inclui a <b data-cr="comprou">Coleção Completa</b> que você comprou. Você não paga duas vezes por ela: <b>o que pagou hoje vira desconto.</b></p>
+      <p class="lead so-credito">Com o Acervo Completo você leva <b>todas as coleções da VESPRO™</b>, as exclusivas que ninguém mais tem e <b>acesso VIP a todas as que ainda vão sair</b>. E o que você pagou hoje na <b data-cr="comprou">Coleção Completa</b> vira desconto.</p>
       <div class="credito so-credito" aria-label="Como fica o desconto">
         <div class="cr-barra">
           <div class="cr-pago" data-cr-flex="pagou"><small>Já pago</small><b>R$ <span data-cr="pagou">21,90</span></b></div>
-          <div class="cr-falta" data-cr-flex="preco"><small>Falta</small><b>R$ <span data-cr="preco">25,99</span></b></div>
+          <div class="cr-falta" data-cr-flex="preco"><small>Falta</small><b>R$ <span data-cr="preco">17,90</span></b></div>
         </div>
-        <p class="cr-barra-leg">Acervo Completo inteiro: R$ <span data-cr="total">47,89</span></p>
+        <p class="cr-barra-leg">Acervo Completo inteiro: R$ <span data-cr="total">39,80</span></p>
         <div class="cr-recibo">
-          <div class="cr-linha"><span>Acervo Completo</span><span>R$ <span data-cr="total">47,89</span></span></div>
+          <div class="cr-linha"><span>Acervo Completo</span><span>R$ <span data-cr="total">39,80</span></span></div>
           <div class="cr-linha cr-desc"><span><i aria-hidden="true">✓</i> Você já pagou<small data-cr="comprou">Coleção Completa</small></span><span>- R$ <span data-cr="pagou">21,90</span></span></div>
-          <div class="cr-linha cr-total"><span>Você paga agora</span><span>R$ <span data-cr="preco">25,99</span></span></div>
+          <div class="cr-linha cr-total"><span>Você paga agora</span><span>R$ <span data-cr="preco">17,90</span></span></div>
         </div>
       </div>
       <p class="lead so-normal">Você levou uma coleção. Por <b>R$ <span data-preco>32,90</span></b>, fica com <b>todas</b>: as que já saíram, as próximas e as artes que nem aparecem no site.</p>
+      <div class="vip">
+        <p class="vip-selo">Acesso VIP</p>
+        <ul class="vip-lista">
+          <li><b>Todas as coleções que já saíram</b>, numa pasta só.</li>
+          <li><b>Coleções que ninguém mais tem:</b> 200+ artes que não são vendidas no site nem em lugar nenhum.</li>
+          <li><b>Todas as próximas coleções</b> entram na sua pasta quando saírem, sem pagar nada a mais. Você recebe antes de todo mundo.</li>
+        </ul>
+      </div>
+      <a class="btn btn-topo so-credito" href="#oferta">QUERO TUDO + ACESSO VIP <span style="white-space:nowrap">POR R$ <span data-preco>17,90</span></span></a>
       <div class="mural" aria-label="Algumas artes do Acervo Completo">
         <img src="../assets/acervo/polo-nuvem-400.webp" alt="" loading="lazy" width="400" height="225">
         <img src="../assets/acervo/relogio-9-5-400.webp" alt="" loading="lazy" width="400" height="223">
@@ -281,10 +303,10 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     <tr><th></th><th>Comprou a Essencial</th><th>Comprou a Completa</th><th class="voce">Você, com o Acervo Completo</th></tr>
     <tr><td>Wallpapers</td><td>75+</td><td>150+</td><td class="voce">a sua coleção + 200+ exclusivos</td></tr>
     <tr><td>Coleções que já saíram</td><td class="nao">só a escolhida</td><td class="nao">só a escolhida</td><td class="voce">todas</td></tr>
-    <tr><td>Próximas coleções</td><td class="nao">não inclui</td><td class="nao">não inclui</td><td class="voce">entram na sua pasta</td></tr>
-    <tr><td>Artes que não aparecem no site</td><td class="nao">✕</td><td class="nao">✕</td><td class="voce">✓</td></tr>
+    <tr><td>Coleções exclusivas (ninguém mais tem)</td><td class="nao">✕</td><td class="nao">✕</td><td class="voce">✓</td></tr>
+    <tr><td>Acesso VIP às próximas coleções</td><td class="nao">paga de novo</td><td class="nao">paga de novo</td><td class="voce">entram na sua pasta, de graça</td></tr>
   </table>
-    <p class="punch">Paga uma vez e fica <em>um passo à frente</em> de quem comprou antes.</p>
+    <p class="punch">Paga uma vez, <em>quase nada</em>, e nunca mais compra coleção nenhuma.</p>
   </section>
 
   <section class="clientes">
@@ -311,35 +333,37 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
   <section class="oferta card" id="oferta">
     <span class="selo">Só nesta página</span>
     <h3 class="c-nome">Acervo Completo</h3>
-    <p class="c-sub">Para quem quer ficar com tudo.</p>
+    <p class="c-sub">Todas as coleções, as exclusivas e acesso VIP a tudo que ainda vai sair.</p>
     <div class="c-thumbs" aria-hidden="true">
       <img src="../assets/acervo/polo-nuvem-400.webp" alt="" width="400" height="225" loading="lazy">
       <img src="../assets/acervo/relogio-9-5-400.webp" alt="" width="400" height="223" loading="lazy">
       <img src="../assets/acervo/no-risk-no-story-400.webp" alt="" width="400" height="223" loading="lazy">
       <span>200+</span>
     </div>
-    <p class="c-resumo"><b>200+ wallpapers</b>Você fica com a sua coleção e com todas as outras que a VESPRO™ já lançou, mais as próximas.</p>
+    <p class="c-resumo"><b>Tudo da VESPRO™, para sempre</b>Você fica com a sua coleção, com todas as outras que já saíram, com as exclusivas e com cada coleção nova que sair daqui pra frente.</p>
     <ul class="c-lista">
-      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>200+ wallpapers exclusivos</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span><b>Acesso VIP:</b> todas as coleções futuras, sem pagar de novo</span></li>
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Todas as coleções que já saíram</span></li>
-      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Todas as próximas coleções</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Coleções exclusivas que ninguém mais tem (200+ artes)</span></li>
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Artes que não aparecem no site</span></li>
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Celular, notebook, iPad e ultrawide</span></li>
       <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Guia para trocar o wallpaper automaticamente</span></li>
     </ul>
-    <p class="c-cred so-credito">Acervo R$ <span data-cr="total">47,89</span> <span class="menos">- R$ <span data-cr="pagou">21,90</span> que você já pagou</span></p>
+    <p class="c-cred so-credito">Acervo R$ <span data-cr="total">39,80</span> <span class="menos">- R$ <span data-cr="pagou">21,90</span> que você já pagou</span></p>
+    <p class="c-ancora">Cada coleção nova custa <b>R$ 12,90</b> no site. Com o acesso VIP, você <b>não paga mais nenhuma</b>.</p>
     <p class="c-label">Pagamento único</p>
     <p class="de" data-de hidden>De <s>R$ <span data-precoantes></span></s></p>
     <div class="preco"><small>R$</small><span data-preco>32,90</span></div>
     <p class="c-conta so-normal">Dá menos de 17 centavos por wallpaper.</p>
-    <p class="c-conta so-credito">O que você pagou hoje já está descontado.</p>
-    <div class="wiapy" id="wiapy_upsell_1"><a class="btn" data-reserva>QUERO O ACERVO COMPLETO</a></div>
+    <p class="c-conta so-credito">Menos que um lanche, por tudo que a VESPRO™ já fez e ainda vai fazer. O que você pagou hoje já está descontado.</p>
+    <div class="wiapy" id="wiapy_upsell_1"><a class="btn" data-reserva>QUERO TUDO + ACESSO VIP</a></div>
     <p class="seguro">Compra segura · acesso liberado na hora</p>
+    <p class="risco"><b>Risco zero:</b> 7 dias de garantia. Não gostou, devolvemos tudo.</p>
   </section>
 
   <div class="como">
     <b>Como dá pra ser tão barato?</b>
-    <span>Você já é cliente. A gente não precisa pagar anúncio pra te achar de novo, e essa economia vira desconto pra você.</span>
+    <span>Você já é cliente. A gente não precisa pagar anúncio pra te achar de novo, e essa economia vira desconto pra você. Esse preço só aparece agora, nesta página.</span>
   </div>
   <p class="garantia">7 dias de garantia. Se baixar e sentir que não era o que imaginava, é só pedir o reembolso.</p>
 </main>
@@ -367,7 +391,7 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     if(pronto && window.initWiapyUpsell){
       initWiapyUpsell({
         elementId:id, linkUrl:link,
-        linkText:"QUERO O ACERVO COMPLETO", processingText:"Processando...",
+        linkText:"QUERO TUDO + ACESSO VIP", processingText:"Processando...",
         refusalLinkUrl:u.recusar, refusalLinkText:"Não, quero ficar só com a minha coleção", refusalLinkColor:"#a6a6a6",
         styles:{backgroundColor:"#d9b878",hoverBackgroundColor:"#e6c890",color:"#0b0f15",fontSize:"16px",fontWeight:"800",
                 padding:"17px 16px",borderRadius:"12px",fontFamily:"Inter, system-ui, sans-serif",hoverTransform:"scale(1.02)"}
