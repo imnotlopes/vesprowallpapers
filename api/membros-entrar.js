@@ -23,7 +23,7 @@ async function supa(caminho, opcoes = {}) {
   const chave = process.env.SUPABASE_SERVICE_ROLE_KEY;
   const r = await fetch(url, {
     ...opcoes,
-    headers: { apikey: chave, Authorization: "Bearer " + chave, "Content-Type": "application/json", ...(opcoes.headers || {}) }
+    headers: { apikey: chave, ...(/^eyJ/.test(chave) ? { Authorization: "Bearer " + chave } : {}), "Content-Type": "application/json", ...(opcoes.headers || {}) } // chave nova (sb_secret_) vai só no apikey
   });
   if (!r.ok) throw new Error("Supabase " + r.status + ": " + (await r.text()).slice(0, 200));
   return r.status === 204 ? null : r.json().catch(() => null);

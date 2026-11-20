@@ -18,7 +18,7 @@ window.MEMBROS = {
      modoDemo: true = demonstração (qualquer e-mail entra e escolhe um perfil de cliente).
      Depois de ligar o banco (membros-servidor/LEIA-ME.md), mude para false.
      api: função que confere a compra pelo e-mail (fica neste site, em api/membros-entrar.js). */
-  modoDemo: true,
+  modoDemo: false,
   api: "/api/membros-entrar",
 
   metaPixelId: "1781303226340709",

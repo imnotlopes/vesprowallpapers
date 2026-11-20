@@ -33,9 +33,9 @@ A pasta `membros-servidor/` não vai para o site (`.vercelignore`).
 
 ## Passo a passo
 
-1. **Supabase**: criar um projeto (o plano grátis serve para começar).
-2. **Banco**: no SQL Editor, rodar `01-banco.sql` e depois `02-links.sql`.
-3. **Vercel**: em Settings > Environment Variables do projeto `vesprowallpapers`, criar `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (Supabase > Settings > API; a chave é secreta, nunca vai na página) e `MEMBROS_WEBHOOK_KEY` (uma senha longa inventada). Depois, Redeploy.
+1. **Supabase**: FEITO em 20/11/2026. Organização VESPRO, projeto `vespro-membros` (São Paulo, plano grátis), na conta do Chrome "DESKTOP-QF6KFC7".
+2. **Banco**: FEITO em 20/11/2026 (`01-banco.sql` + `02-links.sql`). Conferido: 34 produtos, 6 coleções com link, busca por e-mail e separação por país funcionando, ninguém de fora chama a busca. Para mudar algo, rodar de novo no SQL Editor.
+3. **Vercel**: em Settings > Environment Variables do projeto `vesprowallpapers`, criar `SUPABASE_URL` (https://rqlqxxahptngdrxjtkjr.supabase.co) e `SUPABASE_SERVICE_ROLE_KEY` (Supabase > Settings > API Keys > Secret keys, a que começa com `sb_secret_`; é secreta, nunca vai na página) e `MEMBROS_WEBHOOK_KEY` (uma senha longa inventada). Depois, Redeploy.
 4. **Ligar a área**: em `membros/config.js`, trocar `modoDemo: true` para `false`, rodar `python membros-servidor/gerar-paises.py` e subir.
 5. **Webhooks**: cadastrar o aviso de "compra aprovada" e "reembolso":
    - Wiapy (área do Brasil): `https://membros.vesprowallpapers.com/api/membros-compra?plataforma=wiapy&chave=SUA_CHAVE`
