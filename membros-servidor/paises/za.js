@@ -4,6 +4,7 @@
 Object.assign(window.MEMBROS, {
   pais: "za",              // compras com loja = 'za' (webhook da Lojou)
   idiomaPadrao: "en",
+  api: "https://membros.vesprowallpapers.com/api/membros-entrar",   // a função fica no site do Brasil
 
   metaPixelId: "",         // mesmo pixel da landing za (hoje vazio)
   clarityId: "",

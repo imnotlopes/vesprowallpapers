@@ -4,7 +4,8 @@
   "use strict";
   var C = window.MEMBROS, T = window.TEXTOS, A = "/assets/";
   var qs = new URLSearchParams(location.search);
-  var DEMO = !C.supabaseUrl || !C.supabaseAnonKey || qs.get("demo") === "1";
+  var DEMO = !!C.modoDemo || qs.get("demo") === "1";
+  var CHAVE_EMAIL = "vespro_email_" + C.pais; // e-mail lembrado neste aparelho
   var LOCAL = /^(localhost|127\.|\[::1\])/.test(location.hostname);
   var app = document.getElementById("app");
 
@@ -17,8 +18,8 @@
 
   var st = {
     lang: detectarIdioma(),
-    etapa: "email", email: "", erro: "", ocupado: false,
-    dados: null, sb: null,
+    email: "", erro: "", ocupado: false,
+    dados: null,
     perfil: ler("vespro_demo_perfil") || "completa"
   };
   function L() { return T[st.lang] || T.pt; }
@@ -217,22 +218,11 @@
         '<label for="perfil">' + esc(t("demo_perfil")) + '</label><select id="perfil">' +
         Object.keys(C.demo).map(function (k) { return '<option value="' + k + '"' + (k === st.perfil ? " selected" : "") + ">" + esc(pf[k] || k) + "</option>"; }).join("") + "</select>";
     }
-    var form;
-    if (st.etapa === "email") {
-      form = '<form class="form" data-form="email" novalidate>' + demo +
-        '<label for="email">' + esc(t("email_label")) + "</label>" +
-        '<input id="email" type="email" inputmode="email" autocomplete="email" required placeholder="' + esc(t("email_ph")) + '" value="' + esc(st.email) + '">' +
-        '<button class="btn" type="submit"' + (st.ocupado ? " disabled" : "") + ">" + esc(st.ocupado ? t("enviando") : t("enviar_codigo")) + "</button>" +
-        (st.erro ? '<p class="erro">' + esc(st.erro) + "</p>" : "") + "</form>";
-    } else {
-      form = '<form class="form" data-form="codigo" novalidate>' +
-        '<p class="msg">' + t("codigo_enviado", { email: esc(st.email) }) + "</p>" +
-        '<label for="codigo">' + esc(t("codigo_label")) + "</label>" +
-        '<input id="codigo" class="codigo" type="text" inputmode="numeric" autocomplete="one-time-code" maxlength="6" pattern="[0-9]*" required>' +
-        '<button class="btn" type="submit"' + (st.ocupado ? " disabled" : "") + ">" + esc(st.ocupado ? t("entrando") : t("entrar")) + "</button>" +
-        '<p style="text-align:center;margin:10px 0 0"><button type="button" class="link" data-acao="trocar-email">' + esc(t("trocar_email")) + "</button></p>" +
-        (st.erro ? '<p class="erro">' + esc(st.erro) + "</p>" : "") + "</form>";
-    }
+    var form = '<form class="form" data-form="email" novalidate>' + demo +
+      '<label for="email">' + esc(t("email_label")) + "</label>" +
+      '<input id="email" type="email" inputmode="email" autocomplete="email" required placeholder="' + esc(t("email_ph")) + '" value="' + esc(st.email) + '">' +
+      '<button class="btn" type="submit"' + (st.ocupado ? " disabled" : "") + ">" + esc(st.ocupado ? t("entrando") : t("entrar")) + "</button>" +
+      (st.erro ? '<p class="erro">' + st.erro + "</p>" : "") + "</form>";
     return '<div class="login">' + idiomasHtml() + '<div class="login-box">' +
       '<img class="logo" src="' + A + 'logo/vespro-logo-240.webp" alt="VESPRO" width="240" height="212">' +
       '<span class="eyebrow">' + esc(t("area")) + "</span>" +
@@ -343,7 +333,7 @@
     if (chave !== ultimaRota) { window.scrollTo(0, 0); ultimaRota = chave; }
   }
   function focoLogin() {
-    var el = document.getElementById(st.etapa === "email" ? "email" : "codigo");
+    var el = document.getElementById("email");
     if (el && !("ontouchstart" in window)) el.focus();
   }
   function aviso(msg) {
@@ -364,55 +354,40 @@
     return { acervo: acervo, colecoes: cols, pago: num(p.pagou), loja: C.pais };
   }
 
-  /* ---------- dados: Supabase ---------- */
-  function carregarSupabase(cb) {
-    if (window.supabase && window.supabase.createClient) return cb();
-    var s = document.createElement("script");
-    s.src = "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js";
-    s.onload = cb; s.onerror = function () { app.innerHTML = '<div class="carregando">' + esc(t("erro_carregar")) + "</div>"; };
-    document.head.appendChild(s);
-  }
-  function buscarArea() {
-    app.innerHTML = '<div class="carregando">' + esc(t("carregando")) + "</div>";
-    return st.sb.rpc("minha_area", { p_loja: C.pais }).then(function (r) {
-      if (r.error) throw r.error;
-      var d = r.data || {};
-      st.dados = { acervo: !!d.acervo, colecoes: d.colecoes || {}, pago: Number(d.pago) || 0, loja: C.pais };
-      rastrear("membros_entrou");
-      render();
-    }).catch(function () { app.innerHTML = '<div class="carregando">' + esc(t("erro_carregar")) + "</div>"; });
-  }
-
-  /* ---------- login ---------- */
-  function enviarCodigo(email) {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { st.erro = t("erro_email"); render(); return; }
+  /* ---------- entrada só com e-mail ----------
+     A página manda o e-mail para a nossa função (api/membros-entrar), que confere
+     no banco o que essa pessoa comprou NESTE país e devolve as coleções e os links. */
+  function entrar(email, silencioso) {
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { st.erro = esc(t("erro_email")); render(); return; }
     st.email = email; st.erro = "";
-    if (DEMO) { st.etapa = "codigo"; render(); return; }
-    st.ocupado = true; render();
-    st.sb.auth.signInWithOtp({ email: email, options: { shouldCreateUser: true } }).then(function (r) {
-      st.ocupado = false;
-      if (r.error) { st.erro = t("erro_envio"); } else { st.etapa = "codigo"; }
-      render();
-    });
-  }
-  function confirmarCodigo(codigo) {
     if (DEMO) {
-      gravar("vespro_demo_email", st.email); gravar("vespro_demo_perfil", st.perfil);
+      gravar(CHAVE_EMAIL, email); gravar("vespro_demo_perfil", st.perfil);
       st.dados = dadosDemo(); render(); return;
     }
-    codigo = codigo.replace(/\D/g, "");
-    if (codigo.length !== 6) { st.erro = t("erro_codigo"); render(); return; }
-    st.ocupado = true; st.erro = ""; render();
-    st.sb.auth.verifyOtp({ email: st.email, token: codigo, type: "email" }).then(function (r) {
-      st.ocupado = false;
-      if (r.error) { st.erro = t("erro_codigo"); render(); return; }
-      buscarArea();
-    });
+    st.ocupado = true;
+    if (silencioso) app.innerHTML = '<div class="carregando">' + esc(t("carregando")) + "</div>"; else render();
+    fetch(C.api, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ email: email, pais: C.pais }) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (d) { return { status: r.status, d: d }; }); })
+      .then(function (x) {
+        st.ocupado = false;
+        if (x.status === 200) {
+          var d = x.d || {};
+          st.dados = { acervo: !!d.acervo, colecoes: d.colecoes || {}, pago: Number(d.pago) || 0, loja: C.pais };
+          gravar(CHAVE_EMAIL, email);
+          rastrear("MembrosEntrou");
+          render(); return;
+        }
+        gravar(CHAVE_EMAIL, null);
+        if (x.status === 404) st.erro = esc(t("erro_nao_achou")) + ' <a href="https://wa.me/' + C.suporte.whatsapp + '" target="_blank" rel="noopener">' + esc(t("whats")) + "</a>";
+        else if (x.status === 429) st.erro = esc(t("erro_muitas"));
+        else st.erro = esc(t("erro_carregar"));
+        render();
+      })
+      .catch(function () { st.ocupado = false; st.erro = esc(t("erro_carregar")); render(); });
   }
   function sair() {
-    st.dados = null; st.etapa = "email"; st.erro = "";
-    gravar("vespro_demo_email", null);
-    if (!DEMO && st.sb) st.sb.auth.signOut();
+    st.dados = null; st.erro = "";
+    gravar(CHAVE_EMAIL, null);
     location.hash = "";
     render();
   }
@@ -437,8 +412,7 @@
   app.addEventListener("submit", function (e) {
     var f = e.target.getAttribute("data-form"); if (!f) return;
     e.preventDefault();
-    if (f === "email") enviarCodigo(document.getElementById("email").value.trim().toLowerCase());
-    else confirmarCodigo(document.getElementById("codigo").value);
+    if (f === "email" && !st.ocupado) entrar(document.getElementById("email").value.trim().toLowerCase());
   });
   app.addEventListener("change", function (e) {
     if (e.target.id === "perfil") { st.perfil = e.target.value; return; }
@@ -452,7 +426,6 @@
     if (el.hasAttribute("data-lang")) { trocarIdioma(el.getAttribute("data-lang")); return; }
     var acao = el.getAttribute("data-acao");
     if (acao === "sair") { sair(); return; }
-    if (acao === "trocar-email") { st.etapa = "email"; st.erro = ""; render(); return; }
     if (acao === "ir-acervo") {
       e.preventDefault();
       var alvo = document.getElementById("acervo");
@@ -474,19 +447,7 @@
   });
   window.addEventListener("hashchange", function () { if (st.dados) render(); });
 
-  /* ---------- início ---------- */
-  if (DEMO) {
-    var em = ler("vespro_demo_email");
-    if (em) { st.email = em; st.dados = dadosDemo(); }
-    render();
-  } else {
-    app.innerHTML = '<div class="carregando">' + esc(t("carregando")) + "</div>";
-    carregarSupabase(function () {
-      st.sb = window.supabase.createClient(C.supabaseUrl, C.supabaseAnonKey, { auth: { persistSession: true } });
-      st.sb.auth.getSession().then(function (r) {
-        var s = r.data && r.data.session;
-        if (s) { st.email = s.user.email; buscarArea(); } else render();
-      });
-    });
-  }
+  /* ---------- início: entra direto se o e-mail já foi usado neste aparelho ---------- */
+  var lembrado = ler(CHAVE_EMAIL) || (DEMO ? ler("vespro_demo_email") : null);
+  if (lembrado) entrar(lembrado, true); else render();
 })();

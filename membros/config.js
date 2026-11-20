@@ -14,11 +14,12 @@ window.MEMBROS = {
   pais: "br",               // precisa bater com a coluna "loja" das compras no banco
   idiomaPadrao: "pt",       // idioma em que a área abre (a pessoa pode trocar no topo)
 
-  /* ---------- Conexão com o Supabase ----------
-     Vazio = modo demonstração (entra com qualquer e-mail, sem banco de dados).
-     Depois de criar o projeto: Settings > API > Project URL e "anon public key". */
-  supabaseUrl: "",
-  supabaseAnonKey: "",
+  /* ---------- Entrada só com e-mail ----------
+     modoDemo: true = demonstração (qualquer e-mail entra e escolhe um perfil de cliente).
+     Depois de ligar o banco (membros-servidor/LEIA-ME.md), mude para false.
+     api: função que confere a compra pelo e-mail (fica neste site, em api/membros-entrar.js). */
+  modoDemo: true,
+  api: "/api/membros-entrar",
 
   metaPixelId: "1781303226340709",
   clarityId: "yyc0uitibt",

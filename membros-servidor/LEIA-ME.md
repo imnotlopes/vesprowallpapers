@@ -4,12 +4,14 @@ Cada país tem a sua área de membros, separada (clientes, moeda, checkout e pre
 
 | País | Endereço | Moeda / checkout | Idioma padrão | Configuração |
 |---|---|---|---|---|
-| Brasil | vesprowallpapers.vercel.app/membros/ | R$ / Wiapy | Português | `membros/config.js` |
+| Brasil | membros.vesprowallpapers.com (ou vesprowallpapers.vercel.app/membros/) | R$ / Wiapy | Português | `membros/config.js` |
 | África do Sul | za.vesprowallpapers.com/members/ | rand / Lojou | Inglês | `membros-servidor/paises/za.js` |
 
 A área do Brasil é a original. A da África do Sul é gerada a partir dela: depois de mexer em qualquer coisa, rodar `python membros-servidor/gerar-paises.py` (copia a página para `landing za/members/` e as imagens que faltam lá). As duas usam o mesmo banco; cada uma só enxerga as compras do seu país (coluna `loja`: `br` ou `za`). Todas têm a troca PT / EN / ES no topo.
 
-Sem as configurações abaixo, a área abre em **modo demonstração**: entra com qualquer e-mail e tem um seletor de perfil de cliente para ver como a área fica para cada um.
+**Entrada só com e-mail**, sem senha e sem código: a pessoa digita o e-mail da compra e a função `api/membros-entrar.js` confere no banco o que ela comprou naquele país. A área lembra o e-mail no aparelho. Proteções: a página nunca fala direto com o banco, cada aparelho tem no máximo 10 tentativas erradas a cada 10 minutos e toda entrada fica na tabela `acessos`.
+
+Enquanto `modoDemo: true` (em `membros/config.js`), a área abre em **modo demonstração**: entra com qualquer e-mail e tem um seletor de perfil de cliente para ver como a área fica para cada um.
 
 ## Onde fica cada coisa
 
@@ -19,6 +21,7 @@ Sem as configurações abaixo, a área abre em **modo demonstração**: entra co
 | `membros/config.js` | Conexão, coleções, prévias, ofertas, preços e links de checkout |
 | `membros/textos.js` | Todos os textos em português, inglês e espanhol |
 | `membros/app.js` | Login, separação Wallpapers / Movies, escada de upsell |
+| `api/membros-entrar.js` | Entrada só com e-mail: confere a compra e devolve as coleções |
 | `api/membros-compra.js` | Recebe o aviso de compra das plataformas e libera o acesso |
 | `membros-servidor/01-banco.sql` | Tabelas do banco e lista de produtos |
 | `membros-servidor/02-links.sql` | Links do Drive (fica só no computador, fora do GitHub) |
@@ -32,12 +35,10 @@ A pasta `membros-servidor/` não vai para o site (`.vercelignore`).
 
 1. **Supabase**: criar um projeto (o plano grátis serve para começar).
 2. **Banco**: no SQL Editor, rodar `01-banco.sql` e depois `02-links.sql`.
-3. **Login por código**: em Authentication > Emails > "Magic Link", trocar o texto para mostrar o código `{{ .Token }}` (6 números). Como o banco é um só para os dois países, escrever o e-mail em português e inglês ("Seu código / Your code"). Em Authentication > URL Configuration, colocar o endereço do site.
-4. **E-mail de envio**: o e-mail padrão do Supabase manda poucos códigos por hora. Antes de anunciar, ligar um SMTP próprio (por exemplo Resend, com o domínio vesprowallpapers.com).
-5. **Página**: colar em `membros/config.js` o "Project URL" e a "anon public key" (Settings > API) e rodar o gerador para a África do Sul receber também. Essa chave pode ficar pública; os dados são protegidos pelo banco.
-6. **Vercel**: em Settings > Environment Variables, criar `SUPABASE_URL`, `SUPABASE_SERVICE_ROLE_KEY` (secreta, nunca na página) e `MEMBROS_WEBHOOK_KEY` (uma senha longa inventada).
-7. **Webhooks**: cadastrar o aviso de "compra aprovada" e "reembolso":
-   - Wiapy (área do Brasil): `https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=wiapy&chave=SUA_CHAVE`
+3. **Vercel**: em Settings > Environment Variables do projeto `vesprowallpapers`, criar `SUPABASE_URL` e `SUPABASE_SERVICE_ROLE_KEY` (Supabase > Settings > API; a chave é secreta, nunca vai na página) e `MEMBROS_WEBHOOK_KEY` (uma senha longa inventada). Depois, Redeploy.
+4. **Ligar a área**: em `membros/config.js`, trocar `modoDemo: true` para `false`, rodar `python membros-servidor/gerar-paises.py` e subir.
+5. **Webhooks**: cadastrar o aviso de "compra aprovada" e "reembolso":
+   - Wiapy (área do Brasil): `https://membros.vesprowallpapers.com/api/membros-compra?plataforma=wiapy&chave=SUA_CHAVE`
    - Lojou (área da África do Sul): mesmo endereço com `plataforma=lojou`
    Stripe (site da marca, dólar) fica para depois. Na Lojou ainda falta confirmar se tem esse aviso.
 
@@ -50,10 +51,10 @@ A pasta `membros-servidor/` não vai para o site (`.vercelignore`).
    - Depois de salvar, usar o botão TESTAR e ver o resultado na tabela `eventos`.
    O webhook da Wiapy manda o ID interno do produto (ex.: 6aa8d1be...), não o código do link de checkout. Esses IDs já estão no `01-banco.sql`. Falta decidir o que libera o "120 Wallpapers Vespro™ (Celular)".
    A Wiapy também tem área de membros própria (menu Members, no formato de curso). Não usamos: a nossa é feita para galeria e download.
-8. **Primeira venda**: abrir a tabela `eventos` no Supabase e ver a coluna `resultado`. Se aparecer "produto não reconhecido", acrescentar o código na tabela `produtos`. Conferir também se o `valor` veio em reais (e não em centavos).
-9. **Clientes antigos**: exportar as vendas da Wiapy (loja `br`) e da Lojou (loja `za`) e importar na tabela `compras` (e-mail, coleções, loja, valor). Sem isso, quem comprou antes entra e vê tudo trancado.
-10. **Entrega**: no conteúdo de cada produto (Wiapy: /membros/; Lojou: za.vesprowallpapers.com/members/), colocar o link da área de membros junto com os links do Drive.
-11. **Ofertas de membro**: criar os produtos (ver preços em `ESTRATEGIA-UPSELL.md`) e colar os links: Brasil em `membros/config.js` (`loja.ofertas`), África do Sul em `membros-servidor/paises/za.js`. Sem link, o botão abre o WhatsApp do suporte.
+6. **Primeira venda**: abrir a tabela `eventos` no Supabase e ver a coluna `resultado`. Se aparecer "produto não reconhecido", acrescentar o código na tabela `produtos`. Conferir também se o `valor` veio em reais (e não em centavos).
+7. **Clientes antigos**: exportar as vendas da Wiapy (loja `br`) e da Lojou (loja `za`) e importar na tabela `compras` (e-mail, coleções, loja, valor). Sem isso, quem comprou antes entra e vê tudo trancado.
+8. **Entrega**: no conteúdo de cada produto (Wiapy: /membros/; Lojou: za.vesprowallpapers.com/members/), colocar o link da área de membros junto com os links do Drive.
+9. **Ofertas de membro**: criar os produtos (ver preços em `ESTRATEGIA-UPSELL.md`) e colar os links: Brasil em `membros/config.js` (`loja.ofertas`), África do Sul em `membros-servidor/paises/za.js`. Sem link, o botão abre o WhatsApp do suporte.
 
 ## Liberar ou tirar acesso à mão
 
@@ -74,4 +75,4 @@ Códigos das coleções: `signature`, `essencial`, `shadows`, `sporting`, `exclu
 
 ## Limite desta primeira versão
 
-Os downloads ainda abrem as pastas do Drive. A pessoa precisa entrar para ver o link, mas depois pode repassar. A fase 2 é tirar os arquivos do Drive e usar links que expiram.
+Os downloads ainda abrem as pastas do Drive. A pessoa precisa entrar para ver o link, mas depois pode repassar (ou repassar o próprio e-mail). Para ver e-mails usados em aparelhos demais, há uma consulta pronta no fim do `01-banco.sql`. Se a pirataria pesar: pedir código só para aparelho novo e tirar os arquivos do Drive para links que expiram.

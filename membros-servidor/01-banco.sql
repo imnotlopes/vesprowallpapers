@@ -46,28 +46,43 @@ create table if not exists public.eventos (
   criado_em  timestamptz not null default now()
 );
 
--- Ninguém lê essas tabelas direto pela internet. A página só usa a função minha_area().
+-- Cada tentativa de entrar na área (para limitar tentativas e ver e-mails usados em aparelhos demais)
+create table if not exists public.acessos (
+  id         bigserial primary key,
+  email      text,
+  loja       text,
+  ip_hash    text,                       -- IP embaralhado (não guardamos o IP de verdade)
+  agente     text,                       -- navegador/aparelho
+  encontrado boolean not null default false,
+  criado_em  timestamptz not null default now()
+);
+create index if not exists acessos_ip_idx on public.acessos (ip_hash, criado_em);
+create index if not exists acessos_email_idx on public.acessos (lower(email), criado_em);
+
+-- Ninguém lê essas tabelas direto pela internet: só a função api/membros-entrar.js (chave secreta).
 alter table public.colecoes enable row level security;
 alter table public.produtos enable row level security;
 alter table public.compras  enable row level security;
 alter table public.eventos  enable row level security;
+alter table public.acessos  enable row level security;
 
--- O que a pessoa logada recebe NA ÁREA DO PAÍS p_loja: as coleções compradas nesse país (com links),
--- se é VIP e quanto já pagou ali. Uma compra no Brasil não aparece na área da África do Sul e vice-versa.
+-- Entrada só com e-mail: as coleções que esse e-mail comprou NO PAÍS p_loja (com links),
+-- se é VIP e quanto já pagou ali. Uma compra no Brasil não aparece na área da África do Sul.
 drop function if exists public.minha_area();
-create or replace function public.minha_area(p_loja text default 'br')
+drop function if exists public.minha_area(text);
+create or replace function public.area_por_email(p_email text, p_loja text default 'br')
 returns jsonb
 language plpgsql
 security definer
 set search_path = public
 as $$
 declare
-  v_email  text := lower(auth.jwt() ->> 'email');
+  v_email  text := lower(trim(p_email));
   v_cols   text[];
   v_acervo boolean;
   v_pago   numeric;
 begin
-  if v_email is null then return null; end if;
+  if v_email is null or v_email = '' then return null; end if;
 
   select coalesce(array_agg(distinct c), '{}') into v_cols
     from public.compras, unnest(colecoes) as c
@@ -89,8 +104,9 @@ begin
   );
 end;
 $$;
-revoke all on function public.minha_area(text) from public, anon;
-grant execute on function public.minha_area(text) to authenticated;
+-- Só a chave secreta (service_role) chama. A página nunca fala direto com o banco.
+revoke all on function public.area_por_email(text, text) from public, anon, authenticated;
+grant execute on function public.area_por_email(text, text) to service_role;
 
 -- ---------------------------------------------------------------------
 -- Coleções (os links entram no 02-links.sql)
@@ -154,6 +170,10 @@ on conflict (codigo) do update set nome = excluded.nome, colecoes = excluded.col
 -- Liberar acesso à mão (ex.: cliente antigo, troca, cortesia). A coluna loja diz em qual área aparece (br ou za):
 --   insert into public.compras (email, colecoes, loja, plataforma, pedido, produto, valor)
 --   values ('cliente@email.com', '{signature}', 'br', 'manual', 'manual-001', 'Coleção Completa', 21.90);
+-- E-mails que entraram de aparelhos demais nos últimos 30 dias (possível repasse):
+--   select email, count(distinct ip_hash) as aparelhos from public.acessos
+--    where encontrado and criado_em > now() - interval '30 days'
+--    group by email having count(distinct ip_hash) > 5 order by 2 desc;
 -- Tirar acesso (reembolso):
 --   update public.compras set status = 'reembolsada' where email = 'cliente@email.com';
 -- ---------------------------------------------------------------------
