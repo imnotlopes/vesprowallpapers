@@ -1,6 +1,17 @@
 {
   "redirects": [
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "membros.vesprowallpapers.com"
+        }
+      ],
+      "destination": "/membros/",
+      "permanent": false
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/fuja/",
       "permanent": false
@@ -43,18 +54,6 @@
           "value": "noindex, nofollow"
         }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/",
-      "has": [
-        {
-          "type": "host",
-          "value": "membros.vesprowallpapers.com"
-        }
-      ],
-      "destination": "/membros/index.html"
     }
   ]
 }
