@@ -8,6 +8,7 @@ e copia as imagens que a área usa e que o site do país ainda não tem.
 Uso (na pasta landing Impasto):  python membros-servidor/gerar-paises.py
 Depois, conferir no navegador e subir o site do país (só com "sobe").
 """
+import filecmp
 import os
 import re
 import shutil
@@ -57,7 +58,7 @@ def gerar(pais, info):
         if not os.path.exists(de):
             print(f"[{pais}] faltando no Brasil: assets/{rel}")
             continue
-        if not os.path.exists(para):
+        if not os.path.exists(para) or not filecmp.cmp(de, para, shallow=False):  # nova ou mudou
             os.makedirs(os.path.dirname(para), exist_ok=True)
             shutil.copyfile(de, para)
             copiadas += 1

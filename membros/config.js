@@ -42,7 +42,7 @@ window.MEMBROS = {
       universo: "wallpapers", ordem: 1, qtd: "150",
       nome: "VESPRO Signature Collection™",
       capa: "membros/limpas/signature-capa.webp",
-      artes: ["membros/limpas/signature-01.webp","membros/limpas/signature-02.webp","membros/limpas/signature-03.webp","membros/limpas/signature-04.webp","membros/limpas/signature-05.webp","membros/limpas/signature-06.webp","membros/limpas/signature-07.webp","membros/limpas/signature-08.webp","membros/limpas/signature-09.webp","membros/limpas/signature-10.webp","membros/limpas/signature-11.webp","membros/limpas/signature-12.webp"],
+      artes: ["membros/limpas/signature-01.webp","membros/limpas/signature-02.webp","membros/limpas/signature-03.webp","membros/limpas/signature-04.webp","membros/limpas/signature-05.webp","membros/limpas/signature-06.webp","membros/limpas/signature-07.webp","membros/limpas/signature-08.webp","membros/limpas/signature-09.webp","membros/limpas/signature-10.webp","membros/limpas/signature-11.webp","membros/limpas/signature-12.webp","membros/limpas/signature-13.webp","membros/limpas/signature-14.webp","membros/limpas/signature-15.webp","membros/limpas/signature-16.webp","membros/limpas/signature-17.webp","membros/limpas/signature-18.webp"],
       downloads: ["desktop","celular","todos"]
     },
     essencial: {

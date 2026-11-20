@@ -19,13 +19,21 @@ LIMPAS = os.path.join(RAIZ, "oil wallpaper", "_site-limpas", "desktop")
 FILMES = os.path.join(RAIZ, "filmes", "Vespro movies")
 ARTES = os.path.join(RAIZ, "oil wallpaper", "capas", "artes")
 LOJOU = os.path.join(RAIZ, "oil wallpaper", "capas", "_gerador-lojou", "img")
+RECENTES = os.path.join(RAIZ, "oil wallpaper", "drive-signature-recentes")
 
 def principal(n): return os.path.join(LIMPAS, n + ".webp")
 def filme(nome): return os.path.join(FILMES, "impasto__" + nome + ".jpg")
 
 COLECOES = {
     # capa primeiro, depois as miniaturas da prévia
-    "signature": [principal(n) for n in ["51", "02", "03", "04", "07", "10", "11", "14", "22", "30", "31", "38", "40"]],
+    # Signature: artes mais recentes da pasta do Drive (30 adicionadas em 19/10/2026), versões de 1000 px
+    # baixadas pela miniatura do Drive e guardadas em oil wallpaper/drive-signature-recentes/
+    # (as 18 escolhidas pelo usuário em 21/11, na ordem da tela dele)
+    "signature": [os.path.join(RECENTES, n + ".jpg") for n in [
+        "hidroaviao-oceano",
+        "rolex-already-late", "relogio-fuck-9-5", "porsche-palmeiras", "polo-nuvens", "polo-azul", "pantera-fonte",
+        "no-risk-no-story", "monge-cha", "homem-terno-olhar", "homem-leoes-parede", "homem-estadio-vazio", "hidroaviao-oceano",
+        "hercules-leao", "golfe-montanhas", "gladiador-crianca-vale", "frase-money-talks", "frase-iate-dinheiro", "frase-average-trap"]],
     "essencial": [principal(n) for n in ["13", "05", "09", "12", "13", "17", "27", "33", "45"]],
     "movies": [filme(n) for n in [
         "Batman - The Batman 2022 1",
