@@ -10,3 +10,6 @@ desktop.ini
 
 # originais das artes de filmes, sem marca d'água (não vão para o site)
 filmes/Vespro movies/
+
+# links do Drive da área de membros (só no computador e no Supabase)
+membros-servidor/02-links.sql
