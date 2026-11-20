@@ -7,7 +7,7 @@ Cada país tem a sua área de membros, separada (clientes, moeda, checkout e pre
 | Brasil | membros.vesprowallpapers.com (ou vesprowallpapers.vercel.app/membros/) | R$ / Wiapy | Português | `membros/config.js` |
 | África do Sul | za.vesprowallpapers.com/members/ | rand / Lojou | Inglês | `membros-servidor/paises/za.js` |
 
-A área do Brasil é a original. A da África do Sul é gerada a partir dela: depois de mexer em qualquer coisa, rodar `python membros-servidor/gerar-paises.py` (copia a página para `landing za/members/` e as imagens que faltam lá). As duas usam o mesmo banco; cada uma só enxerga as compras do seu país (coluna `loja`: `br` ou `za`). Todas têm a troca PT / EN / ES no topo.
+A área do Brasil é a original. A da África do Sul é gerada a partir dela: depois de mexer em qualquer coisa, rodar `python membros-servidor/gerar-paises.py` (copia a página para `landing za/members/` e as imagens que faltam lá). As duas usam o mesmo banco; cada uma só enxerga as compras do seu país (coluna `loja`: `br` ou `za`). A do Brasil é só em português; a da África do Sul tem a troca EN / PT / ES no topo (configuração `idiomas`).
 
 **Entrada só com e-mail**, sem senha e sem código: a pessoa digita o e-mail da compra e a função `api/membros-entrar.js` confere no banco o que ela comprou naquele país. A área lembra o e-mail no aparelho. Proteções: a página nunca fala direto com o banco, cada aparelho tem no máximo 10 tentativas erradas a cada 10 minutos e toda entrada fica na tabela `acessos`.
 

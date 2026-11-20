@@ -25,14 +25,17 @@
   function L() { return T[st.lang] || T.pt; }
   function t(k, v) { var x = L()[k]; if (x == null) x = T.pt[k]; return v ? fill(x, v) : x; }
 
+  // idiomas que esta área oferece (config "idiomas"); com um só, não aparece a troca no topo
+  function idiomas() { return (C.idiomas || Object.keys(T)).filter(function (l) { return T[l]; }); }
   function detectarIdioma() {
+    var ok = idiomas();
     var q = (qs.get("lang") || "").slice(0, 2).toLowerCase();
-    if (T[q]) return q;
-    var s = ler("vespro_lang"); if (s && T[s]) return s;
-    return T[C.idiomaPadrao] ? C.idiomaPadrao : "pt"; // cada país abre no seu idioma
+    if (ok.indexOf(q) >= 0) return q;
+    var s = ler("vespro_lang"); if (s && ok.indexOf(s) >= 0) return s;
+    return ok.indexOf(C.idiomaPadrao) >= 0 ? C.idiomaPadrao : (ok[0] || "pt"); // cada país abre no seu idioma
   }
   function trocarIdioma(l) {
-    if (!T[l]) return;
+    if (idiomas().indexOf(l) < 0) return;
     st.lang = l; gravar("vespro_lang", l);
     render();
   }
@@ -131,8 +134,9 @@
     pasta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5m-2.5-2.5L12 16l2.5-2.5"/></svg>'
   };
   function idiomasHtml() {
+    if (idiomas().length < 2) return "";
     return '<div class="idiomas" role="group" aria-label="' + esc(t("idioma")) + '">' +
-      Object.keys(T).map(function (l) {
+      idiomas().map(function (l) {
         return '<button type="button" data-lang="' + l + '" aria-pressed="' + (l === st.lang) + '" title="' + esc(T[l].nome) + '">' + T[l].curto + "</button>";
       }).join("") + "</div>";
   }

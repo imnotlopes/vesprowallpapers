@@ -12,7 +12,8 @@ window.MEMBROS = {
      Brasil: esta pasta (/membros/). África do Sul: gerada em landing za/members/ por
      membros-servidor/gerar-paises.py a partir de membros-servidor/paises/za.js. */
   pais: "br",               // precisa bater com a coluna "loja" das compras no banco
-  idiomaPadrao: "pt",       // idioma em que a área abre (a pessoa pode trocar no topo)
+  idiomaPadrao: "pt",       // idioma em que a área abre
+  idiomas: ["pt"],          // só português (pedido em 21/11). Com mais de um, ex. ["pt","en","es"], aparece a troca no topo
 
   /* ---------- Entrada só com e-mail ----------
      modoDemo: true = demonstração (qualquer e-mail entra e escolhe um perfil de cliente).
@@ -34,48 +35,49 @@ window.MEMBROS = {
      dentroDe: se a pessoa tem a coleção indicada, esta não aparece (ex.: a Essencial está dentro da Signature).
      so: "acervo" = só se ganha com o Acervo Completo.
      downloads: botões que aparecem na página da coleção (as chaves precisam existir nos links do banco).
-     artes: miniaturas mostradas como prévia (caminho a partir de /assets/). */
+     artes: miniaturas mostradas como prévia (caminho a partir de /assets/).
+     Imagens SEM marca d'água (quem está aqui já comprou): geradas por membros-servidor/gerar-imagens.py. */
   colecoes: {
     signature: {
       universo: "wallpapers", ordem: 1, qtd: "150",
       nome: "VESPRO Signature Collection™",
-      capa: "desktop/800/08.webp",
-      artes: ["desktop/400/01.webp","desktop/400/03.webp","desktop/400/04.webp","desktop/400/06.webp","desktop/400/07.webp","desktop/400/08.webp","desktop/400/09.webp","desktop/400/10.webp","desktop/400/11.webp","desktop/400/13.webp","desktop/400/29.webp","desktop/400/30.webp"],
+      capa: "membros/limpas/signature-capa.webp",
+      artes: ["membros/limpas/signature-01.webp","membros/limpas/signature-02.webp","membros/limpas/signature-03.webp","membros/limpas/signature-04.webp","membros/limpas/signature-05.webp","membros/limpas/signature-06.webp","membros/limpas/signature-07.webp","membros/limpas/signature-08.webp","membros/limpas/signature-09.webp","membros/limpas/signature-10.webp","membros/limpas/signature-11.webp","membros/limpas/signature-12.webp"],
       downloads: ["desktop","celular","todos"]
     },
     essencial: {
       universo: "wallpapers", ordem: 2, qtd: "75+", dentroDe: "signature",
       nome: "VESPRO Essential Collection™",
-      capa: "desktop/800/14.webp",
-      artes: ["desktop/400/14.webp","desktop/400/15.webp","desktop/400/16.webp","desktop/400/17.webp","desktop/400/18.webp","desktop/400/19.webp","desktop/400/20.webp","desktop/400/21.webp"],
+      capa: "membros/limpas/essencial-capa.webp",
+      artes: ["membros/limpas/essencial-01.webp","membros/limpas/essencial-02.webp","membros/limpas/essencial-03.webp","membros/limpas/essencial-04.webp","membros/limpas/essencial-05.webp","membros/limpas/essencial-06.webp","membros/limpas/essencial-07.webp","membros/limpas/essencial-08.webp"],
       downloads: ["desktop","celular"]
     },
     shadows: {
       universo: "wallpapers", ordem: 3,
       nome: "VESPRO Shadows Collection™",
-      capa: "membros/shadows-capa.webp",
-      artes: ["membros/shadows-1.webp","membros/shadows-2.webp","membros/shadows-3.webp","membros/shadows-4.webp"],
+      capa: "membros/limpas/shadows-capa.webp",
+      artes: ["membros/limpas/shadows-01.webp","membros/limpas/shadows-02.webp","membros/limpas/shadows-03.webp","membros/limpas/shadows-04.webp"],
       downloads: ["pasta"]
     },
     sporting: {
       universo: "wallpapers", ordem: 4,
       nome: "VESPRO Sporting Collection™",
-      capa: "membros/sporting-capa.webp",
-      artes: ["membros/sporting-1.webp","membros/sporting-2.webp","membros/sporting-3.webp","membros/sporting-4.webp"],
+      capa: "membros/limpas/sporting-capa.webp",
+      artes: ["membros/limpas/sporting-01.webp","membros/limpas/sporting-02.webp","membros/limpas/sporting-03.webp","membros/limpas/sporting-04.webp"],
       downloads: ["pasta"]
     },
     exclusivas: {
       universo: "wallpapers", ordem: 5, qtd: "200+", so: "acervo",
       nome: "VESPRO Exclusive Expansion™",
-      capa: "acervo/capa-720.webp",
-      artes: ["acervo/polo-nuvem-400.webp","acervo/relogio-9-5-400.webp","acervo/no-risk-no-story-400.webp"],
+      capa: "membros/limpas/exclusivas-capa.webp",
+      artes: ["membros/limpas/exclusivas-01.webp","membros/limpas/exclusivas-02.webp","membros/limpas/exclusivas-03.webp"],
       downloads: ["pasta"]
     },
     movies: {
       universo: "movies", ordem: 1, qtd: "80",
       nome: "VESPRO Movies™",
-      capa: "membros/movies-capa.webp",
-      artes: ["filmes/desktop/400/01.webp","filmes/desktop/400/02.webp","filmes/desktop/400/03.webp","filmes/desktop/400/04.webp","filmes/desktop/400/05.webp","filmes/desktop/400/08.webp","filmes/desktop/400/09.webp","filmes/desktop/400/10.webp","filmes/desktop/400/12.webp","filmes/desktop/400/13.webp","filmes/desktop/400/15.webp","filmes/desktop/400/16.webp"],
+      capa: "membros/limpas/movies-capa.webp",
+      artes: ["membros/limpas/movies-01.webp","membros/limpas/movies-02.webp","membros/limpas/movies-03.webp","membros/limpas/movies-04.webp","membros/limpas/movies-05.webp","membros/limpas/movies-06.webp","membros/limpas/movies-07.webp","membros/limpas/movies-08.webp","membros/limpas/movies-09.webp","membros/limpas/movies-10.webp","membros/limpas/movies-11.webp","membros/limpas/movies-12.webp"],
       downloads: ["desktop"]
     }
   },
