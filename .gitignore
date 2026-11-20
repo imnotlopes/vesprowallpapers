@@ -13,3 +13,4 @@ filmes/Vespro movies/
 
 # links do Drive da área de membros (só no computador e no Supabase)
 membros-servidor/02-links.sql
+membros-servidor/chave-webhook.txt
