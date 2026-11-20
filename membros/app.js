@@ -8,6 +8,9 @@
   var CHAVE_EMAIL = "vespro_email_" + C.pais; // e-mail lembrado neste aparelho
   var LOCAL = /^(localhost|127\.|\[::1\])/.test(location.hostname);
   var app = document.getElementById("app");
+  var UA = navigator.userAgent || "";
+  var APARELHO = /iPhone|iPod/.test(UA) ? "ios" : /Android/.test(UA) ? "android" : /Macintosh|Mac OS/.test(UA) ? "mac" : "pc";
+  var CELULAR = APARELHO === "ios" || APARELHO === "android";
 
   /* ---------- utilidades ---------- */
   function ler(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -131,6 +134,10 @@
     desktop: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M2 20h20"/></svg>',
     celular: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>',
     todos: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="13" height="10" rx="2"/><rect x="17" y="8" width="5" height="11" rx="1"/><path d="M5 19h7"/></svg>',
+    grade: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
+    filme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg>',
+    ajuda: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-4-7.5L21 3l-1 4.5A9 9 0 0 1 21 12z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.4M12 17h.01"/></svg>',
+    seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
     pasta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5m-2.5-2.5L12 16l2.5-2.5"/></svg>'
   };
   function idiomasHtml() {
@@ -150,14 +157,16 @@
       return '<a class="col" href="#/c/' + id + '">' +
         '<div class="img">' + img(c.capa, c.nome) + '<span class="tag ' + (st.dados.acervo ? "vip" : "ok") + '">✓ VESPRO</span></div>' +
         '<div class="corpo"><h3>' + esc(c.nome) + "</h3><p>" + esc(desc) + "</p>" + qtd +
-        '<div class="acao"><span class="btn-sec">' + esc(t("abrir")) + " →</span></div></div></a>";
+        '<div class="acao"><span class="btn-sec">' + esc(t("abrir")) + " →</span></div></div>" +
+        '<span class="chev" aria-hidden="true">' + ICONES.seta + "</span></a>";
     }
     var of = ofertaDaColecao(id), p = precoOferta(of), acao;
     if (c.so === "acervo") {
       acao = '<a class="btn-sec" href="#acervo" data-acao="ir-acervo">' + esc(t("ver_acervo")) + "</a>";
     } else {
       acao = '<a class="btn" href="' + esc(linkOferta(of)) + '" target="_blank" rel="noopener" data-oferta="' + of + '">' + ICONES.cadeado + " " +
-        esc(p ? t("desbloquear", { preco: fmt(p.por) }) : L().ofertas[of].btn) + "</a>";
+        (p ? '<span class="lbl-longo">' + esc(t("desbloquear", { preco: fmt(p.por) })) + '</span><span class="lbl-curto">' + esc(t("desbloquear_curto")) + "</span>"
+           : esc(L().ofertas[of].btn)) + "</a>";
     }
     var preco = p && c.so !== "acervo" ? '<div class="preco-linha">' + (p.de ? "<s>" + fmt(p.de) + "</s>" : "") + "<b>" + fmt(p.por) + "</b></div>" : "";
     return '<div class="col trancada">' +
@@ -224,7 +233,7 @@
     }
     var form = '<form class="form" data-form="email" novalidate>' + demo +
       '<label for="email">' + esc(t("email_label")) + "</label>" +
-      '<input id="email" type="email" inputmode="email" autocomplete="email" required placeholder="' + esc(t("email_ph")) + '" value="' + esc(st.email) + '">' +
+      '<input id="email" type="email" inputmode="email" autocomplete="email" autocapitalize="none" autocorrect="off" spellcheck="false" enterkeyhint="go" required placeholder="' + esc(t("email_ph")) + '" value="' + esc(st.email) + '">' +
       '<button class="btn" type="submit"' + (st.ocupado ? " disabled" : "") + ">" + esc(st.ocupado ? t("entrando") : t("entrar")) + "</button>" +
       (st.erro ? '<p class="erro">' + st.erro + "</p>" : "") + "</form>";
     return '<div class="login">' + idiomasHtml() + '<div class="login-box">' +
@@ -245,6 +254,15 @@
       '<a href="#/movies"' + (r.u === "movies" ? ' aria-current="page"' : "") + ">" + esc(t("tab_movies")) + (movTem ? "" : ' <span class="cad">' + ICONES.cadeado + "</span>") + "</a>" +
       "</nav></div></header>";
   }
+  // celular: abas numa barra fixa embaixo (perto do polegar)
+  function abasBaixo(r) {
+    var movTem = tem("movies");
+    return '<nav class="abas-baixo" aria-label="VESPRO">' +
+      '<a href="#/"' + (r.u === "wallpapers" ? ' aria-current="page"' : "") + ">" + ICONES.grade + "<span>" + esc(t("tab_wallpapers")) + "</span></a>" +
+      '<a href="#/movies"' + (r.u === "movies" ? ' aria-current="page"' : "") + ">" + ICONES.filme + "<span>" + esc(t("tab_movies")) + (movTem ? "" : " " + ICONES.cadeado) + "</span></a>" +
+      '<a href="https://wa.me/' + C.suporte.whatsapp + '" target="_blank" rel="noopener">' + ICONES.ajuda + "<span>" + esc(t("ajuda_curto")) + "</span></a>" +
+      "</nav>";
+  }
 
   function rodape() {
     return "<footer><p>" + esc(t("ajuda")) + ' <a href="mailto:' + esc(C.suporte.email) + '">' + esc(C.suporte.email) + "</a> · " +
@@ -259,9 +277,9 @@
     var h = '<section class="ola"><h1>' + t("ola") + '</h1><p class="email">' + esc(st.email) + "</p>" +
       '<div class="progresso"><p>' + esc(pr.n >= pr.t ? t("progresso_tudo") : t("progresso", { n: pr.n, t: pr.t })) + '</p><div class="barra"><i style="width:' + Math.round(pr.n / pr.t * 100) + '%"></i></div></div></section>';
     if (st.dados.acervo) h += vipHtml();
-    if (of && of !== "acervo") h += cardOferta(of);
     h += '<h2 class="sec">' + esc(t("minhas")) + "</h2>";
     h += minhas.length ? '<div class="grade">' + minhas.map(cardColecao).join("") + "</div>" : '<p class="vazio">' + esc(t("minhas_vazio")) + "</p>";
+    if (of && of !== "acervo") h += cardOferta(of);
     if (trancadas.length) {
       h += '<h2 class="sec">' + t("complete") + '</h2><p class="sec-sub">' + esc(t("complete_sub")) + "</p>";
       h += '<div class="grade">' + trancadas.map(cardColecao).join("") + "</div>";
@@ -300,12 +318,19 @@
       "<h1>" + esc(c.nome) + "</h1><p>" + esc(desc) + (c.qtd ? " · " + esc(t("wallpapers", { q: c.qtd })) : "") + "</p></div></section>";
     if (meu) {
       var links = (st.dados.colecoes[id]) || {};
-      h += '<h2 class="sec">' + t("baixar_titulo") + '</h2><div class="downloads">' + c.downloads.map(function (k) {
+      var ordem = c.downloads.slice();
+      if (CELULAR && ordem.indexOf("celular") > 0) { ordem.splice(ordem.indexOf("celular"), 1); ordem.unshift("celular"); }
+      var ideal = CELULAR ? "celular" : (ordem.indexOf("desktop") >= 0 ? "desktop" : "");
+      h += '<h2 class="sec">' + t("baixar_titulo") + '</h2><div class="downloads">' + ordem.map(function (k) {
         var d = L().dl[k], href = links[k] || "";
-        return '<a class="dl" href="' + esc(href || "#") + '" target="_blank" rel="noopener" data-dl="' + (href ? (href === "#demo" ? "demo" : "ok") : "falta") + '" data-col="' + id + '">' +
-          '<span class="ic">' + ICONES[k] + "</span><span><b>" + esc(d.t) + "</b><small>" + esc(d.d) + '</small></span><span class="seta">↗</span></a>';
+        return '<a class="dl' + (k === ideal && ordem.length > 1 ? " ideal" : "") + '" href="' + esc(href || "#") + '" target="_blank" rel="noopener" data-dl="' + (href ? (href === "#demo" ? "demo" : "ok") : "falta") + '" data-col="' + id + '">' +
+          '<span class="ic">' + ICONES[k] + "</span><span><b>" + esc(d.t) + "</b><small>" + esc(d.d) + "</small>" +
+          (k === ideal && ordem.length > 1 ? '<em class="ideal-tag">' + esc(t("ideal_aparelho")) + "</em>" : "") + '</span><span class="seta">↗</span></a>';
       }).join("") + "</div>";
-      h += '<h2 class="sec">' + esc(t("como_titulo")) + '</h2><div class="como">' + L().como.map(function (x) { return "<div><b>" + esc(x.t) + "</b><span>" + esc(x.p) + "</span></div>"; }).join("") + "</div>";
+      var abrir = { ios: 0, android: 1, pc: 2, mac: 3 }[APARELHO];
+      h += '<h2 class="sec">' + esc(t("como_titulo")) + '</h2><div class="como">' + L().como.map(function (x, i) {
+        return "<details" + (i === abrir ? " open" : "") + "><summary>" + esc(x.t) + "</summary><span>" + esc(x.p) + "</span></details>";
+      }).join("") + "</div>";
       h += '<h2 class="sec">' + esc(t("previa")) + '</h2><div class="galeria">' + c.artes.map(function (s) { return img(s, ""); }).join("") + "</div>";
       var of = ofertaPrincipal(c.universo);
       if (of) h += cardOferta(of);
@@ -332,7 +357,7 @@
     var r = rota();
     document.body.className = r.u === "movies" ? "u-movies" : "";
     var corpo = r.col ? telaColecao(r.col) : r.u === "movies" ? telaMovies() : telaWallpapers();
-    app.innerHTML = topo(r) + '<main class="wrap">' + corpo + "</main>" + rodape() + telaDemoBar();
+    app.innerHTML = topo(r) + '<main class="wrap">' + corpo + "</main>" + rodape() + abasBaixo(r) + telaDemoBar();
     var chave = location.hash;
     if (chave !== ultimaRota) { window.scrollTo(0, 0); ultimaRota = chave; }
   }
