@@ -222,6 +222,14 @@
       "<div><b>" + semHtml(tx.t) + "</b><span>" + esc(tx.d) + "</span></div></a>";
   }
 
+  /* ---------- painel em duas colunas (computador, 1024 px ou mais) ---------- */
+  var MQ_LARGO = window.matchMedia ? window.matchMedia("(min-width:1024px)") : null;
+  function largo() { return !!(MQ_LARGO && MQ_LARGO.matches); }
+  function painel(principal, lateral) {
+    if (!lateral) return principal;
+    return '<div class="painel"><div class="principal">' + principal + '</div><aside class="lateral">' + lateral + "</aside></div>";
+  }
+
   /* ---------- telas ---------- */
   function telaLogin() {
     var demo = "";
@@ -274,40 +282,40 @@
     var minhas = lista.filter(visivelComoMinha);
     var trancadas = lista.filter(function (id) { return !tem(id) && id !== "essencial"; });
     var of = ofertaPrincipal("wallpapers");
-    var h = '<section class="ola"><h1>' + t("ola") + '</h1><p class="email">' + esc(st.email) + "</p>" +
+    var ola = '<section class="ola"><h1>' + t("ola") + '</h1><p class="email">' + esc(st.email) + "</p>" +
       '<div class="progresso"><p>' + esc(pr.n >= pr.t ? t("progresso_tudo") : t("progresso", { n: pr.n, t: pr.t })) + '</p><div class="barra"><i style="width:' + Math.round(pr.n / pr.t * 100) + '%"></i></div></div></section>';
-    if (st.dados.acervo) h += vipHtml();
-    h += '<h2 class="sec">' + esc(t("minhas")) + "</h2>";
-    h += minhas.length ? '<div class="grade">' + minhas.map(cardColecao).join("") + "</div>" : '<p class="vazio">' + esc(t("minhas_vazio")) + "</p>";
-    if (of && of !== "acervo") h += cardOferta(of);
-    if (trancadas.length) {
-      h += '<h2 class="sec">' + t("complete") + '</h2><p class="sec-sub">' + esc(t("complete_sub")) + "</p>";
-      h += '<div class="grade">' + trancadas.map(cardColecao).join("") + "</div>";
-    }
-    if (!st.dados.acervo) h += cardOferta("acervo", { selo: of === "acervo" ? t("prox_selo") : t("vip_selo") });
-    h += proximaHtml();
-    if (!tem("movies")) h += ponte(true);
-    return h;
+    var vip = st.dados.acervo ? vipHtml() : "";
+    var blocoMinhas = '<h2 class="sec">' + esc(t("minhas")) + "</h2>" +
+      (minhas.length ? '<div class="grade minhas' + (minhas.length === 1 ? " uma" : "") + '">' + minhas.map(cardColecao).join("") + "</div>" : '<p class="vazio">' + esc(t("minhas_vazio")) + "</p>");
+    var ofP = of && of !== "acervo" ? cardOferta(of) : "";
+    var blocoTrancadas = trancadas.length ? '<h2 class="sec">' + t("complete") + '</h2><p class="sec-sub">' + esc(t("complete_sub")) + "</p>" +
+      '<div class="grade">' + trancadas.map(cardColecao).join("") + "</div>" : "";
+    var ofA = !st.dados.acervo ? cardOferta("acervo", { selo: of === "acervo" ? t("prox_selo") : t("vip_selo") }) : "";
+    var prox = proximaHtml(), pt = !tem("movies") ? ponte(true) : "";
+    // computador: coleções à esquerda, ofertas (ou o selo VIP) à direita
+    if (largo()) return ola + painel(blocoMinhas + blocoTrancadas + pt, vip + ofP + ofA + prox);
+    return ola + vip + blocoMinhas + ofP + blocoTrancadas + ofA + prox + pt;
   }
 
   function telaMovies() {
     var c = C.colecoes.movies, h;
     if (!tem("movies")) {
       h = '<section class="cine">' + img(c.capa, c.nome) + '<div class="txt"><span class="eyebrow">VESPRO Movies™</span><h1>' + t("movies_trancado_t") + "</h1><p>" + esc(t("movies_trancado_d")) + "</p></div></section>";
-      h += cardOferta("movies");
-      h += '<h2 class="sec">' + esc(t("previa")) + '</h2><p class="sec-sub">' + esc(t("previa_trancada")) + "</p>";
-      h += '<div class="galeria trancada">' + c.artes.slice(0, 8).map(function (s) { return img(s, ""); }).join("") + "</div>";
-      if (!tem("signature") && !tem("essencial")) h += ponte(false);
-      return h;
+      var ofM = cardOferta("movies");
+      var previa = '<h2 class="sec">' + esc(t("previa")) + '</h2><p class="sec-sub">' + esc(t("previa_trancada")) + "</p>" +
+        '<div class="galeria trancada">' + c.artes.slice(0, largo() ? 9 : 8).map(function (s) { return img(s, ""); }).join("") + "</div>";
+      var pt = !tem("signature") && !tem("essencial") ? ponte(false) : "";
+      if (largo()) return h + painel(previa + pt, ofM);
+      return h + ofM + previa + pt;
     }
     h = '<section class="cine">' + img(c.capa, c.nome) + '<div class="txt"><span class="eyebrow">VESPRO Movies™</span><h1>' + t("ola_movies") + "</h1><p>" + esc(st.email) + "</p></div></section>";
-    if (st.dados.acervo) h += vipHtml();
-    h += '<h2 class="sec">' + esc(t("minhas")) + '</h2><div class="grade">' + ids("movies").filter(visivelComoMinha).map(cardColecao).join("") + "</div>";
+    var vip = st.dados.acervo ? vipHtml() : "";
+    var minhasM = ids("movies").filter(visivelComoMinha);
+    var blocoMinhas = '<h2 class="sec">' + esc(t("minhas")) + '</h2><div class="grade minhas' + (minhasM.length === 1 ? " uma" : "") + '">' + minhasM.map(cardColecao).join("") + "</div>";
     var of = ofertaPrincipal("movies");
-    if (of) h += cardOferta(of);
-    if (of === "signature") h += cardOferta("acervo", { selo: t("vip_selo") });
-    h += proximaHtml();
-    return h;
+    var ofertas = (of ? cardOferta(of) : "") + (of === "signature" ? cardOferta("acervo", { selo: t("vip_selo") }) : "") + proximaHtml();
+    if (largo()) return h + painel(blocoMinhas, vip + ofertas);
+    return h + vip + blocoMinhas + ofertas;
   }
 
   function telaColecao(id) {
@@ -321,24 +329,26 @@
       var ordem = c.downloads.slice();
       if (CELULAR && ordem.indexOf("celular") > 0) { ordem.splice(ordem.indexOf("celular"), 1); ordem.unshift("celular"); }
       var ideal = CELULAR ? "celular" : (ordem.indexOf("desktop") >= 0 ? "desktop" : "");
-      h += '<h2 class="sec">' + t("baixar_titulo") + '</h2><div class="downloads">' + ordem.map(function (k) {
+      var downloads = '<h2 class="sec">' + t("baixar_titulo") + '</h2><div class="downloads">' + ordem.map(function (k) {
         var d = L().dl[k], href = links[k] || "";
         return '<a class="dl' + (k === ideal && ordem.length > 1 ? " ideal" : "") + '" href="' + esc(href || "#") + '" target="_blank" rel="noopener" data-dl="' + (href ? (href === "#demo" ? "demo" : "ok") : "falta") + '" data-col="' + id + '">' +
           '<span class="ic">' + ICONES[k] + "</span><span><b>" + esc(d.t) + "</b><small>" + esc(d.d) + "</small>" +
           (k === ideal && ordem.length > 1 ? '<em class="ideal-tag">' + esc(t("ideal_aparelho")) + "</em>" : "") + '</span><span class="seta">↗</span></a>';
       }).join("") + "</div>";
       var abrir = { ios: 0, android: 1, pc: 2, mac: 3 }[APARELHO];
-      h += '<h2 class="sec">' + esc(t("como_titulo")) + '</h2><div class="como">' + L().como.map(function (x, i) {
+      var como = '<h2 class="sec">' + esc(t("como_titulo")) + '</h2><div class="como">' + L().como.map(function (x, i) {
         return "<details" + (i === abrir ? " open" : "") + "><summary>" + esc(x.t) + "</summary><span>" + esc(x.p) + "</span></details>";
       }).join("") + "</div>";
-      h += '<h2 class="sec">' + esc(t("previa")) + '</h2><div class="galeria">' + c.artes.map(function (s) { return img(s, ""); }).join("") + "</div>";
-      var of = ofertaPrincipal(c.universo);
-      if (of) h += cardOferta(of);
-    } else {
-      h += cardOferta(ofertaDaColecao(id));
-      h += '<h2 class="sec">' + esc(t("previa")) + '</h2><p class="sec-sub">' + esc(t("previa_trancada")) + '</p><div class="galeria trancada">' + c.artes.map(function (s) { return img(s, ""); }).join("") + "</div>";
+      var galeria = '<h2 class="sec">' + esc(t("previa")) + '</h2><div class="galeria">' + c.artes.map(function (s) { return img(s, ""); }).join("") + "</div>";
+      var of = ofertaPrincipal(c.universo), ofH = of ? cardOferta(of) : "";
+      // computador: galeria à esquerda; downloads, passo a passo e oferta à direita
+      if (largo()) return h + painel(galeria, downloads + como + ofH);
+      return h + downloads + como + galeria + ofH;
     }
-    return h;
+    var ofC = cardOferta(ofertaDaColecao(id));
+    var previa = '<h2 class="sec">' + esc(t("previa")) + '</h2><p class="sec-sub">' + esc(t("previa_trancada")) + '</p><div class="galeria trancada">' + c.artes.map(function (s) { return img(s, ""); }).join("") + "</div>";
+    if (largo()) return h + painel(previa, ofC);
+    return h + ofC + previa;
   }
 
   function telaDemoBar() {
@@ -475,6 +485,10 @@
     }
   });
   window.addEventListener("hashchange", function () { if (st.dados) render(); });
+  if (MQ_LARGO) {
+    var aoMudar = function () { if (st.dados) render(); };
+    if (MQ_LARGO.addEventListener) MQ_LARGO.addEventListener("change", aoMudar); else if (MQ_LARGO.addListener) MQ_LARGO.addListener(aoMudar);
+  }
 
   /* ---------- início: entra direto se o e-mail já foi usado neste aparelho ---------- */
   var lembrado = ler(CHAVE_EMAIL) || (DEMO ? ler("vespro_demo_email") : null);
