@@ -30,11 +30,11 @@ COLECOES = {
     # baixadas pela miniatura do Drive e guardadas em oil wallpaper/drive-signature-recentes/
     # (as 18 escolhidas pelo usuário em 21/11, na ordem da tela dele)
     "signature": [os.path.join(RECENTES, n + ".jpg") for n in [
-        "hidroaviao-oceano",
+        "no-risk-no-story",
         "rolex-already-late", "relogio-fuck-9-5", "porsche-palmeiras", "polo-nuvens", "polo-azul", "pantera-fonte",
         "no-risk-no-story", "monge-cha", "homem-terno-olhar", "homem-leoes-parede", "homem-estadio-vazio", "hidroaviao-oceano",
         "hercules-leao", "golfe-montanhas", "gladiador-crianca-vale", "frase-money-talks", "frase-iate-dinheiro", "frase-average-trap"]],
-    "essencial": [principal(n) for n in ["13", "05", "09", "12", "13", "17", "27", "33", "45"]],
+    "essencial": [principal(n) for n in ["23", "05", "09", "12", "13", "17", "27", "33", "45"]],
     "movies": [filme(n) for n in [
         "Batman - The Batman 2022 1",
         "Batman - The Batman 2022 1", "Batman - O Cavaleiro das Trevas 5", "O Poderoso Chefao 2",

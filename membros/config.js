@@ -41,14 +41,14 @@ window.MEMBROS = {
     signature: {
       universo: "wallpapers", ordem: 1, qtd: "150",
       nome: "VESPRO Signature Collection™",
-      capa: "membros/limpas/signature-capa.webp",
+      capa: "membros/limpas/signature-capa.webp?v=2",
       artes: ["membros/limpas/signature-01.webp","membros/limpas/signature-02.webp","membros/limpas/signature-03.webp","membros/limpas/signature-04.webp","membros/limpas/signature-05.webp","membros/limpas/signature-06.webp","membros/limpas/signature-07.webp","membros/limpas/signature-08.webp","membros/limpas/signature-09.webp","membros/limpas/signature-10.webp","membros/limpas/signature-11.webp","membros/limpas/signature-12.webp","membros/limpas/signature-13.webp","membros/limpas/signature-14.webp","membros/limpas/signature-15.webp","membros/limpas/signature-16.webp","membros/limpas/signature-17.webp","membros/limpas/signature-18.webp"],
       downloads: ["desktop","celular","todos"]
     },
     essencial: {
       universo: "wallpapers", ordem: 2, qtd: "75+", dentroDe: "signature",
       nome: "VESPRO Essential Collection™",
-      capa: "membros/limpas/essencial-capa.webp",
+      capa: "membros/limpas/essencial-capa.webp?v=2",
       artes: ["membros/limpas/essencial-01.webp","membros/limpas/essencial-02.webp","membros/limpas/essencial-03.webp","membros/limpas/essencial-04.webp","membros/limpas/essencial-05.webp","membros/limpas/essencial-06.webp","membros/limpas/essencial-07.webp","membros/limpas/essencial-08.webp"],
       downloads: ["desktop","celular"]
     },
