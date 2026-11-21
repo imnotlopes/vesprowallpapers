@@ -88,19 +88,19 @@ window.MEMBROS = {
   /* ---------- Ofertas dentro da área (upsell para quem já é cliente) ----------
      Moeda e checkouts deste país (Brasil: reais, Wiapy).
      link vazio = o botão abre o WhatsApp do suporte com a mensagem pronta.
-     PREÇOS ABAIXO SÃO SUGESTÃO: confira antes de criar os produtos.
+     Produtos criados na Wiapy em 21/11/2026 (nome "... · Oferta de membro"), já no webhook.
      Para criar: na Wiapy, um produto novo para cada oferta (pagamento único) e cole o link aqui. */
   loja: {
     moeda: "R$", decimal: ",", codigoMoeda: "BRL",
     precoColecaoSite: "12,90",          // âncora: "cada coleção nova custa R$ 12,90 no site"
     ofertas: {
-      upgrade_signature: { preco: "9,90",  de: "21,90", link: "" },   // Essencial > Signature (paga só a diferença)
-      shadows:           { preco: "9,90",  de: "14,90", link: "" },
-      sporting:          { preco: "9,90",  de: "14,90", link: "" },
-      shadows_sporting:  { preco: "14,90", de: "29,80", link: "" },
-      movies:            { preco: "9,90",  de: "12,90", link: "" },
-      signature:         { preco: "12,90", de: "21,90", link: "" },   // para quem só tem a Movies
-      acervo:            { preco: "37,90", link: "" }                  // Acesso VIP: preço exclusivo da área de membros
+      upgrade_signature: { preco: "9,90",  de: "21,90", link: "https://pay.wiapy.com/smGtJXo-4A-g" },   // Essencial > Signature (paga só a diferença)
+      shadows:           { preco: "9,90",  de: "14,90", link: "https://pay.wiapy.com/z3q-TBe4M5x5" },
+      sporting:          { preco: "9,90",  de: "14,90", link: "https://pay.wiapy.com/P2n-aBHGn7bs" },
+      shadows_sporting:  { preco: "14,90", de: "29,80", link: "https://pay.wiapy.com/mW2OOIdvcEXD" },
+      movies:            { preco: "9,90",  de: "12,90", link: "https://pay.wiapy.com/Q1-asTX3iQ60" },
+      signature:         { preco: "12,90", de: "21,90", link: "https://pay.wiapy.com/Vzkb1l8cW8Zt" },   // para quem só tem a Movies
+      acervo:            { preco: "37,90", link: "https://pay.wiapy.com/iTRVTC0ukQ3V" }                  // Acesso VIP: preço exclusivo da área de membros
       // (outra opção: { cheio: "39,80", minimo: "17,90" } = cheio menos o que a pessoa já pagou)
     }
   },
