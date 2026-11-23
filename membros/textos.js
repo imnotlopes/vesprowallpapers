@@ -80,6 +80,7 @@ window.TEXTOS = {
       { t: "Windows", p: "Clique com o botão direito na imagem e escolha \"Definir como plano de fundo da área de trabalho\"." },
       { t: "Mac", p: "Clique com o botão direito na imagem e escolha \"Definir imagem da mesa\"." }
     ],
+    guia: { t: "Guia: wallpaper novo todo dia", d: "PDF · configure uma vez e o aparelho troca sozinho" },
     proxima_selo: "Em breve",
     proxima_vip: "Você é VIP: ela entra aqui sem custo.",
     proxima_nao_vip: "Com o Acervo Completo, ela entra aqui sem custo.",
