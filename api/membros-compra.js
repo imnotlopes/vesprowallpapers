@@ -95,9 +95,12 @@ async function supa(caminho, opcoes = {}) {
 async function lojouApi(caminho) {
   const chave = process.env.LOJOU_API_KEY;
   if (!chave) return null;
-  const r = await fetch("https://api.lojou.app" + caminho, { headers: { Authorization: "Bearer " + chave, Accept: "application/json" } });
-  const j = await r.json().catch(() => ({}));
-  if (!r.ok) throw new Error("Lojou " + r.status + ": " + String(j.message || "").slice(0, 120));
+  const r = await fetch("https://api.lojou.app" + caminho, {
+    headers: { Authorization: "Bearer " + chave.trim(), Accept: "application/json", "User-Agent": "VESPRO-membros/1.0 (+https://members.vesprowallpapers.com)" }
+  });
+  const texto = await r.text();
+  let j = {}; try { j = JSON.parse(texto); } catch (e) {}
+  if (!r.ok) throw new Error("Lojou " + r.status + ": " + String(j.message || j.error_code || texto.replace(/\s+/g, " ")).slice(0, 160) + (j.missing_scopes ? " (falta " + j.missing_scopes.join(",") + ")" : ""));
   return j;
 }
 
