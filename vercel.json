@@ -12,6 +12,17 @@
       "permanent": false
     },
     {
+      "source": "/",
+      "has": [
+        {
+          "type": "host",
+          "value": "members.vesprowallpapers.com"
+        }
+      ],
+      "destination": "/members/",
+      "permanent": false
+    },
+    {
       "source": "/sitemap.xml",
       "destination": "/fuja/",
       "permanent": false
@@ -48,6 +59,15 @@
     },
     {
       "source": "/membros/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow"
+        }
+      ]
+    },
+    {
+      "source": "/members/(.*)",
       "headers": [
         {
           "key": "X-Robots-Tag",

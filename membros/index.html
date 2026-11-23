@@ -267,7 +267,10 @@ footer p{margin:4px 0}
   .topo .abas{display:none}
   .topo-linha{height:56px}
   .topo .logo{width:34px}
-  .sair{min-height:40px;padding:0 16px;font-size:13px}
+  .sair{min-height:40px;padding:0 16px;font-size:13px;white-space:nowrap}
+  /* com a troca de idioma no topo (área worldwide) o espaço é menor */
+  .dir:has(.idiomas) .sair{padding:0 11px}
+  .dir:has(.idiomas) .idiomas button{padding:6px 8px}
   .abas-baixo{display:grid;grid-template-columns:repeat(3,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(5,8,13,.94);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-top:1px solid var(--line);padding-bottom:env(safe-area-inset-bottom)}
   .abas-baixo a{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;min-height:58px;padding:8px 4px;text-decoration:none;color:var(--muted);font-size:11px;font-weight:600;letter-spacing:.2px}
   .abas-baixo a > svg{width:22px;height:22px}

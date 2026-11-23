@@ -49,6 +49,7 @@ window.TEXTOS = {
     ancora: "Cada coleção nova custa <b>{preco}</b> no site. Com o acesso VIP, você não paga mais nenhuma.",
     economia: "Separadas, as coleções que faltam custariam {soma}.",
     exclusivo_membros: "Preço exclusivo da área de membros",
+    moeda_local: "No checkout o valor aparece na moeda do seu país.",
     ofertas: {
       upgrade_signature: { t: 'Leve as outras <span class="serif">75+ artes</span>', d: "Você tem a Essential. Complete a Signature Collection com 150 wallpapers pagando só a diferença.", btn: "Completar minha coleção" },
       shadows_sporting: { t: 'Duas coleções que <span class="serif">combinam</span> com a sua', d: "Shadows, em preto e branco, e Sporting, de velocidade e esporte. As duas juntas, com preço de membro.", btn: "Quero as duas" },
@@ -140,6 +141,7 @@ window.TEXTOS = {
     ancora: "Each new collection costs <b>{preco}</b> on the site. With VIP access, you never pay for one again.",
     economia: "Bought separately, the collections you are missing would cost {soma}.",
     exclusivo_membros: "Members area exclusive price",
+    moeda_local: "At checkout the price is shown in your local currency.",
     ofertas: {
       upgrade_signature: { t: 'Get the other <span class="serif">75+ artworks</span>', d: "You own the Essential. Complete the 150 wallpaper Signature Collection paying only the difference.", btn: "Complete my collection" },
       shadows_sporting: { t: 'Two collections that <span class="serif">match</span> yours', d: "Shadows, in black and white, and Sporting, all speed and sport. Both together at member price.", btn: "I want both" },
@@ -231,6 +233,7 @@ window.TEXTOS = {
     ancora: "Cada colección nueva cuesta <b>{preco}</b> en el sitio. Con el acceso VIP, no pagas ninguna más.",
     economia: "Por separado, las colecciones que te faltan costarían {soma}.",
     exclusivo_membros: "Precio exclusivo del área de miembros",
+    moeda_local: "En el checkout el precio aparece en la moneda de tu país.",
     ofertas: {
       upgrade_signature: { t: 'Llévate las otras <span class="serif">75+ obras</span>', d: "Tienes la Essential. Completa la Signature Collection con 150 wallpapers pagando solo la diferencia.", btn: "Completar mi colección" },
       shadows_sporting: { t: 'Dos colecciones que <span class="serif">combinan</span> con la tuya', d: "Shadows, en blanco y negro, y Sporting, de velocidad y deporte. Las dos juntas, con precio de miembro.", btn: "Quiero las dos" },

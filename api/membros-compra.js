@@ -1,7 +1,11 @@
 /* Webhook de compra da área de membros VESPRO (função da Vercel).
    URL para colar nas plataformas:
      Wiapy (área do Brasil):        https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=wiapy&chave=SUA_CHAVE
-     Lojou (área da África do Sul): https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=lojou&chave=SUA_CHAVE
+     Lojou (área worldwide, África): https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=lojou&chave=SUA_CHAVE
+     Stripe (área worldwide, cartão):  https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=stripe&chave=SUA_CHAVE
+       (evento checkout.session.completed; em cada Payment Link, metadado "produto_nome" com o nome da oferta,
+        ex.: "Shadows Collection · Member Offer". A Stripe copia o metadado do link para a compra.)
+     Hotmart (área worldwide, depois): ...?plataforma=hotmart&chave=SUA_CHAVE
    Variáveis na Vercel: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MEMBROS_WEBHOOK_KEY.
 
    Cada plataforma manda o aviso num formato diferente. Por isso a função procura
@@ -9,8 +13,11 @@
    inteiro na tabela "eventos" (para conferir) e grava a compra em "compras". */
 
 // Cada plataforma alimenta a área de membros do seu país (coluna "loja" das compras).
-// Stripe (site da marca, dólar) fica para depois.
-const LOJA = { wiapy: "br", lojou: "za", manual: "br" };
+// Desde 22/11/2026 a Lojou alimenta a área WORLDWIDE (ww), junto com a Stripe e, depois, a Hotmart.
+// (As compras antigas 'za' continuam aparecendo na área worldwide: ver api/membros-entrar.js.)
+const LOJA = { wiapy: "br", lojou: "ww", stripe: "ww", hotmart: "ww", manual: "br", manual_ww: "ww" };
+// Plataformas que mandam o valor em centavos.
+const CENTAVOS = { stripe: true };
 
 // Reconhecimento pelo nome (order bumps e produtos sem código cadastrado). A ordem importa.
 const PELO_NOME = [
@@ -95,6 +102,7 @@ module.exports = async (req, res) => {
   let resultado = "";
   try {
     const d = ler(payload);
+    if (CENTAVOS[plataforma] && d.valor != null) d.valor = d.valor / 100;
     const status = d.status.join(" ").replace(/un.?paid|not.?paid|n[aã]o.?pago/gi, "pendente");
     const produtos = await supa("produtos?select=codigo,colecoes");
     const mapa = Object.fromEntries((produtos || []).map((p) => [p.codigo, p.colecoes]));

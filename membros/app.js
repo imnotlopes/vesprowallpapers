@@ -43,8 +43,27 @@
     render();
   }
 
+  /* ---------- checkout por país (área worldwide) ----------
+     Sem "gateways" no config (Brasil): usa C.loja.
+     Com "gateways": escolhe pelo país de quem está vendo. A função de entrada devolve o país
+     pelo IP (pais_visitante). Para testar: ?pais=ZA (força o país) ou ?gw=lojou (força o checkout). */
+  var PAIS_Q = (qs.get("pais") || "").slice(0, 2).toUpperCase();
+  function paisVisitante() { return PAIS_Q || st.paisVisitante || ""; }
+  function gateway() {
+    var G = C.gateways; if (!G) return null;
+    var q = qs.get("gw"); if (q && G[q]) return q;
+    var p = paisVisitante();
+    for (var k in G) if (G[k].ativo !== false && p && (G[k].paises || []).indexOf(p) >= 0) return k;
+    return C.gatewayPadrao;
+  }
+  // a Lojou cobra na moeda local do país; a área mostra o preço em rand (África do Sul)
+  function notaMoedaLocal() {
+    var g = gateway(), p = paisVisitante();
+    return !!(g && C.gateways[g].paisDaMoeda && p && p !== C.gateways[g].paisDaMoeda);
+  }
+
   /* ---------- dinheiro ---------- */
-  function loja() { return C.loja; }
+  function loja() { var g = gateway(); return g ? C.gateways[g].loja : C.loja; }
   function num(s, lj) { if (s === "" || s == null) return NaN; s = String(s); lj = lj || loja(); return lj.decimal === "," ? parseFloat(s.replace(/\./g, "").replace(",", ".")) : parseFloat(s); }
   function fmt(n, lj) {
     lj = lj || loja();
@@ -197,7 +216,8 @@
       var ref = loja().precoColecaoSite;
       if (ref) extra += '<p class="ancora">' + t("ancora", { preco: fmt(num(ref)) }) + "</p>";
     }
-    var preco = p ? '<div class="o-preco">' + (p.de ? "<s>" + fmt(p.de) + "</s>" : "") + "<b>" + fmt(p.por) + '</b></div><p class="unico">' + esc(t("unico")) + "</p>" : "";
+    var preco = p ? '<div class="o-preco">' + (p.de ? "<s>" + fmt(p.de) + "</s>" : "") + "<b>" + fmt(p.por) + '</b></div><p class="unico">' + esc(t("unico")) + "</p>" +
+      (notaMoedaLocal() ? '<p class="unico">' + esc(t("moeda_local")) + "</p>" : "") : "";
     return '<section class="oferta"' + (of === "acervo" ? ' id="acervo"' : "") + ">" +
       '<div class="o-img">' + imagemOferta(of) + "</div>" +
       '<div class="o-corpo"><span class="selo">' + esc(opts.selo || t("prox_selo")) + "</span>" +
@@ -412,6 +432,7 @@
         if (x.status === 200) {
           var d = x.d || {};
           st.dados = { acervo: !!d.acervo, colecoes: d.colecoes || {}, pago: Number(d.pago) || 0, loja: C.pais };
+          if (d.pais_visitante) st.paisVisitante = String(d.pais_visitante).toUpperCase();
           gravar(CHAVE_EMAIL, email);
           rastrear("MembrosEntrou");
           render(); return;

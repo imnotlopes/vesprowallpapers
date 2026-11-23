@@ -19,7 +19,11 @@ SITES = os.path.dirname(RAIZ)
 
 PAISES = {
     # país: pasta do site do país, subpasta da área
-    "za": {"site": os.path.join(SITES, "landing za"), "pasta": "members"},
+    # Worldwide (22/11/2026): members.vesprowallpapers.com, neste mesmo site, em /members/.
+    # Checkout por país: Stripe (padrão), Lojou (África), Hotmart (depois). Ver paises/ww.js.
+    "ww": {"site": RAIZ, "pasta": "members"},
+    # A área antiga só da África do Sul (landing za/members/, nunca publicada) foi substituída
+    # pela worldwide. Para gerar de novo: "za": {"site": os.path.join(SITES, "landing za"), "pasta": "members"},
 }
 
 ARQUIVOS = ["index.html", "app.js", "textos.js"]

@@ -8,10 +8,13 @@
    - toda tentativa fica na tabela "acessos" (dá para ver e-mails usados em aparelhos demais). */
 const crypto = require("crypto");
 
-const PAISES = ["br", "za"];
+const PAISES = ["br", "za", "ww"];
+// A área worldwide (ww) também mostra as compras antigas marcadas como 'za' (Lojou, antes de 22/11/2026).
+const JUNTAR = { ww: ["ww", "za"] };
 const LIMITE_FALHAS = 10;          // e-mails sem compra por IP, a cada 10 minutos
 const ORIGENS = [                   // sites que podem chamar esta função
   "https://membros.vesprowallpapers.com",
+  "https://members.vesprowallpapers.com",
   "https://vesprowallpapers.vercel.app",
   "https://za.vesprowallpapers.com",
   "http://localhost:5173",
@@ -27,6 +30,19 @@ async function supa(caminho, opcoes = {}) {
   });
   if (!r.ok) throw new Error("Supabase " + r.status + ": " + (await r.text()).slice(0, 200));
   return r.status === 204 ? null : r.json().catch(() => null);
+}
+
+// Junta as respostas de mais de uma loja (ex.: ww + za) numa só.
+function juntar(partes, pais) {
+  const r = { acervo: false, colecoes: {}, pago: 0, loja: pais };
+  for (const d of partes) {
+    if (!d) continue;
+    r.acervo = r.acervo || !!d.acervo;
+    for (const [id, links] of Object.entries(d.colecoes || {})) r.colecoes[id] = { ...(r.colecoes[id] || {}), ...(links || {}) };
+    r.pago += Number(d.pago) || 0;
+    for (const k of Object.keys(d)) if (!(k in r)) r[k] = d[k];
+  }
+  return r;
 }
 
 module.exports = async (req, res) => {
@@ -58,13 +74,17 @@ module.exports = async (req, res) => {
     const falhas = await supa("acessos?select=id&encontrado=eq.false&ip_hash=eq." + ipHash + "&criado_em=gte." + encodeURIComponent(desde) + "&limit=" + (LIMITE_FALHAS + 1));
     if ((falhas || []).length >= LIMITE_FALHAS) return res.status(429).json({ erro: "muitas_tentativas" });
 
-    const dados = await supa("rpc/area_por_email", { method: "POST", body: JSON.stringify({ p_email: email, p_loja: pais }) });
+    const lojas = JUNTAR[pais] || [pais];
+    const partes = await Promise.all(lojas.map((l) => supa("rpc/area_por_email", { method: "POST", body: JSON.stringify({ p_email: email, p_loja: l }) })));
+    const dados = juntar(partes, pais);
     const encontrado = !!dados && (dados.acervo || Object.keys(dados.colecoes || {}).length > 0);
 
     await supa("acessos", { method: "POST", body: JSON.stringify({ email, loja: pais, ip_hash: ipHash, agente, encontrado }) }).catch(() => {});
 
     if (!encontrado) return res.status(404).json({ erro: "nao_encontrado" });
-    return res.status(200).json(dados);
+    // país de quem está vendo (a Vercel manda pelo IP): a área worldwide escolhe o checkout por ele
+    const paisVisitante = String(req.headers["x-vercel-ip-country"] || "").toUpperCase().slice(0, 2);
+    return res.status(200).json({ ...dados, pais_visitante: paisVisitante });
   } catch (e) {
     return res.status(500).json({ erro: "servidor" });
   }
