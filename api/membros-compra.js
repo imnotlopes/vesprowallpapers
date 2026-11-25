@@ -7,6 +7,10 @@
      Stripe (área worldwide, cartão):  https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=stripe&chave=SUA_CHAVE
        (evento checkout.session.completed; em cada Payment Link, metadado "produto_nome" com o nome da oferta,
         ex.: "Shadows Collection · Member Offer". A Stripe copia o metadado do link para a compra.)
+     KashPay (área worldwide, EUA em dólar, checkout Stripe PJ):
+                                       https://vesprowallpapers.vercel.app/api/membros-compra?plataforma=kashpay&chave=SUA_CHAVE
+       (Integrações > Webhooks, eventos order.paid, order.refunded e order.chargeback. Valor em centavos;
+        cada oferta comprada vem em data.offers[] com o nome, e o nome diz qual coleção liberar.)
      Hotmart (área worldwide, depois): ...?plataforma=hotmart&chave=SUA_CHAVE
    Variáveis na Vercel: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY, MEMBROS_WEBHOOK_KEY.
 
@@ -17,11 +21,11 @@
 // Cada plataforma alimenta a área de membros do seu país (coluna "loja" das compras).
 // Desde 22/11/2026 a Lojou alimenta a área WORLDWIDE (ww), junto com a Stripe e, depois, a Hotmart.
 // (As compras antigas 'za' continuam aparecendo na área worldwide: ver api/membros-entrar.js.)
-const LOJA = { wiapy: "br", lojou: "ww", stripe: "ww", hotmart: "ww", manual: "br", manual_ww: "ww" };
+const LOJA = { wiapy: "br", lojou: "ww", stripe: "ww", kashpay: "ww", hotmart: "ww", manual: "br", manual_ww: "ww" };
 // Coleções que a Lojou vende como order bump (únicas aceitas do aviso sem senha).
 const BUMPS_LOJOU = ["shadows", "sporting", "movies"];
 // Plataformas que mandam o valor em centavos.
-const CENTAVOS = { stripe: true };
+const CENTAVOS = { stripe: true, kashpay: true };
 
 // Reconhecimento pelo nome (order bumps e produtos sem código cadastrado). A ordem importa.
 const PELO_NOME = [
