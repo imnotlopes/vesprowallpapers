@@ -92,10 +92,16 @@ CSS_EXTRA = '''
 
 # ===== blocos novos da carta: coleções com faixas de pinturas, bônus e card de oferta =====
 CSS_EXTRA += '''
+.seliga{font-size:20px;font-weight:600;color:var(--gold2);margin:4px 0 14px}
+.desce{display:inline-block;margin-left:4px;animation:desce 1.4s ease-in-out infinite}
+@keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.desce{animation:none}}
+.carta-topo h1{font-size:34px;line-height:1.12}
+@media (min-width:960px){.carta-topo h1{font-size:48px}}
 /* coleções em faixas */
 .colecoes{margin-top:64px}
 .colecao{margin:0 0 30px}
-.colecao-topo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 4px}
+.colecao-topo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 12px}
 .colecao-topo h3{margin:0;font-size:21px;font-weight:600;letter-spacing:-.3px}
 .colecao-topo h3 .serif{font-size:1.1em;color:var(--gold2)}
 .colecao-topo span{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--gold);white-space:nowrap}
@@ -177,27 +183,22 @@ COLECOES = f'''
 
     <div class="colecao">
       <div class="colecao-topo"><h3>Signature <span class="serif">Collection</span></h3><span>150 PINTURAS</span></div>
-      <p>A coleção principal: paisagens, carros, mar, cidades. Notebook, celular, iPad e ultrawide.</p>
       {faixa(D(['05','07','08','09','10','29','30','31','41','43','44','49']), 46)}
     </div>
     <div class="colecao">
       <div class="colecao-topo"><h3>Shadows</h3><span>200+ PINTURAS</span></div>
-      <p>Tudo em preto e branco, para quem gosta de uma tela mais sóbria.</p>
       {faixa(['membros/shadows-1.webp','membros/shadows-2.webp','membros/shadows-3.webp','membros/shadows-4.webp'] + D(['01','13','16','26']), 40, volta=True)}
     </div>
     <div class="colecao">
       <div class="colecao-topo"><h3>Sporting</h3><span>30+ PINTURAS</span></div>
-      <p>Fórmula 1, polo, mar aberto e estrada.</p>
-      {faixa(['membros/sporting-1.webp','membros/sporting-2.webp','membros/sporting-3.webp','membros/sporting-4.webp'], 30)}
+      {faixa(['membros/sporting-1.webp','membros/sporting-2.webp'] + [f'sporting/{n:02d}.webp' for n in range(1,10)], 44)}
     </div>
     <div class="colecao">
       <div class="colecao-topo"><h3>Movies</h3><span>80 CENAS</span></div>
-      <p>Cenas de filmes e séries que marcaram época, todas pintadas a óleo.</p>
-      {faixa(F(['01','02','03','04','05','08','09','13','15','17','25','30','39','43','53']), 50, volta=True)}
+      {faixa(F(['01','03','02','04','12','05','17','25','30','09','32','36','48','50']), 50, volta=True)}
     </div>
     <div class="colecao">
       <div class="colecao-topo"><h3>Exclusive <span class="serif">Expansion</span></h3><span>200+ PINTURAS</span></div>
-      <p>As que a gente deixa fora do site e dos anúncios. Só quem tem o VIP vê.</p>
       <div class="cadeado">{faixa(['acervo/polo-nuvem-400.webp','acervo/relogio-9-5-400.webp','acervo/no-risk-no-story-400.webp'] + D(['53','54','56','58']), 44, trancada=True)}<div class="selo-tranca">{CADEADO}<div><b>Liberadas no VIP</b><small>200+ PINTURAS</small></div></div></div>
     </div>
     <div class="proxima"><b>E as próximas coleções</b><span>Cada coleção nova aparece na sua área quando sair. Sem pagar de novo.</span></div>
@@ -273,8 +274,8 @@ CARTA = f'''
   <div class="hero carta-topo">
     {LOGO}
     <p class="tag so-promo" data-promo-nome>Black Friday</p>
-    <h1>Opa. A gente já <span class="serif">se conhece.</span></h1>
-    <p class="lead">Um recado rápido para quem já cruzou com a VESPRO™ por aí.</p>
+    <h1>Opa, você já viu alguns anúncios e sabemos que <span class="serif">curtiu também.</span></h1>
+    <p class="seliga">Então se liga <span class="desce" aria-hidden="true">↓</span></p>
     <a class="btn ghost" href="#oferta">Pular direto para a oferta ↓</a>
   </div>
 

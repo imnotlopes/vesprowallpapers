@@ -245,10 +245,16 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:40px 0 20px}
   .mini-grade{grid-template-columns:repeat(6,1fr)}
 }
 
+.seliga{font-size:20px;font-weight:600;color:var(--gold2);margin:4px 0 14px}
+.desce{display:inline-block;margin-left:4px;animation:desce 1.4s ease-in-out infinite}
+@keyframes desce{0%,100%{transform:translateY(0)}50%{transform:translateY(6px)}}
+@media (prefers-reduced-motion:reduce){.desce{animation:none}}
+.carta-topo h1{font-size:34px;line-height:1.12}
+@media (min-width:960px){.carta-topo h1{font-size:48px}}
 /* coleções em faixas */
 .colecoes{margin-top:64px}
 .colecao{margin:0 0 30px}
-.colecao-topo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 4px}
+.colecao-topo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 12px}
 .colecao-topo h3{margin:0;font-size:21px;font-weight:600;letter-spacing:-.3px}
 .colecao-topo h3 .serif{font-size:1.1em;color:var(--gold2)}
 .colecao-topo span{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--gold);white-space:nowrap}
