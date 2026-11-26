@@ -1,0 +1,526 @@
+<!doctype html>
+<!-- GERADO por vip/gerar_variacoes.py a partir de vip/index.html. Não edite aqui. -->
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Acesso VIP VESPRO™ | leva tudo</title>
+<meta name="description" content="Acesso VIP da VESPRO™: todas as coleções de wallpapers em pintura a óleo impasto, as 200+ exclusivas e as próximas que saírem. Pagamento único.">
+<link rel="icon" href="../../favicon.ico" sizes="48x48">
+<link rel="icon" type="image/png" sizes="32x32" href="../../assets/logo/favicon-32.png">
+<link rel="preconnect" href="https://connect.facebook.net">
+<link rel="preload" href="../../assets/fonts/inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/instrument-serif-italic-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#060a10">
+
+<!-- ===================== CONFIGURAÇÃO =====================
+     Página dedicada ao Acesso VIP (Acervo Completo). Só mexa aqui.
+     Enquanto a promoção estiver valendo (até "fim"), a página mostra o preço e o link de "promo".
+     Depois do prazo ela volta sozinha para o preço e o link "normal", sem contagem regressiva. -->
+<script>
+window.VIP = {
+  separado: "72,50",   // soma das coleções compradas separadas (Signature 21,90 + Shadows 14,90 + Sporting 14,90 + Movies 12,90 + Expansão 7,90)
+  normal: { preco: "37,90", link: "https://pay.wiapy.com/iTRVTC0ukQ3V" },            // Acesso VIP · preço de sempre
+  promo:  { preco: "24,90", link: "https://pay.wiapy.com/E6HDueXFPGmv",             // Acesso VIP · Black Friday
+            nome: "Black Friday", off: "65% OFF",
+            fim: "2026-11-30T23:59:59-03:00", fimTexto: "segunda, 30/11, às 23h59" },
+  metaPixelId: "1781303226340709",
+  clarityId: "yyc0uitibt"
+};
+(function(){
+  var v=window.VIP, p=v.promo, ativa=!!(p && p.link && Date.now() < new Date(p.fim).getTime());
+  v.ativa=ativa; v.preco=ativa?p.preco:v.normal.preco; v.link=ativa?p.link:v.normal.link;
+  document.documentElement.className += ativa ? " promo" : " sem-promo";
+})();
+</script>
+<script>
+(function(){
+  var id=(window.VIP.metaPixelId||"").trim(); if(!id||/^(localhost|127.)/.test(location.hostname)) return;
+  !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init',id); fbq('track','PageView');
+  fbq('track','ViewContent',{content_name:'Acesso VIP VESPRO',currency:'BRL',value:parseFloat(window.VIP.preco.replace(',','.'))});
+})();
+(function(){
+  var c=(window.VIP.clarityId||"").trim(); if(!c||/^(localhost|127.)/.test(location.hostname)) return;
+  (function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y)})(window,document,"clarity","script",c);
+  clarity('set','funil','vip'); clarity('set','variacao','direta');
+})();
+</script>
+
+<style>
+@font-face{font-family:Inter;src:url(../../assets/fonts/inter-latin.woff2) format("woff2");font-weight:100 900;font-display:swap}
+@font-face{font-family:"Instrument Serif";src:url(../../assets/fonts/instrument-serif-italic-latin.woff2) format("woff2");font-style:italic;font-display:swap}
+:root{--bg:#060a10;--card:#0d1520;--line:rgba(255,255,255,.12);--txt:#fff;--muted:#a6a6a6;--gold:#d9b878;--gold2:#f0d9a6;--green:#3ddc84}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+html,body{margin:0;background:var(--bg);color:var(--txt);font-family:Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+body{background-image:linear-gradient(rgba(4,7,12,.8),rgba(4,7,12,.8)),url(../../assets/tex/impasto-navy.webp);background-size:auto,760px;overflow-x:hidden;padding-bottom:84px}
+img{max-width:100%;height:auto;display:block}
+.serif{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400}
+.wrap{max-width:560px;margin:0 auto;padding:0 20px}
+html:not(.promo) .so-promo{display:none!important}.promo .sem-promo-so{display:none}
+/* faixa do topo */
+.topbar{background:var(--gold);color:#0b0f15;text-align:center;font-size:14.5px;line-height:1.4;font-weight:700;padding:10px 12px;position:sticky;top:0;z-index:30}
+.topbar b{font-variant-numeric:tabular-nums;white-space:nowrap}
+/* topo */
+.hero{text-align:center;padding:28px 0 0}
+.hero .logo{width:84px;margin:0 auto 12px}
+.tag{display:inline-block;border:1.5px solid var(--gold);color:var(--gold);border-radius:999px;padding:6px 16px;font-size:12px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;margin:0 0 16px}
+.kicker{color:var(--gold);font-size:12.5px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin:0 0 10px}
+h1{font-size:40px;line-height:1.05;margin:0 0 14px;font-weight:500;letter-spacing:-1.5px}
+.lead{font-size:17px;line-height:1.5;color:#eef1f4;margin:0 auto 6px;max-width:460px}
+.lead b{color:#fff}
+p{font-size:15px;line-height:1.55;margin:0 0 12px;color:#e8e8e8}
+h2{font-size:32px;line-height:1.1;margin:0 0 14px;text-align:center;font-weight:500;letter-spacing:-1px}
+section{margin-top:56px}
+.centro{text-align:center}
+.m{color:var(--muted)}
+/* leque de pinturas */
+.leque{display:flex;align-items:center;justify-content:center;margin:26px -20px 22px}
+.leque .q{flex:none;width:36%;border-radius:12px;background:#11141b;padding:5px;box-shadow:0 16px 36px rgba(0,0,0,.65),0 0 0 1px rgba(255,255,255,.08)}
+.leque .q img{border-radius:8px;aspect-ratio:16/10;object-fit:cover;width:100%}
+.leque .q:first-child{transform:rotate(-5deg);margin-right:-9%}
+.leque .q:last-child{transform:rotate(5deg);margin-left:-9%}
+.leque .q.c{width:52%;z-index:2}
+/* preço */
+.precobox{display:flex;align-items:center;justify-content:center;gap:16px;margin:6px 0 16px}
+.off{flex:none;width:86px;height:86px;border-radius:50%;background:var(--gold);color:#111;display:flex;flex-direction:column;align-items:center;justify-content:center;transform:rotate(-8deg);font-weight:800;line-height:1}
+.off b{font-size:31px;letter-spacing:-1px}.off span{font-size:13px;letter-spacing:1.5px;margin-top:2px}
+.val{text-align:left}
+.de{font-size:14px;color:#c3cad6;margin:0}.de s{text-decoration-color:var(--gold)}
+.preco{font-size:60px;font-weight:800;letter-spacing:-2px;line-height:1;margin:2px 0 4px;white-space:nowrap}
+.preco small{font-size:24px;font-weight:700;letter-spacing:0;margin-right:5px;vertical-align:.9em}
+.unico{font-size:12.5px;color:var(--muted);margin:0}
+.btn{display:block;width:100%;background-color:var(--gold);background-image:url(../../assets/tex/impasto-shade-soft.webp);background-size:240px;background-blend-mode:soft-light;color:#0b0f15;text-decoration:none;font-weight:800;font-size:16px;letter-spacing:.4px;text-align:center;padding:17px 16px;border-radius:12px;transition:transform .15s}
+.btn:hover{transform:scale(1.02)}.btn:active{transform:scale(.98)}
+.seguro{font-size:12.5px;color:var(--muted);margin:12px 0 0;text-align:center}
+.seguro b{color:var(--gold2);font-weight:600}
+/* coleções */
+.col{display:flex;gap:14px;align-items:center;background:rgba(10,14,22,.62);border:1px solid var(--line);border-radius:16px;padding:10px;margin:0 0 10px}
+.col img,.col .mais{flex:none;width:118px;aspect-ratio:16/10;object-fit:cover;border-radius:10px}
+.col .mais{border:2px dashed var(--gold);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:34px;font-weight:300}
+.col .borrada{filter:blur(5px) brightness(.7)}
+.col .cx{position:relative;flex:none;overflow:hidden;border-radius:10px}
+.col .cx svg{position:absolute;left:50%;top:50%;width:26px;height:30px;transform:translate(-50%,-50%)}
+.col div.t{min-width:0}
+.col b{display:block;font-size:16.5px;font-weight:600;letter-spacing:-.2px}
+.col span{display:block;font-size:13.5px;color:var(--muted);line-height:1.4;margin-top:2px}
+.col i{font-style:normal;color:var(--gold);font-weight:700}
+.col.dest{border-color:rgba(217,184,120,.5);background:linear-gradient(90deg,rgba(217,184,120,.12),rgba(10,14,22,.62))}
+/* conta */
+.conta{border:1px solid var(--line);border-radius:16px;background:rgba(10,14,22,.62);padding:8px 18px}
+.ln{display:flex;justify-content:space-between;gap:12px;font-size:15px;padding:9px 0;color:#dfe3e8;border-bottom:1px solid rgba(255,255,255,.08)}
+.ln span:last-child{white-space:nowrap;color:#aeb5bf}
+.ln.soma{font-weight:700;color:#fff}.ln.soma span:last-child{color:#fff;text-decoration:line-through;text-decoration-color:var(--gold)}
+.ln.vip{border:0;font-weight:800;font-size:19px;color:var(--gold);padding-top:12px}.ln.vip span:last-child{color:var(--gold)}
+/* vip */
+.vipbox{padding:16px 18px 8px;border:1.5px solid var(--gold);border-radius:16px;background:linear-gradient(180deg,rgba(217,184,120,.14),rgba(217,184,120,.04))}
+.vl{list-style:none;padding:0;margin:0}
+.vl li{position:relative;padding:0 0 12px 24px;font-size:15px;line-height:1.5;color:#e8e8e8}
+.vl li:before{content:"✦";position:absolute;left:0;top:0;color:var(--gold)}
+.vl b{color:var(--gold2)}
+/* semana */
+.semana{display:flex;gap:8px;justify-content:center;margin:20px 0 6px}
+.dia{flex:1 1 0;max-width:96px;text-align:center}
+.dia img{width:100%;aspect-ratio:9/15;object-fit:cover;border-radius:12px;border:1px solid var(--line)}
+.dia:nth-child(odd){margin-top:14px}
+.dia span{display:block;font-size:11px;font-weight:800;letter-spacing:2px;color:var(--gold);margin-top:7px}
+/* clientes */
+.setups{margin:18px -20px 6px;overflow:hidden}
+.setups-trilho{display:flex;gap:10px;width:max-content;animation:passa 32s linear infinite}
+.setups-trilho img{height:190px;width:auto;border-radius:12px;border:1px solid var(--line);flex:none}
+@keyframes passa{from{transform:translateX(0)}to{transform:translateX(calc(-50% - 5px))}}
+@media (prefers-reduced-motion:reduce){.setups-trilho{animation:none}}
+/* passos */
+.passos{counter-reset:p;list-style:none;padding:0;margin:0}
+.passos li{counter-increment:p;position:relative;padding:0 0 16px 48px;font-size:15px;line-height:1.5;color:#e0e4e9}
+.passos li:before{content:counter(p);position:absolute;left:0;top:-2px;width:34px;height:34px;border-radius:50%;background:rgba(217,184,120,.12);box-shadow:inset 0 0 0 1px rgba(217,184,120,.5);color:var(--gold);font-weight:800;display:flex;align-items:center;justify-content:center}
+.passos b{display:block;color:#fff;font-size:16px}
+.nota{font-size:14px;line-height:1.5;color:var(--gold2);background:rgba(217,184,120,.08);border:1px solid rgba(217,184,120,.3);border-radius:14px;padding:12px 16px;margin:8px 0 0}
+.nota b{color:var(--gold)}
+/* card da oferta */
+.oferta{position:relative;margin-top:70px;padding:34px 22px 22px;border:1px solid rgba(217,184,120,.55);border-radius:22px;background:rgba(10,14,22,.7)}
+.oferta .selo{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:var(--gold);color:#0b0f15;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border-radius:999px;padding:7px 16px;white-space:nowrap}
+.c-nome{font-size:25px;font-weight:600;letter-spacing:-.4px;margin:0 0 4px;text-align:center}
+.c-sub{font-size:15px;color:var(--muted);margin:0 0 16px;text-align:center}
+.c-lista{list-style:none;margin:0 0 20px;padding:0}
+.c-lista li{display:flex;align-items:flex-start;gap:12px;font-size:15px;line-height:1.45;color:#e6e6e6;padding:6px 0}
+.ck{flex:0 0 22px;width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);background:rgba(217,184,120,.10);box-shadow:inset 0 0 0 1px rgba(217,184,120,.45);margin-top:-1px}
+.ck svg{width:12px;height:12px}
+.relogio{display:flex;justify-content:center;gap:8px;margin:0 0 18px}
+.relogio div{width:66px;border-radius:12px;background:rgba(255,255,255,.05);border:1px solid var(--line);padding:9px 0 7px;text-align:center}
+.relogio b{display:block;font-size:26px;font-weight:800;font-variant-numeric:tabular-nums;line-height:1}
+.relogio span{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.fecha{text-align:center;font-size:13.5px;color:var(--gold2);margin:0 0 10px}
+.risco{text-align:center;font-size:13px;color:#cfe9da;margin:8px 0 0}
+.risco b{color:var(--green)}
+.porque{text-align:center;margin-top:22px}.porque b{display:block;font-size:15px;margin-bottom:5px}.porque>span{font-size:14px;color:var(--muted);line-height:1.55}.porque [data-fim]{color:var(--gold2)}
+/* dúvidas */
+details{border-bottom:1px solid var(--line);padding:4px 0}
+summary{cursor:pointer;list-style:none;font-size:16px;font-weight:600;padding:14px 30px 14px 0;position:relative}
+summary::-webkit-details-marker{display:none}
+summary:after{content:"+";position:absolute;right:4px;top:10px;font-size:24px;font-weight:300;color:var(--gold)}
+details[open] summary:after{content:"–"}
+details p{color:#c9ced6;margin:0 0 14px}
+footer{text-align:center;color:#6f7680;font-size:11px;padding:40px 0 20px}
+/* barra fixa */
+.fixa{position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(6,10,16,.94);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px calc(10px + env(safe-area-inset-bottom));transform:translateY(110%);transition:transform .3s}
+.fixa.on{transform:none}
+.fixa-in{max-width:560px;margin:0 auto;display:flex;align-items:center;gap:12px}
+.fixa p{margin:0;font-size:12px;color:var(--muted);line-height:1.3;flex:1;min-width:0}
+.fixa p b{display:block;color:#fff;font-size:17px;white-space:nowrap}
+.fixa .btn{width:auto;padding:13px 20px;font-size:14px;white-space:nowrap}
+@media (min-width:600px){h1{font-size:48px}h2{font-size:38px}.setups-trilho img{height:220px}}
+@media (min-width:960px){
+  .wrap{max-width:1040px;padding:0 32px}
+  .topbar{font-size:16px;padding:12px 20px}
+  .hero{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;text-align:left;padding-top:52px}
+  .hero .logo{margin:0 0 14px}
+  .hero h1{font-size:58px}
+  .hero .lead{margin:0 0 6px}
+  .hero .leque{margin:0}
+  .hero .precobox{justify-content:flex-start;margin-top:22px}
+  .hero .btn{max-width:420px}
+  .hero .seguro{text-align:left}
+  section{margin-top:90px}
+  .estreito{max-width:640px;margin-left:auto;margin-right:auto}
+  .grade{display:grid;grid-template-columns:1fr 1fr;gap:12px}.grade .col{margin:0}
+  .duas{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .duas h2{text-align:left}.duas .lead{margin-left:0}
+  .setups{margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw)}
+  .setups-trilho img{height:280px}
+  .oferta{max-width:520px;margin-left:auto;margin-right:auto;margin-top:110px}
+}
+
+/* ===== variações ===== */
+.btn.ghost{background:transparent;background-image:none;border:1.5px solid var(--gold);color:var(--gold);max-width:320px;margin:6px auto 0}
+.carta{margin-top:30px;background:rgba(10,14,22,.72);border:1px solid var(--line);border-radius:20px;padding:26px 22px 22px}
+.carta p{font-size:16.5px;line-height:1.7;color:#e4e7ec;margin:0 0 16px}
+.carta p b{color:#fff}
+.carta .destaque{font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-size:27px;line-height:1.25;color:var(--gold2);margin:24px 0}
+.carta figure{margin:22px -8px}
+.carta figure img{border-radius:12px;width:100%;aspect-ratio:16/9;object-fit:cover}
+.carta figcaption{font-size:12.5px;color:var(--muted);text-align:center;margin-top:8px}
+.carta ul{list-style:none;padding:0;margin:0 0 18px}
+.carta li{position:relative;padding:0 0 10px 24px;font-size:16px;line-height:1.55;color:#e4e7ec}
+.carta li:before{content:"✦";position:absolute;left:0;color:var(--gold)}
+.assina{border-top:1px dashed rgba(255,255,255,.18);padding-top:16px;margin-top:6px;display:flex;align-items:center;gap:14px}
+.assina img{width:54px}
+.assina b{display:block;font-size:15px}.assina span{font-size:13px;color:var(--muted)}
+.carta .ps{font-size:15px;color:#cfd3d8;margin:18px 0 0}
+.carta .ps b{color:var(--gold2)}
+.comparativo{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.lado{border-radius:16px;padding:16px 14px;border:1px solid var(--line);background:rgba(10,14,22,.62)}
+.lado.vip{border:1.5px solid var(--gold);background:linear-gradient(180deg,rgba(217,184,120,.14),rgba(10,14,22,.62))}
+.lado h3{margin:0 0 12px;font-size:14px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
+.lado.vip h3{color:var(--gold)}
+.lado ul{list-style:none;padding:0;margin:0}
+.lado li{display:flex;gap:9px;align-items:flex-start;font-size:13.5px;line-height:1.4;padding:6px 0;color:#d6dae0}
+.lado li .ck{flex-basis:20px;width:20px;height:20px}
+.xx{flex:0 0 20px;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;color:#7a828d;box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
+.mini-grade{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:22px 0 4px}
+.mini-grade>div{position:relative;border-radius:10px;overflow:hidden;aspect-ratio:1}
+.mini-grade img{width:100%;height:100%;object-fit:cover}
+.mini-grade span{position:absolute;left:0;right:0;bottom:0;padding:16px 6px 6px;background:linear-gradient(transparent,rgba(0,0,0,.85));font-size:11.5px;font-weight:700;text-align:center}
+.mini-grade span i{display:block;font-style:normal;color:var(--gold);font-weight:800}
+.mini-grade .prox{border:2px dashed var(--gold);display:flex;align-items:center;justify-content:center}
+.mini-grade .prox span{position:static;background:none;padding:0}
+.mini-grade .borra img{filter:blur(4px) brightness(.7)}
+.hero.curta{display:block;text-align:center}
+.hero.curta .precobox{justify-content:center}
+.hero.curta h1{font-size:38px}
+@media (min-width:960px){
+  .hero.carta-topo,.hero.curta{display:block;text-align:center;max-width:760px;margin:0 auto}
+  .hero.carta-topo .logo,.hero.curta .logo{margin:0 auto 14px}
+  .hero.carta-topo .lead,.hero.curta .lead{margin:0 auto 6px}
+  .carta{max-width:680px;margin-left:auto;margin-right:auto;padding:40px 46px 34px}
+  .carta p{font-size:18px}
+  .hero.curta h1{font-size:52px}
+  .hero.curta .precobox{justify-content:center}
+  .hero.curta .btn{margin:0 auto}
+  .hero.curta .seguro{text-align:center}
+  .comparativo{max-width:760px;margin-left:auto;margin-right:auto;gap:16px}
+  .lado{padding:22px}.lado li{font-size:15px}
+  .mini-grade{grid-template-columns:repeat(6,1fr)}
+}
+
+/* coleções em faixas */
+.colecoes{margin-top:64px}
+.colecao{margin:0 0 30px}
+.colecao-topo{display:flex;align-items:baseline;justify-content:space-between;gap:12px;margin:0 0 4px}
+.colecao-topo h3{margin:0;font-size:21px;font-weight:600;letter-spacing:-.3px}
+.colecao-topo h3 .serif{font-size:1.1em;color:var(--gold2)}
+.colecao-topo span{font-size:13px;font-weight:800;letter-spacing:1px;color:var(--gold);white-space:nowrap}
+.colecao>p{font-size:14px;color:var(--muted);margin:0 0 12px}
+.faixa{margin:0 -20px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask-image:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.faixa-trilho{display:flex;gap:10px;width:max-content;animation:passa var(--dur,40s) linear infinite}
+.faixa.volta .faixa-trilho{animation-direction:reverse}
+.faixa img{flex:none;height:118px;width:auto;aspect-ratio:16/9;object-fit:cover;border-radius:10px;border:1px solid var(--line)}
+.faixa.trancada img{filter:blur(7px) brightness(.62)}
+.cadeado{position:relative}
+.cadeado .selo-tranca{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;display:flex;align-items:center;gap:10px;background:rgba(8,12,22,.9);border:1.5px solid var(--gold);border-radius:14px;padding:10px 16px;white-space:nowrap}
+.selo-tranca svg{width:22px;height:26px}.selo-tranca b{font-size:14px}.selo-tranca small{display:block;font-size:11px;letter-spacing:1px;color:var(--gold);font-weight:700}
+.proxima{border:2px dashed rgba(217,184,120,.6);border-radius:16px;padding:18px;text-align:center;background:rgba(217,184,120,.05)}
+.proxima b{display:block;font-family:"Instrument Serif",Georgia,serif;font-style:italic;font-weight:400;font-size:26px;color:var(--gold2)}
+.proxima span{font-size:14px;color:#cfd3d8}
+@media (prefers-reduced-motion:reduce){.faixa-trilho{animation:none}}
+/* bônus */
+.bonus{margin-top:64px}
+.bonus-grade{display:grid;gap:10px}
+.bonus-item{display:flex;gap:14px;align-items:flex-start;background:rgba(10,14,22,.62);border:1px solid rgba(217,184,120,.35);border-radius:16px;padding:16px}
+.bonus-item .ic{flex:none;width:44px;height:44px;border-radius:12px;background:rgba(217,184,120,.12);display:flex;align-items:center;justify-content:center;font-size:21px}
+.bonus-item .et{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#0b0f15;background:var(--gold);border-radius:999px;padding:3px 9px;margin-bottom:6px}
+.bonus-item b{display:block;font-size:16px;margin-bottom:3px}
+.bonus-item p{margin:0;font-size:14px;color:#c9ced6;line-height:1.45}
+/* card da oferta no modelo da landing principal */
+.oferta2{position:relative;margin-top:78px;border-radius:26px;padding:34px 22px 24px;background:rgba(10,14,22,.72);box-shadow:inset 0 0 0 1px rgba(217,184,120,.45),0 30px 70px -30px rgba(0,0,0,.9)}
+.oferta2>.selo{position:absolute;top:0;left:50%;transform:translate(-50%,-50%);background:var(--gold);color:#0b0f15;font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border-radius:999px;padding:7px 16px;white-space:nowrap}
+.o2-nome{font-size:24px;font-weight:600;letter-spacing:-.3px;margin:0}
+.o2-sub{font-size:14.5px;color:var(--muted);margin:4px 0 18px}
+.o2-thumbs{display:flex;margin:0 0 16px}
+.o2-thumbs img,.o2-thumbs span{width:56px;height:56px;border-radius:13px;object-fit:cover;box-shadow:0 0 0 2px #0a0e16,0 6px 16px -6px rgba(0,0,0,.8)}
+.o2-thumbs img+img,.o2-thumbs img+span{margin-left:-12px}
+.o2-thumbs span{display:flex;align-items:center;justify-content:center;background:#2a2416;color:var(--gold);font-size:13px;font-weight:800}
+.o2-qtd{font-size:15px;font-weight:600;margin:0 0 2px}
+.o2-qtd-sub{font-size:14px;color:var(--muted);margin:0 0 16px}
+.o2-lista{list-style:none;margin:0;padding:0}
+.o2-lista li{display:flex;gap:11px;align-items:flex-start;font-size:14.5px;line-height:1.45;color:#e2e6eb;padding:5px 0}
+.o2-lista li b{color:#fff}
+.o2-lista .tag-b{font-size:10px;font-weight:800;letter-spacing:1px;color:var(--gold);border:1px solid rgba(217,184,120,.5);border-radius:999px;padding:1px 7px;margin-left:6px;vertical-align:1px;white-space:nowrap}
+.o2-dir{text-align:center;border-top:1px solid rgba(255,255,255,.1);margin-top:22px;padding-top:24px}
+.o2-label{font-size:12.5px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.o2-preco-linha{display:flex;flex-direction:column;align-items:center;gap:8px}
+.o2-off{display:inline-flex;align-items:center;gap:6px;background:rgba(217,184,120,.14);border:1px solid rgba(217,184,120,.6);color:var(--gold2);border-radius:999px;padding:5px 14px;font-weight:800;font-size:13px;letter-spacing:1.5px;line-height:1}
+.o2-off b{font-size:13px;letter-spacing:1.5px}.o2-off span{font-size:13px}
+.o2-de{font-size:14px;color:#c3cad6;margin:0}.o2-de s{text-decoration-color:var(--gold)}
+.o2-preco{font-size:62px;font-weight:500;letter-spacing:-2px;line-height:1;margin:2px 0 0;white-space:nowrap}
+.o2-preco small{font-size:26px;margin-right:6px;vertical-align:.8em}
+.o2-conta{font-size:13.5px;color:var(--muted);margin:10px 0 18px}
+.oferta2 .relogio{margin:0 0 18px}
+.oferta2 .btn{font-size:16px}
+.o2-escassez{font-size:13.5px;color:#cfd3d8;margin:14px 0 0;line-height:1.45}
+.o2-escassez b{color:var(--gold2);font-weight:700}
+@media (min-width:960px){
+  .colecoes,.bonus{max-width:900px;margin-left:auto;margin-right:auto;margin-top:96px}
+  .faixa{margin:0}.faixa img{height:150px}
+  .bonus-grade{grid-template-columns:1fr 1fr}
+  .oferta2{max-width:940px;margin:110px auto 0;padding:46px 44px 40px;display:grid;grid-template-columns:1.15fr 1fr;gap:44px;align-items:center}
+  .o2-dir{border-top:0;margin-top:0;padding-top:0;border-left:1px solid rgba(255,255,255,.1);padding-left:40px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar so-promo"><span data-promo-nome>Black Friday</span>: <span data-off>65% OFF</span> no Acesso VIP · acaba em <b data-relogio-texto>--</b></div>
+
+<main class="wrap">
+
+  <!-- TOPO -->
+  <div class="hero curta">
+    <img class="logo" src="../../assets/logo/vespro-logo-240.webp" alt="VESPRO" width="240" height="212">
+    <p class="tag so-promo" data-promo-nome>Black Friday</p>
+    <p class="kicker">Para quem já conhece a VESPRO™</p>
+    <h1>Você já viu um pedaço. <span class="serif">Leva tudo.</span></h1>
+    <div class="precobox">
+      <div class="off so-promo"><b data-off-num>65%</b><span>OFF</span></div>
+      <div class="val">
+        <p class="de">de <s>R$ <span data-separado>72,50</span></s> comprando separado</p>
+        <p class="preco"><small>R$</small><span data-preco>24,90</span></p>
+        <p class="unico">pagamento único · Pix ou cartão</p>
+      </div>
+    </div>
+    <a class="btn" data-checkout data-local="topo" href="https://pay.wiapy.com/iTRVTC0ukQ3V">QUERO O ACESSO VIP</a>
+    <p class="seguro"><span class="so-promo">Só até <b data-fim>segunda, 30/11, às 23h59</b> · </span>acesso na hora · 7 dias de garantia</p>
+    <div class="mini-grade" aria-hidden="true">
+      <div><img src="../../assets/acervo/polo-nuvem-400.webp" alt="" width="400" height="225"><span>Signature<i>150</i></span></div>
+      <div><img src="../../assets/membros/shadows-1.webp" alt="" width="400" height="225"><span>Shadows<i>200+</i></span></div>
+      <div><img src="../../assets/membros/sporting-1.webp" alt="" width="400" height="225"><span>Sporting<i>30+</i></span></div>
+      <div><img src="../../assets/filmes/desktop/400/01.webp?v=wm2" alt="" width="400" height="225"><span>Movies<i>80</i></span></div>
+      <div class="borra"><img src="../../assets/acervo/no-risk-no-story-400.webp" alt="" width="400" height="223"><span>Exclusivas<i>200+</i></span></div>
+      <div class="prox"><span>Próximas<i>incluídas</i></span></div>
+    </div>
+  </div>
+
+  <!-- COMPARATIVO -->
+  <section>
+    <h2>Do jeito que está <span class="serif">x com o VIP</span></h2>
+    <div class="comparativo">
+      <div class="lado">
+        <h3>Hoje</h3>
+        <ul>
+          <li><span class="xx" aria-hidden="true">✕</span><span>Você vê as pinturas só nos anúncios</span></li>
+          <li><span class="xx" aria-hidden="true">✕</span><span>Tem uma coleção, ou nenhuma</span></li>
+          <li><span class="xx" aria-hidden="true">✕</span><span>As 200+ exclusivas ficam escondidas</span></li>
+          <li><span class="xx" aria-hidden="true">✕</span><span>Saiu coleção nova? Paga de novo</span></li>
+        </ul>
+      </div>
+      <div class="lado vip">
+        <h3>Com o VIP</h3>
+        <ul>
+          <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Todas as coleções na sua área</span></li>
+          <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>600+ pinturas, notebook e celular</span></li>
+          <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>As 200+ exclusivas liberadas</span></li>
+          <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Coleção nova entra sozinha, sem pagar</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. A CONTA -->
+  <section class="estreito">
+    <h2>Faz a conta <span class="serif">com a gente</span></h2>
+    <div class="conta">
+      <div class="ln"><span>Signature Collection</span><span>R$ 21,90</span></div>
+      <div class="ln"><span>Shadows</span><span>R$ 14,90</span></div>
+      <div class="ln"><span>Sporting</span><span>R$ 14,90</span></div>
+      <div class="ln"><span>Movies</span><span>R$ 12,90</span></div>
+      <div class="ln"><span>Exclusive Expansion</span><span>R$ 7,90</span></div>
+      <div class="ln soma"><span>Se você comprasse uma por uma</span><span>R$ <span data-separado>72,50</span></span></div>
+      <div class="ln vip"><span>No VIP, com tudo</span><span>R$ <span data-preco>24,90</span></span></div>
+    </div>
+    <p class="centro m" style="margin-top:12px">E olha que as coleções que ainda vão sair nem entraram nessa conta.</p>
+  </section>
+
+  
+  <!-- 8. OFERTA -->
+  <section class="oferta" id="oferta">
+    <span class="selo"><span class="so-promo"><span data-promo-nome>Black Friday</span> · <span data-off>65% OFF</span></span><span class="sem-promo-so">Acesso VIP</span></span>
+    <h3 class="c-nome">Acesso VIP VESPRO™</h3>
+    <p class="c-sub">Tudo o que a gente já fez e tudo o que ainda vai fazer.</p>
+    <ul class="c-lista">
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Signature, Shadows, Sporting e Movies</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Exclusive Expansion: 200+ pinturas fora do site</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>As próximas coleções, sem pagar de novo</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Notebook e celular em todas as coleções</span></li>
+      <li><span class="ck" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Pagamento único e acesso vitalício</span></li>
+    </ul>
+    <div class="so-promo">
+      <p class="fecha">Fecha <span data-fim>segunda, 30/11, às 23h59</span>. Depois volta para R$ <span data-normal>37,90</span>.</p>
+      <div class="relogio" aria-label="Tempo que falta">
+        <div><b data-r="d">0</b><span>dias</span></div><div><b data-r="h">00</b><span>horas</span></div><div><b data-r="m">00</b><span>min</span></div><div><b data-r="s">00</b><span>seg</span></div>
+      </div>
+    </div>
+    <div class="precobox">
+      <div class="off so-promo"><b data-off-num>65%</b><span>OFF</span></div>
+      <div class="val">
+        <p class="de">de <s>R$ <span data-separado>72,50</span></s> comprando separado</p>
+        <p class="preco"><small>R$</small><span data-preco>24,90</span></p>
+        <p class="unico">pagamento único · Pix ou cartão</p>
+      </div>
+    </div>
+    <a class="btn" data-checkout data-local="oferta" href="https://pay.wiapy.com/iTRVTC0ukQ3V">QUERO O ACESSO VIP</a>
+    <p class="seguro">Compra segura · acesso liberado na hora</p>
+    <p class="risco"><b>Risco zero:</b> 7 dias de garantia. Não gostou, a gente devolve tudo.</p>
+  </section>
+
+  <div class="porque estreito">
+    <b>Por que tão barato?</b>
+    <span>Porque você já conhece a gente. Não precisamos gastar com anúncio para te apresentar a marca, e essa economia vira desconto para você.<span class="so-promo"> E é Black Friday: esse preço vale só até <span data-fim>segunda, 30/11, às 23h59</span>.</span></span>
+  </div>
+
+  
+  <div class="porque estreito">
+    <b>Por que tão barato?</b>
+    <span>Porque você já conhece a gente. Não precisamos gastar com anúncio para te apresentar a marca, e essa economia vira desconto para você.</span>
+  </div>
+  <!-- 7. COMO FUNCIONA -->
+  <section class="estreito">
+    <h2>Pagou, <span class="serif">entrou</span></h2>
+    <ol class="passos">
+      <li><b>Faça o pagamento</b>No Pix ou no cartão. É uma vez só.</li>
+      <li><b>Abra a área de membros</b>Em membros.vesprowallpapers.com, com o e-mail da compra. Não tem senha nem código.</li>
+      <li><b>Escolha e baixe</b>Tudo separado por coleção, já no tamanho do seu celular e do seu notebook.</li>
+    </ol>
+    <p class="nota"><b>Já comprou com a gente?</b> Usa o mesmo e-mail da outra vez. O que você já tem continua lá, do jeito que está. O VIP só abre o resto.</p>
+  </section>
+
+  
+  <!-- 9. DÚVIDAS -->
+  <section class="estreito">
+    <h2>Ainda na <span class="serif">dúvida?</span></h2>
+    <details><summary>Já tenho uma coleção. Vou pagar de novo pelo que já tenho?</summary><p>Não. O que você já tem continua seu. Você paga o VIP uma vez e ele abre todo o resto: as outras coleções, as 200+ exclusivas e as que ainda vão sair.</p></details>
+    <details><summary>É assinatura?</summary><p>Não. É pagamento único, no Pix ou no cartão. Pagou uma vez, é seu para sempre.</p></details>
+    <details><summary>Como eu recebo?</summary><p>Assim que o pagamento é aprovado, o acesso aparece na área de membros (membros.vesprowallpapers.com). Você entra só com o e-mail da compra e baixa o que quiser.</p></details>
+    <details><summary>Funciona no meu aparelho?</summary><p>Celular (iPhone e Android) e notebook em todas as coleções. A Signature vem também em iPad e monitor ultrawide.</p></details>
+    <details><summary>E as coleções novas, como chegam?</summary><p>Elas aparecem na sua área de membros quando saírem. Você só entra e baixa.</p></details>
+    <details><summary>E se eu não gostar?</summary><p>Você tem 7 dias de garantia. Pediu, a gente devolve.</p></details>
+  </section>
+
+
+
+</main>
+
+<footer>VESPRO™ · todos os direitos reservados</footer>
+
+<div class="fixa" id="fixa">
+  <div class="fixa-in">
+    <p><span class="so-promo"><span data-off>65% OFF</span> · acaba em <span data-relogio-texto>--</span></span><span class="sem-promo-so">Acesso VIP · pagamento único</span><b>R$ <span data-preco>24,90</span></b></p>
+    <a class="btn" data-checkout data-local="barra" href="https://pay.wiapy.com/iTRVTC0ukQ3V">QUERO O VIP</a>
+  </div>
+</div>
+
+<script>
+(function(){
+  var v=window.VIP, p=v.promo||{};
+  var safe=function(fn){ try{ fn(); }catch(e){ if(window.console) console.error(e); } };
+  var cada=function(sel,fn){ Array.prototype.forEach.call(document.querySelectorAll(sel),fn); };
+  var num=function(s){ return parseFloat(String(s).replace(',','.')); };
+
+  // preços e textos da configuração
+  safe(function(){
+    cada('[data-preco]',function(e){ e.textContent=v.preco; });
+    cada('[data-separado]',function(e){ e.textContent=v.separado; });
+    cada('[data-normal]',function(e){ e.textContent=v.normal.preco; });
+    if(v.ativa){
+      cada('[data-promo-nome]',function(e){ e.textContent=p.nome; });
+      cada('[data-off]',function(e){ e.textContent=p.off; });
+      cada('[data-off-num]',function(e){ e.textContent=p.off.replace(/\s*OFF/i,''); });
+      cada('[data-fim]',function(e){ e.textContent=p.fimTexto; });
+    }
+  });
+
+  // botões: link certo, UTMs repassadas e registro do clique
+  safe(function(){
+    var extra=[];
+    location.search.replace(/^\?/,'').split('&').forEach(function(par){ if(/^(utm_[a-z]+|src|sck|fbclid)=/.test(par)) extra.push(par); });
+    var link=v.link+(extra.length?(v.link.indexOf('?')<0?'?':'&')+extra.join('&'):'');
+    cada('[data-checkout]',function(a){
+      a.href=link;
+      a.addEventListener('click',function(){
+        if(window.fbq) fbq('trackCustom','CliqueCheckout',{value:num(v.preco),currency:'BRL',content_name:'Acesso VIP VESPRO'+(v.ativa?' (Black Friday)':'')});
+        if(window.clarity) clarity('event','clique_checkout_'+a.getAttribute('data-local'));
+      });
+    });
+  });
+
+  // contagem regressiva; quando acaba, a página recarrega e volta ao preço normal
+  safe(function(){
+    if(!v.ativa) return;
+    var fim=new Date(p.fim).getTime(), dois=function(n){ return (n<10?'0':'')+n; };
+    var tick=function(){
+      var t=Math.floor((fim-Date.now())/1000);
+      if(t<=0){ location.reload(); return; }
+      var d=Math.floor(t/86400), h=Math.floor(t%86400/3600), m=Math.floor(t%3600/60), s=t%60;
+      var txt=(d>0?d+'d ':'')+dois(h)+'h '+dois(m)+'m '+dois(s)+'s';
+      cada('[data-relogio-texto]',function(e){ e.textContent=txt; });
+      var q=function(k,val){ cada('[data-r="'+k+'"]',function(e){ e.textContent=val; }); };
+      q('d',d); q('h',dois(h)); q('m',dois(m)); q('s',dois(s));
+    };
+    tick(); setInterval(tick,1000);
+  });
+
+  // barra fixa: aparece depois do topo e some quando o card da oferta está na tela
+  safe(function(){
+    var barra=document.getElementById('fixa'), topo=document.querySelector('.hero .btn'), card=document.getElementById('oferta');
+    var ver=function(){
+      var a=topo.getBoundingClientRect(), b=card.getBoundingClientRect(), H=window.innerHeight;
+      var noCard=b.top<H-120 && b.bottom>120;
+      barra.className='fixa'+((a.bottom<0 && !noCard)?' on':'');
+    };
+    window.addEventListener('scroll',ver,{passive:true}); window.addEventListener('resize',ver); ver();
+  });
+})();
+</script>
+</body>
+</html>
