@@ -156,6 +156,7 @@
     grade: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>',
     filme: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></svg>',
     ajuda: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-4-7.5L21 3l-1 4.5A9 9 0 0 1 21 12z"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .8-1 1.5v.4M12 17h.01"/></svg>',
+    guia: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M12 11v6m-2.5-2.5L12 17l2.5-2.5"/></svg>',
     seta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
     pasta: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M12 11v5m-2.5-2.5L12 16l2.5-2.5"/></svg>'
   };
@@ -359,6 +360,10 @@
       var como = '<h2 class="sec">' + esc(t("como_titulo")) + '</h2><div class="como">' + L().como.map(function (x, i) {
         return "<details" + (i === abrir ? " open" : "") + "><summary>" + esc(x.t) + "</summary><span>" + esc(x.p) + "</span></details>";
       }).join("") + "</div>";
+      // guia em PDF (bônus da coleção): arquivo fica no próprio site, em /assets/
+      var g = L().guia;
+      if (c.guia && g) como += '<a class="dl guia" href="' + A + c.guia + '" target="_blank" rel="noopener" data-dl="ok" data-col="' + id + '-guia">' +
+        '<span class="ic">' + ICONES.guia + "</span><span><b>" + esc(g.t) + "</b><small>" + esc(g.d) + '</small></span><span class="seta">↓</span></a>';
       var galeria = '<h2 class="sec">' + esc(t("previa")) + '</h2><div class="galeria">' + c.artes.map(function (s) { return img(s, ""); }).join("") + "</div>";
       var of = ofertaPrincipal(c.universo), ofH = of ? cardOferta(of) : "";
       // computador: galeria à esquerda; downloads, passo a passo e oferta à direita

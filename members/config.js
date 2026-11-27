@@ -45,7 +45,8 @@ window.MEMBROS = {
       nome: "VESPRO Signature Collection™",
       capa: "membros/limpas/signature-capa.webp?v=2",
       artes: ["membros/limpas/signature-01.webp","membros/limpas/signature-02.webp","membros/limpas/signature-03.webp","membros/limpas/signature-04.webp","membros/limpas/signature-05.webp","membros/limpas/signature-06.webp","membros/limpas/signature-07.webp","membros/limpas/signature-08.webp","membros/limpas/signature-09.webp","membros/limpas/signature-10.webp","membros/limpas/signature-11.webp","membros/limpas/signature-12.webp","membros/limpas/signature-13.webp","membros/limpas/signature-14.webp","membros/limpas/signature-15.webp","membros/limpas/signature-16.webp","membros/limpas/signature-17.webp","membros/limpas/signature-18.webp"],
-      downloads: ["desktop","celular","todos"]
+      downloads: ["desktop","celular","todos"],
+      guia: "membros/guia-wallpaper-vespro.pdf"   // bônus da Coleção Completa (botão abaixo de "Como colocar")
     },
     essencial: {
       universo: "wallpapers", ordem: 2, qtd: "75+", dentroDe: "signature",
@@ -124,7 +125,7 @@ window.MEMBROS = {
    Depois de mexer aqui: python membros-servidor/gerar-paises.py
 
    Uma área só para o mundo todo. O checkout muda pelo país de quem está vendo:
-   - Stripe (dólar): padrão, para os países que pagam com cartão;
+   - KashPay/Stripe (dólar): padrão, para os países que pagam com cartão;
    - Lojou (rand): todos os países da África;
    - Hotmart: para alguns países, ainda desligada (ativo: false).
    País novo num checkout = código de 2 letras (ISO) na lista "paises" dele. */
@@ -140,22 +141,23 @@ Object.assign(window.MEMBROS, {
   gatewayPadrao: "stripe",
   gateways: {
 
-    /* ---------- Stripe: países com cartão (todos que não estão em outra lista) ----------
-       PREÇOS SÃO SUGESTÃO. Link vazio = o botão abre o WhatsApp do suporte.
-       Para ligar: criar um Payment Link na Stripe para cada oferta e colar aqui. */
+    /* ---------- KashPay (Stripe PJ): países com cartão (todos que não estão em outra lista) ----------
+       Ofertas de membro criadas na KashPay em 27/11/2026 (preços do usuário: coleções a $9.90,
+       Acesso VIP acima do maior upsell, que é $34.90). Pós-compra volta para members.vesprowallpapers.com.
+       Webhook: api/membros-compra?plataforma=kashpay (o nome da oferta diz a coleção). */
     stripe: {
       paises: [],
       loja: {
         moeda: "US$", decimal: ".", codigoMoeda: "USD",
-        precoColecaoSite: "4.99",
+        precoColecaoSite: "9.90",
         ofertas: {
-          upgrade_signature: { preco: "2.99", de: "7.99", link: "" },
-          shadows:           { preco: "2.99", de: "4.99", link: "" },
-          sporting:          { preco: "2.49", de: "3.99", link: "" },
-          shadows_sporting:  { preco: "4.99", de: "8.98", link: "" },
-          movies:            { preco: "2.99", de: "4.99", link: "" },
-          signature:         { preco: "4.99", de: "7.99", link: "" },
-          acervo:            { preco: "9.99", link: "" }
+          upgrade_signature: { preco: "9.90",  de: "19.90", link: "https://checkout.kashpay.com/checkout/checkout-1795796504190" }, // Complete Collection · Member Offer
+          shadows:           { preco: "9.90",  link: "https://checkout.kashpay.com/checkout/checkout-1795796236703" },
+          sporting:          { preco: "9.90",  link: "https://checkout.kashpay.com/checkout/checkout-1795796333214" },
+          shadows_sporting:  { preco: "14.90", de: "19.80", link: "https://checkout.kashpay.com/checkout/checkout-1795796611675" },
+          movies:            { preco: "9.90",  link: "https://checkout.kashpay.com/checkout/checkout-1795796416956" },
+          signature:         { preco: "9.90",  de: "19.90", link: "https://checkout.kashpay.com/checkout/checkout-1795796504190" }, // mesmo checkout do upgrade
+          acervo:            { preco: "37.90", link: "https://checkout.kashpay.com/checkout/checkout-1795796038484" }  // Complete Archive · VIP Member Access
         }
       }
     },
