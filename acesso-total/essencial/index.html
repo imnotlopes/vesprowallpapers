@@ -42,6 +42,7 @@ window.VERSOES = {
   if(!m || !window.VERSOES[m[1]]) return;
   var v = window.VERSOES[m[1]], u = window.UPSELL;
   u.versao = m[1]; u.credito = v; u.preco = v.preco; u.checkout = v.checkout;
+  u.recusar = "https://vesprowallpapers.vercel.app/colecoes/" + m[1] + "/";   // quem recusa vai para o downsell da mesma versão
   document.documentElement.className += " modo-credito";
 })();
 </script>
@@ -254,10 +255,6 @@ footer{text-align:center;color:#6f7680;font-size:11px;padding:22px 0 30px}
     <h1>Obrigado por <span class="serif">confiar</span> na gente</h1>
     <p class="lead">Se você comprou, é porque confiou na VESPRO™ e curtiu as artes. Isso significa muito pra gente.</p>
     <p class="comunidade"><b>+ de 500 clientes</b> já compraram com a gente, e você já faz parte dessa comunidade. Seja bem-vindo!</p>
-    <div class="ok">
-      <b>Pronto, compra confirmada!</b>
-      <span>Sua coleção já está indo pro seu e-mail.</span>
-    </div>
   </section>
 
   <section class="intro">

@@ -148,6 +148,11 @@ insert into public.produtos (codigo, plataforma, nome, colecoes) values
   ('6aae0316f72e338d1599a0ec', 'wiapy', '+150 Wallpapers · Expansão Exclusiva',           '{exclusivas}'),
   ('6af6357b2cbc3c959607cfe1', 'wiapy', 'Acervo Completo VESPRO™',                        '{acervo}'),
   ('6af632fdac6765bc3bb6da7b', 'wiapy', 'Acervo Completo VESPRO™',                        '{acervo}'),
+  -- Downsell (28/11/2026): quem recusa o Acervo + VIP. Tudo que já saiu + 200 exclusivas, sem as coleções futuras.
+  -- (o webhook também reconhece pelo nome "Coleções VESPRO™ ..." em api/membros-compra.js)
+  ('6b0b0f8f262e4085364dd3a9', 'wiapy', 'Coleções VESPRO™ + 200 Exclusivas (19,90)', '{signature,shadows,sporting,movies,exclusivas}'),
+  ('6b0b0f9095e27f33e031d197', 'wiapy', 'Coleções VESPRO™ + 200 Exclusivas (15,90)', '{signature,shadows,sporting,movies,exclusivas}'),
+  ('6b0b0f90262e4085364dd3e5', 'wiapy', 'Coleções VESPRO™ + 200 Exclusivas (12,90)', '{signature,shadows,sporting,movies,exclusivas}'),
   ('6af94b4ba84994dd38ab2895', 'wiapy', 'VESPRO Movies™',                                 '{movies}'),
   ('6af94d38f22d19f67561af7f', 'wiapy', 'VESPRO Movies™ + Signature Collection™',         '{movies,signature}'),
   ('6af94e16a84994dd38ab51ba', 'wiapy', 'VESPRO Movies™ + Signature Collection™',         '{movies,signature}'),

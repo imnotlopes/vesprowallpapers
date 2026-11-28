@@ -34,8 +34,8 @@ window.TEXTOS = {
     bloqueada: "Bloqueada",
     desbloquear: "Desbloquear por {preco}",
     desbloquear_curto: "Desbloquear",
-    so_acervo: "Só no Acervo Completo",
-    ver_acervo: "Ver o Acervo Completo",
+    so_acervo: "Só no Acesso VIP",
+    ver_acervo: "Ver o Acesso VIP",
     incluida: "Já vem na Signature",
     vip_selo: "Acesso VIP",
     vip_titulo: "Você é VIP",
@@ -57,7 +57,7 @@ window.TEXTOS = {
       sporting: { t: 'Velocidade em <span class="serif">pintura a óleo</span>', d: "A Sporting Collection, com preço de membro.", btn: "Quero a Sporting" },
       movies: { t: 'Seus filmes em <span class="serif">pintura a óleo</span>', d: "80 cenas de cinema no mesmo estilo impasto das suas artes, para a tela do notebook.", btn: "Quero a VESPRO Movies™" },
       signature: { t: 'Do cinema para a <span class="serif">sua mesa</span>', d: "A Signature Collection: 150 wallpapers em pintura a óleo para notebook e celular.", btn: "Quero a Signature" },
-      acervo: { t: 'Tenha tudo, <span class="serif">para sempre</span>', d: "Todas as coleções, as 200+ exclusivas que não são vendidas em lugar nenhum e acesso VIP a tudo que ainda vai sair.", btn: "Quero tudo + acesso VIP" }
+      acervo: { t: 'Comprou e curtiu? <span class="serif">Leve todas</span>', d: "No Acesso VIP você leva todas as coleções que faltam e recebe as novas em primeira mão, antes de todo mundo e sem pagar de novo.", btn: "Quero o Acesso VIP" }
     },
     movies_trancado_t: 'A VESPRO Movies™ ainda <span class="serif">não é sua</span>',
     movies_trancado_d: "80 cenas de filmes e séries pintadas a óleo, no mesmo estilo das suas artes. Fica numa área só dela, separada das coleções principais.",
@@ -83,7 +83,7 @@ window.TEXTOS = {
     guia: { t: "Guia: wallpaper novo todo dia", d: "PDF · configure uma vez e o aparelho troca sozinho" },
     proxima_selo: "Em breve",
     proxima_vip: "Você é VIP: ela entra aqui sem custo.",
-    proxima_nao_vip: "Com o Acervo Completo, ela entra aqui sem custo.",
+    proxima_nao_vip: "Com o Acesso VIP, ela entra aqui sem custo e em primeira mão.",
     ajuda: "Precisa de ajuda?",
     ajuda_curto: "Ajuda",
     ideal_aparelho: "Ideal para este aparelho",
@@ -288,7 +288,7 @@ window.TEXTOS.pt.cols = {
   exclusivas: "200+ artes que não são vendidas no site nem em lugar nenhum.",
   movies: "Cenas de filmes e séries em pintura a óleo."
 };
-window.TEXTOS.pt.acervo_nome = "Acervo Completo VESPRO™";
+window.TEXTOS.pt.acervo_nome = "Acesso VIP VESPRO™";
 window.TEXTOS.en.cols = {
   signature: "The main collection: 150 oil painting artworks for laptop, phone, iPad and ultrawide.",
   essencial: "75+ artworks from the main collection, for laptop and phone.",

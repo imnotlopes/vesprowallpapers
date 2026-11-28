@@ -29,6 +29,8 @@ const CENTAVOS = { stripe: true, kashpay: true };
 
 // Reconhecimento pelo nome (order bumps e produtos sem código cadastrado). A ordem importa.
 const PELO_NOME = [
+  // downsell "Coleções VESPRO™ + 200 Exclusivas": tudo que já saiu, sem o acesso VIP (coleções futuras)
+  [/cole[cç][oõ]es vespro/, ["signature", "shadows", "sporting", "movies", "exclusivas"]],
   [/acervo|archive/, ["acervo"]],
   [/expans|exclusiv/, ["exclusivas"]],          // "+150 Wallpapers · Expansão Exclusiva" (antes do "150")
   [/shadows.*sporting.*movies|3 em 1|3 cole/, ["shadows", "sporting", "movies"]],
